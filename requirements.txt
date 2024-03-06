@@ -9,3 +9,7 @@ whitenoise>=6.2.0
 python-decouple
 # Used to resize images on upload.
 django_resized
+
+#Required for models to added to db
+Pillow
+requests
