@@ -13,3 +13,5 @@ django_resized
 #Required for models to added to db
 Pillow
 requests
+# Ability to import and export from admin interface.
+django-import-export 

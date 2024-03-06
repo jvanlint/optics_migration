@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "optics.opticsapp.apps.OpticsappConfig",
+    "import_export",
 ]
 
 MIDDLEWARE = [
