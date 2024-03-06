@@ -7,3 +7,5 @@ whitenoise>=6.2.0
 
 # Used to separate env variables from .env files needed for development
 python-decouple
+# Used to resize images on upload.
+django_resized
