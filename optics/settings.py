@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "optics.opticsapp",
+    "optics.opticsapp.apps.OpticsappConfig",
 ]
 
 MIDDLEWARE = [
