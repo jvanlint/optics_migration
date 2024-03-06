@@ -1,0 +1,2483 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<TacviewDebriefing Version="1.2.6">
+	<!--Flight Recording Properties-->
+	<FlightRecording>
+		<Source>DCS 2.7.10.19473</Source>
+		<Recorder>DCS2ACMI 1.8.3.200</Recorder>
+		<RecordingTime>2022-02-08T09:13:39.262Z</RecordingTime>
+		<Author>War Piglet | 161sqn</Author>
+	</FlightRecording>
+	<!--Mission Properties-->
+	<Mission>
+		<Title>SuvarovFour</Title>
+		<Category>Runway Attack</Category>
+		<MissionTime>2010-10-02T04:04:23Z</MissionTime>
+		<Duration>6720.87</Duration>
+		<MainAircraftID>360</MainAircraftID>
+		<Comments>DCS Liberation Turn 4
+====================
+
+Most briefing information, including communications and flight plan information, can be found on your kneeboard.
+
+Current situation:
+====================
+Our forces from Kutaisi are fighting enemies based in Khashuri FOB. On this location, our ground forces will focus on the destruction of enemy assets, before attempting to make progress toward Khashuri FOB.  The enemy is already outnumbered, and this maneuver might draw a final blow to their forces.&quot;
+
+
+Your flights:
+====================
+--------------------------------------------------
+BAI F-16C_50 x 4, departing in 0:04:17, VULTURE
+Freq : COM2 Ch 1 (116 MHz)
+0 T+0:22:17 -- TAKEOFF : Takeoff from Kutaisi
+1 Depart  T+0:30:59 -- HOLD : Wait until push time
+2 T+0:33:27 -- JOIN : Rendezvous with package
+3 T+0:37:32 -- INGRESS : INGRESS on VULTURE
+4 T+0:46:47 -- armor|203 at VULTURE : ATTACK armor|203 at VULTURE
+5 T+0:41:33 -- SPLIT : Depart from package
+6 -- LANDING : Land
+7 -- BULLSEYE : Bullseye
+----------------------------------------------------------------------------------------------------
+BAI A-10C_2 x 4, departing in 0:00:00, VULTURE
+Freq : 227 MHz
+0 T+0:18:00 -- TAKEOFF : Takeoff from Kutaisi
+1 Depart  T+0:29:15 -- HOLD : Wait until push time
+2 T+0:33:27 -- JOIN : Rendezvous with package
+3 T+0:37:32 -- INGRESS : INGRESS on VULTURE
+4 T+0:46:47 -- armor|203 at VULTURE : ATTACK armor|203 at VULTURE
+5 T+0:41:33 -- SPLIT : Depart from package
+6 -- LANDING : Land
+7 -- BULLSEYE : Bullseye
+----------------------------------------------------------------------------------------------------
+BAI JF-17 x 2, departing in 0:04:17, VULTURE
+Freq : COM1 Ch 1 (130 MHz)
+0 T+0:22:17 -- TAKEOFF : Takeoff from Kutaisi
+1 Depart  T+0:30:59 -- HOLD : Wait until push time
+2 T+0:33:27 -- JOIN : Rendezvous with package
+3 T+0:37:32 -- INGRESS : INGRESS on VULTURE
+4 T+0:46:47 -- armor|203 at VULTURE : ATTACK armor|203 at VULTURE
+5 T+0:41:33 -- SPLIT : Depart from package
+6 -- LANDING : Land
+7 -- BULLSEYE : Bullseye
+----------------------------------------------------------------------------------------------------
+BARCAP M-2000C x 2, departing in 0:00:00, Kutaisi
+Freq : UHF Ch 1 (228 MHz)
+0 T+0:18:00 -- TAKEOFF : Takeoff from Kutaisi
+1 T+0:25:10 -- RACETRACK START : Orbit between this point and the next point
+2 Depart  T+0:55:10 -- RACETRACK END : Orbit between this point and the previous point
+3 -- LANDING : Land
+4 -- BULLSEYE : Bullseye
+----------------------------------------------------------------------------------------------------
+OCA/Runway F-14B x 2, departing in 0:00:00, Tbilisi-Lochini
+Freq : VHF/UHF Ch 1 (108 MHz)
+0 -- TAKEOFF : Takeoff from CVN-73 George Washington
+1 -- HOLD : Wait until push time
+2 -- INGRESS : INGRESS on Tbilisi-Lochini
+3 -- STRIKE Tbilisi-Lochini : STRIKE Tbilisi-Lochini
+4 -- BULLSEYE : Bullseye
+----------------------------------------------------------------------------------------------------
+OCA/Runway FA-18C_hornet x 4, departing in 0:00:01, Tbilisi-Lochini
+Freq : COMM1 Ch 1 (231 MHz)
+0 T+0:12:00 -- TAKEOFF : Takeoff from CVN-73 George Washington
+1 Depart  T+0:20:22 -- HOLD : Wait until push time
+2 T+0:39:39 -- JOIN : Rendezvous with package
+3 T+0:42:00 -- INGRESS : INGRESS on Tbilisi-Lochini
+4 T+0:47:26 -- STRIKE Tbilisi-Lochini : STRIKE Tbilisi-Lochini
+5 T+0:44:26 -- SPLIT : Depart from package
+6 -- LANDING : Land
+7 -- BULLSEYE : Bullseye
+--------------------------------------------------Planned ally flights:
+====================
+Kutaisi
+---------------------------------------------------
+AEW&amp;amp;C E-3A x 1, departing in 0:00:00, Kutaisi
+Refueling KC135MPRS x 1, departing in 0:00:00, Kutaisi
+Carriers and FARPs:
+====================
+CVN-73 George Washington
+--------------------------------------------------
+RADIO : 225 MHz
+TACAN : 1X CVH
+ICLS Channel: 1
+
+AWACS:
+====================
+Overlord -- Freq : 229.0
+JTACS [F-10 Menu] :
+====================
+Frontline Frontline Kutaisi/Khashuri FOB -- Code : 1688, Freq : 226.0</Comments>
+	</Mission>
+	<!--Flight Log-->
+	<Events>
+		<Event>
+			<Time>14.22</Time>
+			<PrimaryObject ID="348">
+				<Type>SAM/AAA</Type>
+				<Name>AN/TWQ-1 Avenger</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>unit|80|5|25|M1097 Heavy HMMWV Avenger|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<Occurrences>3</Occurrences>
+			<SecondaryObject ID="353">
+				<Type>Shell</Type>
+				<Name>weapons.shells.2A64_152</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>348</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>36.45</Time>
+			<PrimaryObject ID="357">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>45.17</Time>
+			<PrimaryObject ID="344">
+				<Type>Tank</Type>
+				<Name>LAV-25</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>unit|80|1|25|LAV-25|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="355">
+				<Type>Shell</Type>
+				<Name>weapons.shells.2A64_152</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>300</Parent>
+			</SecondaryObject>
+			<ParentObject ID="300">
+				<Type>Tank</Type>
+				<Name>SAU Msta</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>unit|0|8|1001|2S19 Msta-S|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>59.72</Time>
+			<PrimaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>59.72</Time>
+			<PrimaryObject ID="344">
+				<Type>Tank</Type>
+				<Name>LAV-25</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>unit|80|1|25|LAV-25|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="300">
+				<Type>Tank</Type>
+				<Name>SAU Msta</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>unit|0|8|1001|2S19 Msta-S|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>100.02</Time>
+			<PrimaryObject ID="14">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>106.04</Time>
+			<PrimaryObject ID="16">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>125.05</Time>
+			<PrimaryObject ID="23">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+		</Event>
+		<Event>
+			<Time>142.76</Time>
+			<PrimaryObject ID="24">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D| Pilot #2</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+		</Event>
+		<Event>
+			<Time>156.96</Time>
+			<PrimaryObject ID="357">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>202.31</Time>
+			<PrimaryObject ID="363">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>241.47</Time>
+			<PrimaryObject ID="364">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>242.31</Time>
+			<PrimaryObject ID="363">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>260.62</Time>
+			<PrimaryObject ID="365">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>271.38</Time>
+			<PrimaryObject ID="365">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>277.66</Time>
+			<PrimaryObject ID="366">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>279.20</Time>
+			<PrimaryObject ID="22">
+				<Type>Aircraft</Type>
+				<Name>A-50 Mainstay</Name>
+				<Pilot>Mozdok AEW&amp;C|0|9|26|A-50| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mozdok AEW&amp;C|0|9|26|A-50|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+		</Event>
+		<Event>
+			<Time>304.72</Time>
+			<PrimaryObject ID="366">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>309.37</Time>
+			<PrimaryObject ID="367">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>310.21</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>320.19</Time>
+			<PrimaryObject ID="364">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>407.66</Time>
+			<PrimaryObject ID="302">
+				<Type>Aircraft</Type>
+				<Name>KC-135 Stratotanker</Name>
+				<Pilot>Kutaisi Refueling|80|6|25|KC-135 Stratotanker MPRS| Pilot #1</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Kutaisi Refueling|80|6|25|KC-135 Stratotanker MPRS|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>445.04</Time>
+			<PrimaryObject ID="369">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>G Money</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>456.09</Time>
+			<PrimaryObject ID="301">
+				<Type>Aircraft</Type>
+				<Name>E-3A Sentry</Name>
+				<Pilot>Kutaisi AEW&amp;C|80|5|25|E-3A| Pilot #1</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Kutaisi AEW&amp;C|80|5|25|E-3A|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>470.46</Time>
+			<PrimaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>545.95</Time>
+			<PrimaryObject ID="13">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>Shuto | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>546.39</Time>
+			<PrimaryObject ID="15">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>687.48</Time>
+			<PrimaryObject ID="367">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>692.73</Time>
+			<PrimaryObject ID="371">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>765.48</Time>
+			<PrimaryObject ID="369">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>G Money</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>877.18</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>1111.77</Time>
+			<PrimaryObject ID="374">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>G Money</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>1410.47</Time>
+			<PrimaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1419.19</Time>
+			<PrimaryObject ID="371">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1423.32</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1511.38</Time>
+			<PrimaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1771.15</Time>
+			<PrimaryObject ID="374">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>G Money</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>1812.45</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="375">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1849.16</Time>
+			<PrimaryObject ID="294">
+				<Type>Tank</Type>
+				<Name>BMP-2</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|207</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="375">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>1849.25</Time>
+			<PrimaryObject ID="294">
+				<Type>Tank</Type>
+				<Name>BMP-2</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|207</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1920.04</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="376">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1945.47</Time>
+			<PrimaryObject ID="25">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+		</Event>
+		<Event>
+			<Time>1961.13</Time>
+			<PrimaryObject ID="293">
+				<Type>Tank</Type>
+				<Name>BMP-2</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|207</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="376">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>1961.21</Time>
+			<PrimaryObject ID="293">
+				<Type>Tank</Type>
+				<Name>BMP-2</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|207</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>1967.08</Time>
+			<PrimaryObject ID="26">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D| Pilot #2</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+		</Event>
+		<Event>
+			<Time>2071.22</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="377">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2100.40</Time>
+			<PrimaryObject ID="284">
+				<Type>Tank</Type>
+				<Name>T-72B</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|203</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="377">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2100.48</Time>
+			<PrimaryObject ID="284">
+				<Type>Tank</Type>
+				<Name>T-72B</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|203</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2352.50</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="378">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2369.26</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="379">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2386.46</Time>
+			<PrimaryObject ID="285">
+				<Type>Tank</Type>
+				<Name>T-72B</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|203</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="378">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2392.74</Time>
+			<PrimaryObject ID="288">
+				<Type>Tank</Type>
+				<Name>T-72B</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|203</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="379">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2446.83</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="380">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2470.55</Time>
+			<PrimaryObject ID="285">
+				<Type>Tank</Type>
+				<Name>T-72B</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>armor|203</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="380">
+				<Type>Missile</Type>
+				<Name>AGM-65 Maverick</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2530.93</Time>
+			<PrimaryObject ID="15">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>2586.54</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="381">
+				<Type>Bomb</Type>
+				<Name>GBU_31</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2693.94</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="382">
+				<Type>Bomb</Type>
+				<Name>GBU_31_V_3B</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2700.09</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2813.98</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasTakenOff</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2844.51</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="387">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2844.81</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="388">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2845.09</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="389">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2852.44</Time>
+			<PrimaryObject ID="11">
+				<Type>Airport</Type>
+				<Name>Invisible FARP</Name>
+				<Coalition>Allies</Coalition>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="387">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2852.60</Time>
+			<PrimaryObject ID="11">
+				<Type>Airport</Type>
+				<Name>Invisible FARP</Name>
+				<Coalition>Allies</Coalition>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="388">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2852.83</Time>
+			<PrimaryObject ID="10">
+				<Type>Airport</Type>
+				<Name>Invisible FARP</Name>
+				<Coalition>Allies</Coalition>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="389">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2901.54</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="390">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2902.03</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="391">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2911.04</Time>
+			<PrimaryObject ID="390">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>2911.40</Time>
+			<PrimaryObject ID="10">
+				<Type>Airport</Type>
+				<Name>Invisible FARP</Name>
+				<Coalition>Allies</Coalition>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="391">
+				<Type>Missile</Type>
+				<Name>AGR_20_M282</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>17</Parent>
+			</SecondaryObject>
+			<ParentObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2933.25</Time>
+			<PrimaryObject ID="297">
+				<Type>SAM/AAA</Type>
+				<Name>SA-19 Grison</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|214|215</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="392">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2944.40</Time>
+			<PrimaryObject ID="297">
+				<Type>SAM/AAA</Type>
+				<Name>SA-19 Grison</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|214|215</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="393">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2949.44</Time>
+			<PrimaryObject ID="392">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>2952.13</Time>
+			<PrimaryObject ID="297">
+				<Type>SAM/AAA</Type>
+				<Name>SA-19 Grison</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|214|215</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="400">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2959.84</Time>
+			<PrimaryObject ID="297">
+				<Type>SAM/AAA</Type>
+				<Name>SA-19 Grison</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|214|215</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="404">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2963.62</Time>
+			<PrimaryObject ID="393">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>2967.18</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="404">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</SecondaryObject>
+			<ParentObject ID="297">
+				<Type>SAM/AAA</Type>
+				<Name>SA-19 Grison</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|214|215</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>2967.18</Time>
+			<PrimaryObject ID="17">
+				<Type>Aircraft</Type>
+				<Name>A-10C Thunderbolt II</Name>
+				<Pilot>AEF Tigershark | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>VULTURE BAI|80|2|25|A-10C Thunderbolt II (Suite 7)|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="297">
+				<Type>SAM/AAA</Type>
+				<Name>SA-19 Grison</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|214|215</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>2972.35</Time>
+			<PrimaryObject ID="400">
+				<Type>Missile</Type>
+				<Name>SA9M311</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>297</Parent>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>2978.24</Time>
+			<PrimaryObject ID="418">
+				<Type>Parachutist</Type>
+				<Name>Pilot</Name>
+			</PrimaryObject>
+			<Action>HasEnteredTheArea</Action>
+		</Event>
+		<Event>
+			<Time>3030.13</Time>
+			<PrimaryObject ID="418">
+				<Type>Parachutist</Type>
+				<Name>Pilot</Name>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>3551.30</Time>
+			<PrimaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="429">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3568.48</Time>
+			<PrimaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<Occurrences>2</Occurrences>
+			<SecondaryObject ID="430">
+				<Type>Bomb</Type>
+				<Name>GBU_32_V_2B</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>370</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3570.05</Time>
+			<PrimaryObject ID="371">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<Occurrences>4</Occurrences>
+			<SecondaryObject ID="431">
+				<Type>Bomb</Type>
+				<Name>GBU_31_V_3B</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>371</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3599.67</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="436">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3604.41</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="437">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3639.10</Time>
+			<PrimaryObject ID="201">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="429">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+			<ParentObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3696.34</Time>
+			<PrimaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="438">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3719.89</Time>
+			<PrimaryObject ID="13">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>Shuto | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="449">
+				<Type>Bomb</Type>
+				<Name>GBU_24</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>13</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3742.80</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="450">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3788.39</Time>
+			<PrimaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="451">
+				<Type>Missile</Type>
+				<Name>AGM_154</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>370</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3793.84</Time>
+			<PrimaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="452">
+				<Type>Missile</Type>
+				<Name>AGM_154</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>370</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3807.03</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="453">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3807.33</Time>
+			<PrimaryObject ID="201">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="438">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+			<ParentObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3815.33</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="454">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3822.14</Time>
+			<PrimaryObject ID="34">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|21|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|21|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="450">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+			<ParentObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3844.16</Time>
+			<PrimaryObject ID="23">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<Airport ID="ICAO:XRMF">
+				<Name>Mozdok</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>3845.51</Time>
+			<PrimaryObject ID="24">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D| Pilot #2</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<Airport ID="ICAO:XRMF">
+				<Name>Mozdok</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>3856.54</Time>
+			<PrimaryObject ID="31">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|18|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|18|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="452">
+				<Type>Missile</Type>
+				<Name>AGM_154</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>370</Parent>
+			</SecondaryObject>
+			<ParentObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3858.11</Time>
+			<PrimaryObject ID="32">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|19|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|19|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="451">
+				<Type>Missile</Type>
+				<Name>AGM_154</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>370</Parent>
+			</SecondaryObject>
+			<ParentObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3858.18</Time>
+			<PrimaryObject ID="32">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|19|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|19|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3871.11</Time>
+			<PrimaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="504">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3884.83</Time>
+			<PrimaryObject ID="33">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|20|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|20|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="453">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+			<ParentObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3953.02</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="527">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3958.83</Time>
+			<PrimaryObject ID="201">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="528">
+				<Type>Missile</Type>
+				<Name>SA9M31</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>201</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3964.54</Time>
+			<PrimaryObject ID="202">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="504">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+			<ParentObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>3964.60</Time>
+			<PrimaryObject ID="202">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>3972.81</Time>
+			<PrimaryObject ID="528">
+				<Type>Missile</Type>
+				<Name>SA9M31</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Parent>201</Parent>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+		</Event>
+		<Event>
+			<Time>3977.42</Time>
+			<PrimaryObject ID="29">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|16|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|16|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="527">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+			<ParentObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>4001.85</Time>
+			<PrimaryObject ID="34">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|21|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|21|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4036.63</Time>
+			<PrimaryObject ID="31">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|18|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|18|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4051.92</Time>
+			<PrimaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="559">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4064.63</Time>
+			<PrimaryObject ID="33">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|20|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|20|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4073.16</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="560">
+				<Type>Bomb</Type>
+				<Name>GBU_16</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>383</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4097.79</Time>
+			<PrimaryObject ID="201">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="559">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>360</Parent>
+			</SecondaryObject>
+			<ParentObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>4097.85</Time>
+			<PrimaryObject ID="201">
+				<Type>SAM/AAA</Type>
+				<Name>SA-9 Gaskin</Name>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>aa|137|138</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="360">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>War Piglet | 161sqn</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4135.14</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="565">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4157.54</Time>
+			<PrimaryObject ID="29">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|16|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|16|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4158.62</Time>
+			<PrimaryObject ID="13">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>Shuto | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="566">
+				<Type>Bomb</Type>
+				<Name>GBU_24</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>13</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4169.30</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="567">
+				<Type>Bomb</Type>
+				<Name>GBU_16</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>383</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4173.48</Time>
+			<PrimaryObject ID="30">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|17|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|17|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="565">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+			<ParentObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>4231.43</Time>
+			<PrimaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="591">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4275.61</Time>
+			<PrimaryObject ID="35">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|22|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|22|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenHitBy</Action>
+			<SecondaryObject ID="591">
+				<Type>Bomb</Type>
+				<Name>GBU-38 JDAM</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>368</Parent>
+			</SecondaryObject>
+			<ParentObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</ParentObject>
+		</Event>
+		<Event>
+			<Time>4352.43</Time>
+			<PrimaryObject ID="30">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|17|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|17|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4427.34</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="595">
+				<Type>Bomb</Type>
+				<Name>GBU_24</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>383</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4456.73</Time>
+			<PrimaryObject ID="35">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Tbilisi-Lochini BARCAP|0|22|29|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Tbilisi-Lochini BARCAP|0|22|29|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasBeenDestroyed</Action>
+			<SecondaryObject ID="368">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>MrPing | 161 SQNLDR</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4649.23</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<SecondaryObject ID="596">
+				<Type>Bomb</Type>
+				<Name>GBU_24</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>383</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4718.31</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasFired</Action>
+			<Occurrences>203</Occurrences>
+			<SecondaryObject ID="597">
+				<Type>Shell</Type>
+				<Name>weapons.shells.M56A3_HE_RED</Name>
+				<Coalition>Enemies</Coalition>
+				<Parent>383</Parent>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>4942.03</Time>
+			<PrimaryObject ID="302">
+				<Type>Aircraft</Type>
+				<Name>KC-135 Stratotanker</Name>
+				<Pilot>Kutaisi Refueling|80|6|25|KC-135 Stratotanker MPRS| Pilot #1</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Kutaisi Refueling|80|6|25|KC-135 Stratotanker MPRS|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<Airport ID="ICAO:UGKO">
+				<Name>Kutaisi</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>5777.54</Time>
+			<PrimaryObject ID="25">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<Airport ID="ICAO:XRMF">
+				<Name>Mozdok</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>5800.85</Time>
+			<PrimaryObject ID="26">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D| Pilot #2</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|11|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<Airport ID="ICAO:XRMF">
+				<Name>Mozdok</Name>
+			</Airport>
+		</Event>
+		<Event>
+			<Time>5992.74</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>6143.51</Time>
+			<PrimaryObject ID="24">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D| Pilot #2</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+		</Event>
+		<Event>
+			<Time>6168.50</Time>
+			<PrimaryObject ID="23">
+				<Type>Aircraft</Type>
+				<Name>Su-33 Flanker-D</Name>
+				<Pilot>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D| Pilot #1</Pilot>
+				<Coalition>Allies</Coalition>
+				<Country>ru</Country>
+				<Group>Mineralnye Vody BARCAP|0|10|28|Su-33 Flanker-D|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+		</Event>
+		<Event>
+			<Time>6176.73</Time>
+			<PrimaryObject ID="383">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>DAGGER 1-1 | Jabby</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasLeftTheArea</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>6329.77</Time>
+			<PrimaryObject ID="13">
+				<Type>Aircraft</Type>
+				<Name>F-14B Tomcat</Name>
+				<Pilot>Shuto | 161 SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|7|1002|F-14B Tomcat|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>6487.46</Time>
+			<PrimaryObject ID="370">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>SneakyBastd 161</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+		<Event>
+			<Time>6529.09</Time>
+			<PrimaryObject ID="371">
+				<Type>Aircraft</Type>
+				<Name>F/A-18C Hornet</Name>
+				<Pilot>ZyfrNZ | 161SQN</Pilot>
+				<Coalition>Enemies</Coalition>
+				<Group>Tbilisi-Lochini OCA/Runway|80|8|1002|F/A-18C Hornet (Lot 20)|</Group>
+			</PrimaryObject>
+			<Action>HasLanded</Action>
+			<SecondaryObject ID="12">
+				<Type>Carrier</Type>
+				<Name>CVN_73</Name>
+				<Coalition>Enemies</Coalition>
+				<Group>BLUE|EWR|CARRIER|221</Group>
+			</SecondaryObject>
+		</Event>
+	</Events>
+</TacviewDebriefing>

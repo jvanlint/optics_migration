@@ -23,4 +23,5 @@ xhtml2pdf
 django-allauth
 django-htmx
 
+tzdata
  
