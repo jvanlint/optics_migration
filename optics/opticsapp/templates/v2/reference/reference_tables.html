@@ -1,0 +1,69 @@
+{% extends "v2/base.html" %} 
+{% block title %} Reference Tables {% endblock %}
+{% load django_htmx %} 
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} 
+{% block content %}
+
+<main class="c-main">
+	<div class="container-fluid">
+		<div class="fade-in">
+			<!-- .row -->
+			<div class="row">
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/campaign_status.html" %}
+				</div>
+
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/terrain.html" %}
+				</div>
+			</div>
+			<!-- /.row -->
+
+			<!-- .row -->
+			<div class="row">
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/waypoint_types.html" %}
+				</div>
+
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/flight_tasks.html" %}
+				</div>
+			</div>
+			<!-- /.row -->
+
+			<!-- .row -->
+			<div class="row">
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/support_types.html" %}
+				</div>
+
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/threat_types.html" %}
+				</div>
+			</div>
+			<!-- /.row -->
+
+			<!-- .row -->
+			<div class="row">
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/airframes.html" %}
+				</div>
+
+				<div class="col-lg-6">
+					{% include "v2/reference/includes/airframe_defaults.html" %}
+				</div>
+			</div>
+			<!-- /.row -->
+
+		</div>
+	</div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

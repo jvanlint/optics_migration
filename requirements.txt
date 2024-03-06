@@ -14,4 +14,13 @@ django_resized
 Pillow
 requests
 # Ability to import and export from admin interface.
-django-import-export 
+django-import-export
+
+django-crispy-forms
+crispy-bootstrap4
+xhtml2pdf
+
+django-allauth
+django-htmx
+
+ 

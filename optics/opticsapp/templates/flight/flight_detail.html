@@ -1,0 +1,226 @@
+{% extends "dashboard/basev2.html" %} {% load static %} {% block content %}
+
+<!-- start container -->
+<div class="container">
+	<!-- start row - Bread Crumbs -->
+	<div class="row">
+		<!-- Start Col -->
+		<div class="col-sm">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'campaign' %}">Campaigns</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'campaign' flight_Object.package.mission.campaign.id  %}">{{ flight_Object.package.mission.campaign.name }}</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'mission' flight_Object.package.mission.id  %}">{{flight_Object.package.mission.name}}</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'package' flight_Object.package.id  %}">{{flight_Object.package.name}}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{flight_Object.callsign}}</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!-- end row -->
+
+	<div class="starter-template">
+		<h6 class='text-muted'>Flight</h6>
+		<h2>{{ flight_Object.callsign }}</h2>
+		<br>
+		<h6 class='text-muted'>Task</h6>
+		<p><b>{{ flight_Object.task }}</b></p>
+		<br>
+		<h6 class='text-muted'>Flight Coordination Notes</h6>
+		<p>{{ flight_Object.flight_coordination|linebreaks }}</p>
+		<hr />
+		<div class="table-responsive">
+			<table class="table table-striped table-sm">
+				<thead class="thead-light">
+					<tr>
+						<th>Flight Radio</th>
+						<th>Flight TACAN</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{flight_Object.radio_frequency}}</td>
+						<td>{{flight_Object.tacan}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="btn-toolbar">
+			<div class="btn-group mr-2">
+				<a class="btn btn-sm btn-outline-secondary" href="{% url 'flight_update' flight_Object.id %}?returnUrl={{request.path}}" role="button">Edit</a>
+				<a class="btn btn-sm btn-outline-secondary" href="{% url 'flight_delete' flight_Object.id %}?returnUrl={{request.path}}" role="button">Delete</a>
+				<a class="btn btn-sm btn-outline-secondary" href="{% url 'pdf_view' flight_Object.package.mission.id flight_Object.id %}?returnUrl={{request.path}}" role="button">View Mission Card</a>
+				<a class="btn btn-sm btn-outline-secondary" href="{% url 'pdf_download' flight_Object.package.mission.id flight_Object.id %}?returnUrl={{request.path}}" role="button">Download Mission Card</a>
+			</div>
+		</div>
+	</div>
+	<hr />
+
+	<h2>Aircraft</h2>
+	<div class="table-responsive">
+		<table class="table table-striped table-sm">
+			<thead class="thead-dark">
+				<tr>
+					<th style="width: 30%">Type</th>
+					<th style="width: 20%">Pilot</th>
+					<th style="width: 20%">RIO/WSO</th>
+					<th style="width: 20%">Tail Code</th>
+					<th style="width: 10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if aircraft_Object %} {% for aircraft in aircraft_Object %}
+				<tr>
+					<td>{{ aircraft.type }}</td>
+					<td>{{ aircraft.pilot }} {% if aircraft.flight_lead %}<span class="badge badge-success">FLIGHT LEAD</span>{% endif %}</td>
+					<td>{{ aircraft.rio_wso }}</td>
+					<td>{{ aircraft.tailcode }}</td>
+					<td>
+						<button class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">						
+                            <i class="bi bi-pencil"></i>&nbspAircraft
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{% url 'aircraft_update' aircraft.id %}?returnUrl={{request.path}}">
+                                <i class="bi bi-pencil"></i>&nbspEdit
+                            </a>
+                            <a class="dropdown-item" href="{% url 'aircraft_delete' aircraft.id %}?returnUrl={{request.path}}">
+                                <i class="bi bi-trash"></i>&nbspDelete
+                            </a>
+							<a class="dropdown-item" href="{% url 'aircraft_copy' aircraft.id %}?returnUrl={{request.path}}">
+                                <i class="bi bi-plus"></i>&nbspCopy
+                            </a>
+                        </div>
+					</td>
+				</tr>
+				{% endfor %} {% else %}
+				<tr>
+					<td colspan="5">No aircraft specified.</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+		<a href="{% url 'aircraft_add' flight_Object.id %}" role="button"
+			><button type="button" class="btn btn-sm btn-success float-right"><i class="bi bi-plus"></i> Add Aircraft</button></a
+		>
+	</div>
+
+	<h2>Waypoint{{ waypoint_Object|pluralize }}</h2>
+	<div class="table-responsive">
+		<table class="table table-striped table-sm">
+			<thead class="thead-dark">
+				<tr>
+					<th style="width: 5%">Number</th>
+					<th style="width: 20%">Name</th>
+					<th style="width: 20%">Type</th>
+					<th style="width: 5%">Lat</th>
+					<th style="width: 5%">Long</th>
+					<th style="width: 5%">Elev</th>
+					<th style="width: 30%">Notes</th>
+					<th style="width: 10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for waypoint in waypoint_Object %}
+				<tr>
+					<td>{{ waypoint.number }}</td>
+					<td>{{ waypoint.name }}</td>
+					<td>{{ waypoint.waypoint_type }}</td>
+					<td>{{ waypoint.lat }}</td>
+					<td>{{ waypoint.long }}</td>
+					<td>{{ waypoint.elevation }}</td>
+					<td>{{ waypoint.notes|linebreaks }}</td>
+					<td>
+						<button class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">						
+                            <i class="bi bi-pencil"></i>&nbspWaypoint
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{% url 'waypoint_update' waypoint.id %}?returnUrl={{request.path}}">
+                                <i class="bi bi-pencil"></i>&nbspEdit
+                            </a>
+                            <a class="dropdown-item" href="{% url 'waypoint_delete' waypoint.id %}?returnUrl={{request.path}}">
+                                <i class="bi bi-trash"></i>&nbspDelete
+                            </a>
+							<a class="dropdown-item" href="{% url 'waypoint_copy' waypoint.id %}?returnUrl={{request.path}}">
+								<i class="bi bi-plus"></i>&nbspCopy
+							</a>
+                        </div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{% url 'waypoint_add' flight_Object.id %}" role="button"
+			><button type="button" class="btn btn-sm btn-success float-right"><i class="bi bi-plus"></i> Add Waypoint</button></a
+		>
+	</div>
+
+	<h2>Target{{ target_Object|pluralize }}</h2>
+	<div class="table-responsive">
+		<table class="table table-striped table-sm">
+			<thead class="thead-dark">
+				{% if target_Object %}
+				<tr>
+					<th>Name</th>
+					<th>Lat</th>
+					<th>Long</th>
+					<th>Elev</th>
+					<th>Notes</th>
+					<th>Image</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for target in target_Object %}
+				<tr>
+					<td>{{ target.name }}</td>
+					<td>{{ target.lat }}</td>
+					<td>{{ target.long }}</td>
+					<td>{{ target.elev }}</td>
+					<td>{{ target.notes|linebreaks }}</td>
+					{% if target.target_image %}
+					<td><a href="{{ target.target_image.url }}" add target="_blank">View</a></td>
+					{% else %}
+					<td>None</td>
+					{% endif %}
+				</tr>
+				{% endfor %} {% endif %}
+			</tbody>
+		</table>
+	</div>
+	
+	<hr>
+	
+	<h2>Flight Imagery
+		 <a href="{% url 'flight_imagery_add' flight_Object.id %}?returnUrl={{request.path}}" role="button">
+			<button type="button" class="btn btn-sm btn-success float-right"><i class="bi bi-plus"></i> Add Image</button>
+		</a>
+	</h2>
+
+	<div class="row">
+		{% if imagery_object %} 
+			{% for imagery in imagery_object %}
+				<div class="col">
+					<figure class="figure">
+						<a href="{{ imagery.image.url }}" add target="_blank"><img src="{{ imagery.image.url }}" class="figure-img img-fluid rounded" alt="{{imagery.caption}}" /></a>
+						<figcaption class="figure-caption">
+							{{ imagery.caption }} <a style="padding-left: 25px" href="{% url 'flight_imagery_update' imagery.id %}?returnUrl={{request.path}}" role="button"><i class="bi bi-pencil"></i> </a>
+							<a style="padding-left: 25px" href="{% url 'flight_imagery_delete' imagery.id %}?returnUrl={{request.path}}" role="button"><i class="bi bi-trash"></i></a>
+						</figcaption>
+					</figure>
+				</div>
+				{% if forloop.counter|divisibleby:3 %}
+					</div>
+					<div class="row">
+				{% endif %}
+			 {% endfor %} 
+		 {% else %}
+			<div class="col">
+				<h5>No imagery available.</h5>
+			</div>
+		{% endif %}
+	</div>
+	
+</div>
+
+{% endblock %}

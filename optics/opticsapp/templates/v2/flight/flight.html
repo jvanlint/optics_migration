@@ -1,0 +1,432 @@
+{% extends "v2/base.html" %}
+{% load static %} 
+{% block title %} Flight {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %} 
+{% block content %}
+{% include 'v2/includes/confirm_delete_modal.html' %}
+
+<main class="c-main">
+	<div class="container-fluid">
+		<div class="fade-in">
+			<div class="row">
+				<div class="col-sm-12 col-md-5">
+					<div class="card">
+						<div class="card-header">
+							<h6 class="text-muted">Flight</h6>
+							
+							<!-- .mission card button -->
+							<button class="btn btn-success btn-sm dropdown-toggle float-right" id="cardDropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Mission Card
+							</button>
+							<div class="dropdown-menu" aria-labelledby="cardDropdownMenuButton">
+								<a class="dropdown-item" href="{% url 'pdf_view' flight_object.package.mission.id flight_object.id %}?returnUrl={{request.path}}">
+									View PDF
+								</a>
+								<a class="dropdown-item" href="{% url 'pdf_download' flight_object.package.mission.id flight_object.id %}?returnUrl={{request.path}}">
+									Download
+								</a>
+							</div>
+							<!-- ./mission card button -->
+							
+							<h2>{{flight_object.callsign}}</h2>
+							<h6 class="text-muted">Task</h6>
+							<h4>{{flight_object.task}}</h4>
+							<div class="media text-muted pt-3">
+								<div class="c-avatar"><img class="c-avatar-img" src="{{ flight_object.created_by.profile.profile_image.url }}" alt="" /></div>
+								<p class="media-body pb-3 pl-2 mb-0  lh-125">
+								<strong class="d-block text-gray-dark">
+									{% if flight_object.created_by.username %}
+									<a href="{% url 'user_profile' flight_object.created_by.id %}" class="text-decoration-none text-reset">{{ flight_object.created_by.username }}</a>
+									{% endif %}
+								</strong>
+								{{ flight_object.date_created }} Date Last Edited Here
+								</p>
+							</div>
+						</div>
+						<div class="card-body">
+							{{flight_object.notes|linebreaks|urlize}}
+							<div class="nav-tabs-boxed">
+								<ul class="nav nav-tabs" role="tablist">
+									
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#comms" role="tab" aria-controls="comms">Comms</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#tacan" role="tab" aria-controls="comms">TACAN</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#hacks" role="tab" aria-controls="comms">Time Hacks</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#fuel" role="tab" aria-controls="comms">Fuel</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#notes" role="tab" aria-controls="notes">Flight Coordination Notes</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="comms" role="tabpanel">
+										{{flight_object.radio_frequency}}
+									</div>
+									<div class="tab-pane" id="tacan" role="tabpanel">
+										{{flight_object.tacan}}
+									</div>
+									<div class="tab-pane" id="hacks" role="tabpanel">
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Take Off</th>
+														<th>RDV 1</th>
+														<th>RDV 2</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>{{flight_object.timehack_start}}</td>
+														<td>{{flight_object.timehack_rdv1}}</td>
+														<td>{{flight_object.timehack_rdv2}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane" id="fuel" role="tabpanel">
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														
+														<th>Fuel FOB</th>
+														<th>Fuel Joker</th>
+														<th>Fuel Bingo</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>{{flight_object.fuel_fob}}</td>
+														<td>{{flight_object.fuel_joker}}</td>
+														<td>{{flight_object.fuel_bingo}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane" id="notes" role="tabpanel">
+										{{flight_object.flight_coordination|linebreaks|urlize}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							{% if package_object.creator.username == user.username or isAdmin == True %}
+								<button class="btn-sm btn-primary dropdown-toggle float-right" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+							{% else %}
+								<button class="btn-sm btn-primary dropdown-toggle float-right" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled="">
+							{% endif %}
+								<svg class="c-icon">
+									<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+								</svg>
+								&nbspFlight
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="{% url 'flight_update_v2' flight_object.id %}?returnUrl={{request.path}}">
+									<svg class="c-icon">
+										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+									</svg>
+									&nbspEdit
+								</a>
+								<a class="dropdown-item" id="flight_{{flight_object.id}}" data-toggle="modal" data-target="#confirmModal" data-message="Are you sure? If you proceed, the {{ flight_object.callsign }} flight will be deleted." data-buttontext="Delete" href="{% url 'flight_delete_v2' flight_object.id %}?returnUrl={% url 'package_v2' flight_object.package.id %}">
+									<svg class="c-icon">
+										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
+									</svg>
+									&nbspDelete
+								</a>
+							</div>
+							<h6 class="media-body pb-3 pl-2 mb-0 lh-125">Last modified on {{ flight_object.date_modified }}
+								{% if flight_object.modified_by %}
+								<br>by <a href="{% url 'user_profile' flight_object.modified_by.id %}">{{ flight_object.modified_by.username }} </a>
+								{% endif %}
+							</h6> 
+						</div>
+					</div>
+					<!-- /.card -->
+
+					<!--.card -->
+					<div class="card" id="comments">
+							{% include "v2/flight/includes/comments.html" %}
+					</div>
+					<!--.card -->
+
+				</div>
+				<!-- /.col-->
+				<div class="col-sm-0 col-md-7">
+
+					<!-- .card -->
+					<div class="card">
+						<div class="card-header">Aircraft <span class="badge badge-pill badge-info ml-auto">{{ aircraft_object.count }}</span></div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width: 30%">Type</th>
+											<th style="width: 20%">Pilot</th>
+											<th style="width: 20%">RIO/WSO</th>
+											<th style="width: 10%">Flight Lead</th>
+											<th style="width: 10%">Tail Code</th>
+											<th style="width: 10%">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% if aircraft_object %} 
+										{% for aircraft in aircraft_object %}
+										<tr>
+											<td>{{ aircraft.type }}</td>
+											<td>{{ aircraft.pilot }}</td>
+											<td>{{ aircraft.rio_wso }}</td>
+											<td>{{ aircraft.flight_lead }}</td>
+											<td>{{ aircraft.tailcode }}</td>
+											<td>
+												<button class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<svg class="c-icon">
+														<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+													</svg>
+													&nbspAircraft
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="{% url 'aircraft_update_v2' aircraft.id %}?returnUrl={{ request.path }}">
+														<svg class="c-icon">
+															<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+														</svg>
+														&nbspEdit
+													</a>
+													<a class="dropdown-item" id="aircraft_{{aircraft.id}}" data-toggle="modal" data-target="#confirmModal" data-message="Are you sure? If you proceed, the {{ aircraft.type }} aircraft will be deleted." data-buttontext="Delete" href="{% url 'aircraft_delete_v2' aircraft.id %}?returnUrl={{ request.path }}">
+														<svg class="c-icon">
+															<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
+														</svg>
+														&nbspDelete
+													</a>
+													<a class="dropdown-item" href="{% url 'aircraft_copy_v2' aircraft.id %}?returnUrl={{request.path}}">
+														<svg class="c-icon">
+															<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
+														</svg>
+														&nbspCopy
+													</a>
+												</div>
+											</td>
+										</tr>
+										{% endfor %} {% else %}
+										<tr>
+											<td colspan="6">No aircraft available.</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="card-footer">
+						<h6>
+							<a href="{% url 'aircraft_add_v2' flight_object.id %}?returnUrl={{ request.path }}" class="btn btn-sm btn-success float-right" role="button">
+								<svg class="c-icon">
+									<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
+								</svg>
+								Add Aircraft
+							</a>
+						</h6>
+						</div>
+					</div>
+					<!-- /.card -->
+					
+					<!-- .card -->
+					<div class="card">
+						<div class="card-header">Waypoint{{ waypoint_object|pluralize }} <span class="badge badge-pill badge-info ml-auto">{{ waypoint_object.count }}</span></div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th style="width: 5%">#</th>
+											<th style="width: 10%">Name</th>
+											<th style="width: 10%">Type</th>
+											<th style="width: 10%">Lat</th>
+											<th style="width: 10%">Long</th>
+											<th style="width: 5%">Elev</th>
+											<th style="width: 40%">Notes</th>
+											<th style="width: 5%">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% if waypoint_object %} 
+										{% for waypoint in waypoint_object %}
+										<tr>
+											<td>{{ waypoint.number }}</td>
+											<td>{{ waypoint.name }}</td>
+											<td>{{ waypoint.waypoint_type }}</td>
+											<td>{{ waypoint.lat }}</td>
+											<td>{{ waypoint.long }}</td>
+											<td>{{ waypoint.elevation  }}</td>
+											<td>{{ waypoint.notes }}</td>
+											<td>
+												<button class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<svg class="c-icon">
+														<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+													</svg>
+													&nbspWaypoint
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="{% url 'waypoint_update_v2' waypoint.id %}?returnUrl={{ request.path }}">
+														<svg class="c-icon">
+															<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+														</svg>
+														&nbspEdit
+													</a>
+													<a class="dropdown-item" id="waypoint_{{waypoint.id}}" data-toggle="modal" data-target="#confirmModal" data-message="Are you sure? If you proceed, the {{ waypoint.name }} waypoint will be deleted." data-buttontext="Delete" href="{% url 'waypoint_delete_v2' waypoint.id %}?returnUrl={{request.path}}">
+														<svg class="c-icon">
+															<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
+														</svg>
+														&nbspDelete
+													</a>
+													<a class="dropdown-item" href="{% url 'waypoint_copy_v2' waypoint.id %}?returnUrl={{request.path}}">
+														<svg class="c-icon">
+															<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
+														</svg>
+														&nbspCopy
+													</a>
+												</div>
+											</td>
+										</tr>
+										{% endfor %} {% else %}
+										<tr>
+											<td colspan="8">No waypoints available.</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="card-footer">
+						<h6>
+							<a href="{% url 'waypoint_add_v2' flight_object.id %}?returnUrl={{ request.path }}" class="btn btn-sm btn-success float-right" role="button">
+								<svg class="c-icon">
+									<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
+								</svg>
+								Add Waypoint
+							</a>
+						</h6>
+						</div>
+					</div>
+					<!-- /.card -->
+					
+					<!-- .card -->
+					<div class="card">
+						<div class="card-header">Assigned Target{{ target_object|pluralize }} <span class="badge badge-pill badge-info ml-auto">{{ target_object.count }}</span></div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Lat</th>
+											<th>Long</th>
+											<th>Elev</th>
+											<th>Notes</th>
+											<th>Image</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% if target_object %} 
+										{% for target in target_object %}
+										<tr>
+											<td>{{ target.name }}</td>
+											<td>{{ target.lat }}</td>
+											<td>{{ target.long }}</td>
+											<td>{{ target.elev }}</td>
+											<td>{{ target.notes|linebreaks }}</td>
+											{% if target.target_image %}
+											<td><a href="{{ target.target_image.url }}" add target="_blank">View</a></td>
+											{% else %}
+											<td>None</td>
+											{% endif %}
+										</tr>
+										{% endfor %} {% else %}
+										<tr>
+											<td colspan="8">No assigned targets available.</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="card-footer">
+						
+						</div>
+					</div>
+					<!-- /.card -->
+					
+					<!-- .card -->
+					<div class="card">
+						<div class="card-header">Flight Image{{ imagery_object|pluralize }} <span class="badge badge-pill badge-info ml-auto">{{ imagery_object.count }}</span></div>
+						<div class="card-body">
+							<div class="row">
+							{% if imagery_object %} {% for imagery in imagery_object %}
+								<div class="col-sm-6 col-md-4">
+									<figure class="figure">
+										<a href="{{ imagery.image.url }}" add target="_blank"><img src="{{ imagery.image.url }}" class="figure-img img-fluid rounded" alt="{{imagery.caption}}" /></a>
+										<figcaption class="figure-caption">
+											{{ imagery.caption }}
+											<br>
+											<a id="imagery{{imagery.id}}" data-toggle="modal" data-target="#confirmModal" data-message="Are you sure? If you proceed, the image will be deleted." data-buttontext="Delete" href="{% url 'flight_imagery_delete_v2' imagery.id %}?returnUrl={{request.path}}" role="button">
+												<svg class="c-icon">
+													<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
+												</svg>
+											</a>
+											<a href="{% url 'flight_imagery_update_v2' imagery.id %}?returnUrl={{request.path}}" role="button">
+												<svg class="c-icon">
+													<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+												</svg>
+											</a>
+										</figcaption>
+									</figure>
+								</div>
+							{% endfor %} 
+							</div>
+							{% else %}
+								<div class="col-sm-6 col-md-4">
+									No imagery available.
+								</div>
+							{% endif %}
+						</div>
+						<div class="card-footer">
+						<h6>
+							<a href="{% url 'flight_imagery_add_v2' flight_object.id %}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
+								<svg class="c-icon">
+									<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
+								</svg>
+								Add Imagery
+							</a>
+						</h6>
+						</div>
+					</div>
+					<!-- /.card -->
+
+				</div>
+				<!-- /.col-->
+			</div>
+			<!-- /.row-->
+		</div>
+	</div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<!-- Confirm Delete JS -->
+<script src="{% get_static_prefix %}assets/js/confirm_delete.js"></script>
+<script>$("[data-toggle=tooltip").tooltip();</script>
+ {% endblock javascripts %}

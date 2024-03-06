@@ -1,0 +1,82 @@
+{% extends "v2/base.html" %}
+{% load static %}
+{% block title %} OPTICS | All Campaigns {% endblock title %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block content %}
+
+
+
+<main class="c-main">
+    <!-- .container-fluid-->
+    <div class="container-fluid">
+        <!-- .fade-in --> 
+        <div class="fade-in">
+            
+            <!-- Title and Add Button Row -->
+            <!-- .row -->
+            <div class="row" style="margin-bottom:20px;">
+                <div class="col">
+                    <h4>Available Campaigns</h4>
+                </div>
+                <!-- .col -->
+                <div class="col">
+                    <a href="{% url 'campaign_add_v2' %}">
+                        <button class="btn btn-success float-right" type="button">
+                            <svg class="c-icon">
+                                <use xlink:href="{% get_static_prefix %}assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
+                            </svg>
+                            Add Campaign
+                        </button>
+                    </a>
+                </div>
+                <!-- /.col-->
+            </div>
+            <!-- /.row-->
+            
+            <!-- Filter Row -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Filtering
+                        </div>
+                        <div class="card-body">
+                            <div class="dropdown">
+                                <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                    Status
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" hx-target="#campaigns" hx-get="{% url 'campaigns_filter' %}?filter=Active" href="">Active</a>
+                                    <a class="dropdown-item" hx-target="#campaigns" hx-get="{% url 'campaigns_filter' %}?filter=Inactive" href="">Inactive</a>
+                                    <a class="dropdown-item" hx-target="#campaigns" hx-get="{% url 'campaigns_filter' %}?filter=WIP" href="">WIP</a>
+                                    <a class="dropdown-item" hx-target="#campaigns" hx-get="{% url 'campaigns_filter' %}?filter=On Hold" href="">On Hold</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" hx-target="#campaigns" hx-get="{% url 'campaigns_filter' %}?filter=All" href="">All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campaign Cards -->
+            <!-- .row -->
+            <div class="row" id="campaigns">
+                    {% include "v2/campaign/includes/campaign_card.html" %}
+            </div> 
+            <!-- /.row-->
+        </div>
+        <!-- /.fade-in-->
+    </div> 
+    <!-- /.container-fluid-->
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+  <script src="{% static 'js/htmx/htmx.min.js' %}"></script>
+  <script src="{% static 'js/htmx/ext/event-header.js' %}"></script>
+{% endblock javascripts %}
