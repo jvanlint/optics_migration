@@ -1,9 +1,0 @@
-Last Login....: Mon Jun 14 02:59:55 from 123.456.789.0
-Uptime........: 50days 15hours 51minutes 52seconds
-Load..........: 0.02 (1minute) 0.01 (5minutes) 0.00 (15minutes)
-Memory MB.....: 488 Used: 457 Free: 30 Free Cached: 295 Swap In Use: 160
-Temperature...: Core0: 91.4°F M/B: 98.6°F CPU: 89.6°F Disk: 98°F
-Disk Usage....: You're using 2M in /home/mewbie
-SSH Logins....: There are currently 3 users logged in.
-Processes.....: 84 running of which 4 are yours
-Weather.......: 58°F, Cloudy
