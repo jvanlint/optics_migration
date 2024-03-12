@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from ..decorators import allowed_users
 from django.views.decorators.cache import never_cache
+from django.urls import reverse
 
 from ..models import Aircraft, Flight, UserProfile
 from ..forms import AircraftForm
@@ -30,7 +31,7 @@ def aircraft_create(request, link_id):
 		form = AircraftForm(flights, request.POST, request.FILES)
 		if form.is_valid():
 			form.save(commit=True)
-			return HttpResponseRedirect("/airops/flight/" + str(link_id))
+			return HttpResponseRedirect(reverse('flight_detail', args=[str(link_id)]))
 
 	context = {"form": form, "link": link_id}
 	return render(request, "aircraft/aircraft_form.html", context=context)
@@ -53,7 +54,7 @@ def aircraft_update(request, link_id):
 		if form.is_valid():
 			form.save(commit=True)
 			print("Form Saved!")
-			return HttpResponseRedirect("/airops/flight/" + str(flightID))
+			return HttpResponseRedirect(reverse('flight_detail', args=[str(flightID)]))
 
 	context = {"form": form, "link": flightID}
 	return render(request, "aircraft/aircraft_form.html", context=context)
@@ -67,7 +68,7 @@ def aircraft_delete(request, link_id):
 
 	if request.method == "POST":
 		aircraft.delete()
-		return HttpResponseRedirect("/airops/flight/" + str(flightID))
+		return HttpResponseRedirect(reverse('flight_detail', args=[str(flightID)]))
 
 	context = {"item": aircraft}
 	return render(request, "aircraft/aircraft_delete.html", context=context)
@@ -79,4 +80,4 @@ def aircraft_copy(request, link_id):
 	aircraft = Aircraft.objects.get(id=link_id)
 	flightID = aircraft.copy()
 
-	return HttpResponseRedirect("/airops/flight/" + str(flightID))
+	return HttpResponseRedirect(reverse('flight_detail', args=[str(flightID)]))

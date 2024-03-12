@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load url %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- CoreUI and necessary plugins-->
 <script defer src="{% get_static_prefix %}assets/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
@@ -11,7 +12,8 @@
 <script>
     document.getElementById('id_airframe').addEventListener('change', function () {
             var airframe_id = this.value;
-            fetch('/airops/v2/flight/get_callsigns/' + airframe_id + '/')
+            var url = "{% url 'get_callsigns' airframe_id %}";
+            fetch(url)
             .then(response => response.json())
             .then(data => {
                 var select = document.getElementById('id_callsign');
