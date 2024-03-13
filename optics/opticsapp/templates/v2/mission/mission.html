@@ -154,8 +154,7 @@
 												<tbody>
 													{% for file in mission_files %}
 													<tr>
-														<td><a href="{{file.mission_file.url}}" download>{{ file.name
-																}}</a></td>
+														<td><a href="{{file.mission_file.url}}" download>{{ file.name }}</a></td>
 														<td>{{ file.get_file_type_display }}</td>
 														<td>{{ file.uploaded_by }}</td>
 														<td>{{ file.date_uploaded }}</td>
