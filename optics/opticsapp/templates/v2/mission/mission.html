@@ -24,8 +24,7 @@
 					{% csrf_token %}
 					{% for field in file_form %}
 					<div class="form-group row">
-						<label class="col-md-3 col-form-label" for="{{ form.campaign_name.id_for_label }}">{{
-							field.label }}</label>
+						<label class="col-md-3 col-form-label" for="{{ form.campaign_name.id_for_label }}">{{field.label }}</label>
 						<div class="col-md-9">
 							{{ field }}
 							<span class="help-block">{{ field.help_text }}</span>
