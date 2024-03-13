@@ -11,7 +11,7 @@
 <script>
     document.getElementById('id_airframe').addEventListener('change', function () {
             var airframe_id = this.value;
-            var url = "{% url 'get_callsigns' airframe_id %}";
+            var url = "{% url 'get_callsigns' airframe_id=airframe.id %}";
             fetch(url)
             .then(response => response.json())
             .then(data => {
