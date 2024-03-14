@@ -127,6 +127,8 @@ def flight_update_v2(request, link_id):
             obj.modified_by = request.user
             # TODO: When airframe type is updated the aircraft should be updated.
             obj.save()
+            obj.targets.set(post_form.cleaned_data['targets'])
+            obj.save()
             return HttpResponseRedirect(returnURL)
 
     context = {
