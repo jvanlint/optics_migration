@@ -79,11 +79,10 @@ def flight_add_v2(request, link_id):
     }
 
     if request.method == "POST":
-        print(request.POST)
+        print(f'Flight post data: {request.POST}')
         post_form = FlightForm(target, request.POST)
         if post_form.is_valid():
             obj = post_form.save(commit=False)
-            obj.targets.set(post_form.cleaned_data['targets'])
             obj.modified_by = request.user
             obj.created_by = request.user
             print(f"Object id is: {obj.id}")
@@ -96,6 +95,8 @@ def flight_add_v2(request, link_id):
             # TODO: When a flight is created some default values for radios and callsigns should be populated.
             # TODO: The flight form should also enable the selection of the callsign associated with the airframe.
             obj.callsign = post_form.cleaned_data["callsign"]
+            obj.save()
+            obj.targets.set(post_form.cleaned_data['targets'])
             obj.save()
             # populate_airframe_defaults(flight_id, airframe_id)
             return HttpResponseRedirect(returnURL)
