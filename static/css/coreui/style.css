@@ -17227,5 +17227,20 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
   }
+
+  .image-popup {
+    position: relative;
+    display: inline-block;
+  }
+
+  .popup-image {
+    display: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .image-popup:hover .popup-image {
+    display: block;
+  }
 }
 /*# sourceMappingURL=style.css.map */
