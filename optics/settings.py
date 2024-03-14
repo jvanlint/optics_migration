@@ -30,14 +30,14 @@ DEBUG = config("DEBUG")
 print(f"Debug set to: {DEBUG}")
 
 ALLOWED_HOSTS = ["*"]
-#ALLOWED_HOSTS = ["https://opticsapp.online", 
-                 "http://opticsapp.online", 
-                 "https://django-server-production-c104.up.railway.app", 
-                 "http://django-server-production-c104.up.railway.app", 
-                 "http://localhost:8000", 
-                 "https://django-server.railway.internal"
-                 "http://django-server.railway.internal"
-                 ]
+# ALLOWED_HOSTS = ["https://opticsapp.online", 
+#                  "http://opticsapp.online", 
+#                  "https://django-server-production-c104.up.railway.app", 
+#                  "http://django-server-production-c104.up.railway.app", 
+#                  "http://localhost:8000", 
+#                  "https://django-server.railway.internal"
+#                  "http://django-server.railway.internal"
+#                  ]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
