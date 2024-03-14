@@ -81,7 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
     # Add the htmx middleware:
@@ -169,6 +169,23 @@ MEDIA_URL = "/media/"
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+# S3 Bucket Settings
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {"location": "media"},
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {"location": "static"},
+        },
+}
+
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME= config("AWS_S3_REGION_NAME")
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-secondary",

@@ -24,3 +24,7 @@ django-allauth
 django-htmx
 
 tzdata
+
+# S3 required packages
+django-storages
+boto3
