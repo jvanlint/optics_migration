@@ -83,7 +83,7 @@ def flight_add_v2(request, link_id):
         post_form = FlightForm(target, request.POST)
         if post_form.is_valid():
             obj = post_form.save(commit=False)
-            obj.targets = post_form.cleaned_data["targets"]
+            obj.targets.set(post_form.cleaned_data['targets'])
             obj.modified_by = request.user
             obj.created_by = request.user
             print(f"Object id is: {obj.id}")
