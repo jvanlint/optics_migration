@@ -29,8 +29,8 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG")
 print(f"Debug set to: {DEBUG}")
 
-#ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = ["https://opticsapp.online", 
+ALLOWED_HOSTS = ["*"]
+#ALLOWED_HOSTS = ["https://opticsapp.online", 
                  "http://opticsapp.online", 
                  "https://django-server-production-c104.up.railway.app", 
                  "http://django-server-production-c104.up.railway.app", 
