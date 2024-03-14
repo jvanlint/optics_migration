@@ -303,9 +303,9 @@ def flight_imagery_delete_v2(request, link_id):
 
     # Check to see if an AO Image exists.
     if imagery:
-        os.remove(os.path.join(settings.MEDIA_ROOT, str(imagery.image)))
+        imagery.delete()
 
-    imagery.delete()
+    
     return HttpResponseRedirect(returnURL)
 
 

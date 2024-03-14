@@ -50,6 +50,10 @@ class Target(models.Model):
 		blank=True,
 	)
 
+	# Override the delete class to ensure the image is deleted from the file system
+	def delete(self):
+		self.target_image.delete()
+		super().delete()
 	# Metadata
 
 	class Meta:

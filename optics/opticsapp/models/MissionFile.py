@@ -32,3 +32,8 @@ class MissionFile (models.Model):
 	class Meta:
 		ordering = ['-date_uploaded']
 		verbose_name = 'Mission File'
+	
+	# Override the delete class to ensure the file is deleted from the file system
+	def delete(self):
+		self.mission_file.delete()
+		super().delete()

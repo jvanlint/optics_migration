@@ -145,15 +145,6 @@ def campaign_update_v2(request, link_id):
 def campaign_delete_v2(request, link_id):
     campaign = Campaign.objects.get(id=link_id)
 
-    # Delete the campaign thumbnail before deleting the actual DB record.
-    # Check to see if a campaign thumbnail exists.
-    if campaign.campaignImage:
-        os.remove(os.path.join(settings.MEDIA_ROOT, str(campaign.campaignImage)))
-
-    # Check to see if an AO Image exists.
-    if campaign.aoImage:
-        os.remove(os.path.join(settings.MEDIA_ROOT, str(campaign.aoImage)))
-
     campaign.delete()
     # messages.success(request, "Campaign successfully deleted.")
     campaigns_queryset = Campaign.objects.order_by('status', 'name')

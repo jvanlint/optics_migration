@@ -44,6 +44,11 @@ class UserProfile(models.Model):
         blank=False,
     )
 
+    # Override the delete class to ensure the image is deleted from the file system
+    def delete(self):
+        self.profile_image.delete()
+        super().delete()
+
     def __str__(self):
         return self.user.username
 

@@ -19,3 +19,9 @@ class MissionImagery(models.Model):
 		null=True,
 		blank=True,
 	)
+
+	# Override the delete class to ensure the image is deleted from the file system
+	def delete(self):
+		self.image.delete()
+		super().delete()
+

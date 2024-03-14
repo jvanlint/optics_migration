@@ -78,6 +78,11 @@ class Campaign(models.Model):
     
     comments = GenericRelation(Comment)
 
+    # Override the delete class to ensure the image is deleted from the file system
+    def delete(self):
+        self.campaignImage.delete()
+        super().delete()
+    
     # Metadata
 
     class Meta:
@@ -87,3 +92,5 @@ class Campaign(models.Model):
 
     def __str__(self):
         return self.name
+    
+    

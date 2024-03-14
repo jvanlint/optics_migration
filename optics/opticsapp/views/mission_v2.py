@@ -149,7 +149,7 @@ def mission_delete_v2(request, link_id):
     # Check to see if an AO Image exists.
     if mission_files:
         for file in mission_files:
-            os.remove(os.path.join(settings.MEDIA_ROOT, str(file.mission_file)))
+           file.delete()
 
     if mission.discord_msg_id:
         mission.delete_discord_event()
@@ -274,9 +274,9 @@ def mission_file_delete(request, link_id):
 
     # Check to see if an AO Image exists.
     if mission_file_obj:
-        os.remove(os.path.join(settings.MEDIA_ROOT, str(mission_file_obj.mission_file)))
+        mission_file_obj.delete()
 
-    mission_file_obj.delete()
+    
 
     return HttpResponseRedirect(returnURL)
 
@@ -338,9 +338,9 @@ def mission_imagery_delete_v2(request, link_id):
 
     # Check to see if an AO Image exists.
     if imagery:
-        os.remove(os.path.join(settings.MEDIA_ROOT, str(imagery.image)))
+        imagery.delete()
 
-    imagery.delete()
+    
     return HttpResponseRedirect(returnURL)
 
 
