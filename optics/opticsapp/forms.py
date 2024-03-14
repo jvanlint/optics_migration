@@ -144,23 +144,13 @@ class TargetForm(ModelForm):
 
 
 class FlightForm(ModelForm):
-    # Add a callsign dropdown to the form
-    callsign = forms.ChoiceField(choices=[], required=False)
-    # callsign = forms.CharField(max_length=20, required=False)
+    
 
     def __init__(self, target, *args, **kwargs):
         super(FlightForm, self).__init__(*args, **kwargs)
         self.fields["targets"].queryset = target
         for field in self.fields:
             self.fields[field].widget.attrs.update({"class": "form-control"})
-
-    # def clean_callsign(self):
-    #     # get the submitted callsign value
-    #     print("Clean call sign is being called")
-    #     callsign = self.cleaned_data.get("callsign")
-
-    #     # skip the choice validation and return the callsign value
-    #     return callsign
 
     def clean(self):
         print("Cleaning the form")
