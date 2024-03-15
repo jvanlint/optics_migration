@@ -2,7 +2,7 @@
 <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
 	<button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
 		<svg class="c-icon c-icon-lg">
-			<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
+			<use xlink:href="{{ STATIC_URL }}/static/assets/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
 		</svg>
     </button>
 	<a class="c-header-brand d-lg-none" href="{% url 'index'%}">
@@ -10,7 +10,7 @@
     </a>
 	<button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
 		<svg class="c-icon c-icon-lg">
-			<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
+			<use xlink:href="{{ STATIC_URL }}/static/assets/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
 		</svg>
 	</button>
 
@@ -29,7 +29,7 @@
 
 				<a class="dropdown-item" href="#">
 					<svg class="c-icon mr-2">
-						<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-file"></use>
+						<use xlink:href="{{ STATIC_URL }}/static/assets/vendors/@coreui/icons/svg/free.svg#cil-file"></use>
 					</svg>
 					Campaigns<span class="badge badge-primary ml-auto">3</span></a
 				>
@@ -37,20 +37,20 @@
 
 				<a class="dropdown-item" href="{% url 'own_profile' %}">
 					<svg class="c-icon mr-2">
-						<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+						<use xlink:href="{{ STATIC_URL }}/static/assets/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
 					</svg>
 					Profile
 				</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/admin">
 					<svg class="c-icon mr-2">
-						<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+						<use xlink:href="{{ STATIC_URL }}/static/assets/vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
 					</svg>
 					Admin
 				</a>
 				<a class="dropdown-item" href="{% url 'account_logout' %}">
 					<svg class="c-icon mr-2">
-						<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+						<use xlink:href="{{ STATIC_URL }}/static/assets/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
 					</svg>
 					Logout
 				</a>
