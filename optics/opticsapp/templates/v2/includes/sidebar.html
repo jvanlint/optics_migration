@@ -9,52 +9,40 @@
 
 		<li class="c-sidebar-nav-item">
 			<a class="c-sidebar-nav-link" href="{% url 'campaigns' %}">
-				<svg class="c-sidebar-nav-icon">
-					<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-airplane-mode" %}"></use>
-				</svg>
-				Campaigns</a
-			>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/airplane-mode.svg' %}" class="c-sidebar-nav-icon">
+				Campaigns
+			</a>
 		</li>
 		<li class="c-sidebar-nav-title">Reference Tables</li>
 		<li class="c-sidebar-nav-item">
 			<a class="c-sidebar-nav-link" href="{% url 'reference_tables' %}">
-				<svg class="c-sidebar-nav-icon">
-					<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-spreadsheet" %}"></use>
-				</svg>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/spreadsheet.svg' %}" class="c-sidebar-nav-icon">
 				Reference Tables<span class="badge badge-info">NEW</span></a
 			>
 		</li>
 		
 		<li class="c-sidebar-nav-item">
 			<a class="c-sidebar-nav-link" href="#">
-				<svg class="c-sidebar-nav-icon">
-					<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-spreadsheet" %}"></use>
-				</svg>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/spreadsheet.svg' %}" class="c-sidebar-nav-icon">
 				Threat Database<span class="badge badge-danger">SOON</span></a
 			>
 		</li>
 		<li class="c-sidebar-nav-title">Statistics</li>
 		<li class="c-sidebar-nav-item">
 			<a class="c-sidebar-nav-link" href="{% url 'mission_dashboard' %}">
-				<svg class="c-sidebar-nav-icon">
-					<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-speedometer" %}"></use>
-				</svg>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/speedometer.svg' %}" class="c-sidebar-nav-icon">
 				Mission Dashboard<span class="badge badge-danger">SOON</span></a
 			>
 		</li>
 		<li class="c-sidebar-nav-title">Application</li>
 		<li class="c-sidebar-nav-item">
 			<a class="c-sidebar-nav-link" href="https://github.com/jvanlint/OPTICS/issues">
-				<svg class="c-sidebar-nav-icon">
-					<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-bug" %}"></use>
-				</svg>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/bug.svg' %}" class="c-sidebar-nav-icon">
 				Report a Bug<span class="badge badge-info">NEW</span></a>
 		</li>
 		<li class="c-sidebar-nav-item">
 			<a class="c-sidebar-nav-link" href="{% url 'about' %}">
-				<svg class="c-sidebar-nav-icon">
-					<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-info" %}"></use>
-				</svg>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/info.svg' %}" class="c-sidebar-nav-icon">
 				About OPTICS<span class="badge badge-info">NEW</span></a>
 		</li>
 	</ul>

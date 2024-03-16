@@ -51,9 +51,7 @@
 							<h2>{{mission_object.name}}</h2>
 							<h6 class="text-muted">Actual Date-Time
 								{% if mission_object.notify_discord %} 
-								<svg class="c-icon">
-									<use xlink:href="/static/assets/vendors/@coreui/icons/svg/brand.svg#cib-discord"></use>
-								</svg> 
+								<img src="{% static "assets/vendors/@coreui/icons/svg/discord.svg" %}" class="c-icon"> 
 								{% endif %}
 							</h6>
 							<h5>{{ mission_object.mission_date }} ({{ mission_object.mission_date|timeuntil }} from now)</h5>
@@ -159,9 +157,7 @@
 											{% if comment.user.username == user.username %}
 											<br>
 											<a id="comment_{{comment.id}}" data-toggle="modal" data-target="#confirmModal" data-message="Are you sure? If you proceed, the comment will be deleted." data-buttontext="Delete" href="{% url 'mission_delete_comment' comment.id %}?returnUrl={{request.path}}">
-												<svg class="c-icon">
-													<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
-												</svg>
+												<img src="{% static "assets/vendors/@coreui/icons/svg/trash.svg" %}" class="c-icon">
 											</a>
 											{% endif %}
 											<p class="small">{{ comment.date_created | timesince}} ago.</p>

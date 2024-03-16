@@ -9526,7 +9526,7 @@ html:not([dir="rtl"]) .c-sidebar-nav-link .badge, html:not([dir="rtl"]) .c-sideb
   font-size: 1.09375rem;
   text-align: center;
   transition: 0.3s;
-  fill: currentColor;
+  fill: white;
 }
 
 html:not([dir="rtl"]) .c-sidebar-nav-icon:first-child {
@@ -17243,4 +17243,3 @@ a.text-dark:hover, a.text-dark:focus {
     display: block;
   }
 }
-/*# sourceMappingURL=style.css.map */

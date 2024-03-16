@@ -1,4 +1,4 @@
-
+{% load static %}
 	<div class="card-header">
 		Comments <span class="badge badge-pill badge-info ml-auto">{{comments.count}}</span>
 	</div>
@@ -26,14 +26,10 @@
 						{% if comment.user.username == user.username %}
 						<br>
 						<a hx-target="#comments" hx-confirm="Are you sure? If you proceed, the comment will be deleted and cannot be recovered." hx-get="{% url 'mission_delete_comment' comment.id %}?mission_id={{mission_object.id}}">
-							<svg class="c-icon">
-								<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
-							</svg>
+							<img src="{% static "assets/vendors/@coreui/icons/svg/trash-black.svg" %}" class="c-icon">
 						</a>
 						<a hx-target="#comment-{{ comment.id }}" hx-get="{% url 'mission_edit_comment' comment.id %}?mission_id={{mission_object.id}}">
-							<svg class="c-icon">
-								<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-							</svg>
+							<img src="{% static "assets/vendors/@coreui/icons/svg/pencil-black.svg" %}" class="c-icon">
 						</a>
 						{% endif %}
 						<p class="small">{{ comment.date_created | timesince}} ago.</p>

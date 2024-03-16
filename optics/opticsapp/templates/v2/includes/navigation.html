@@ -1,17 +1,13 @@
 {% load static %}
 <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
 	<button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
-		<svg class="c-icon c-icon-lg">
-			<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-menu" %}"></use>
-		</svg>
+		<img src="{% static 'assets/vendors/@coreui/icons/svg/menu.svg' %}" class="c-icon mr-2">
     </button>
 	<a class="c-header-brand d-lg-none" href="{% url 'index'%}">
       <img src="{% static 'assets/brand/OPTICS_dark.png' %}" height="46" />
     </a>
 	<button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
-		<svg class="c-icon c-icon-lg">
-			<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-menu" %}"></use>
-		</svg>
+		<img src="{% static 'assets/vendors/@coreui/icons/svg/menu.svg' %}" class="c-icon mr-2">
 	</button>
 
 	<!-- NEw Code-->
@@ -28,30 +24,22 @@
 				<div class="dropdown-header bg-gray-900 py-2" style="color: white"><strong>{{user.username}}</strong></div>
 
 				<a class="dropdown-item" href="#">
-					<svg class="c-icon mr-2">
-						<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-file" %}"></use>
-					</svg>
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/file.svg' %}" class="c-icon mr-2">
 					Campaigns<span class="badge badge-primary ml-auto">3</span></a
 				>
 				<div class="dropdown-header bg-light py-2"><strong>Profile</strong></div>
 
 				<a class="dropdown-item" href="{% url 'own_profile' %}">
-					<svg class="c-icon mr-2">
-						<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
-					</svg>
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/user.svg' %}" class="c-icon mr-2">
 					Profile
 				</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/admin">
-					<svg class="c-icon mr-2">
-						<use xlink:href="{% static "assets/vendors/@coreui/icons/svg/free.svg#cil-settings" %}"></use>
-					</svg>
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/settings.svg' %}" class="c-icon mr-2">
 					Admin
 				</a>
 				<a class="dropdown-item" href="{% url 'account_logout' %}">
-					<svg class="c-icon mr-2">
-						<use xlink:href="{{ STATIC_URL }}assets/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-					</svg>
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/account-logout.svg' %}" class="c-icon mr-2">
 					Logout
 				</a>
 			</div>
