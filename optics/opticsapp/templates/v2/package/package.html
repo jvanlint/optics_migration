@@ -92,20 +92,13 @@
 									type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 									disabled="">
 									{% endif %}
-									<svg class="c-icon">
-										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
-										</use>
-									</svg>
+									<img src="{% static "assets/vendors/@coreui/icons/svg/pencil.svg" %}" class="c-icon">
 									&nbspPackage
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<a class="dropdown-item"
 										href="{% url 'package_update_v2' package_object.id %}?returnUrl={{request.path}}">
-										<svg class="c-icon">
-											<use
-												xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
-											</use>
-										</svg>
+										<img src="{% static "assets/vendors/@coreui/icons/svg/pencil-black.svg" %}" class="c-icon">
 										&nbspEdit
 									</a>
 									<a class="dropdown-item" id="generate_{{package_object.id}}" data-toggle="modal"
@@ -113,11 +106,7 @@
 										data-message="Are you sure? If you proceed, the {{ package_object.name }} mission will be deleted."
 										data-buttontext="Delete"
 										href="{% url 'package_delete_v2' package_object.id %}?returnUrl={% url 'mission_v2' package_object.mission.id  %}">
-										<svg class="c-icon">
-											<use
-												xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
-											</use>
-										</svg>
+										<img src="{% static "assets/vendors/@coreui/icons/svg/trash-black.svg" %}" class="c-icon">
 										&nbspDelete
 									</a>
 								</div>
@@ -178,30 +167,18 @@
 												<button class="btn btn-info btn-sm dropdown-toggle"
 													id="dropdownMenuButton" type="button" data-toggle="dropdown"
 													aria-haspopup="true" aria-expanded="false">
-													<svg class="c-icon">
-														<use
-															xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
-														</use>
-													</svg>
+													<img src="{% static "assets/vendors/@coreui/icons/svg/pencil.svg" %}" class="c-icon">
 													&nbspFlight
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 													<a class="dropdown-item"
 														href="{% url 'flight_update_v2' flight.id %}?returnUrl={{request.path}}">
-														<svg class="c-icon">
-															<use
-																xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
-															</use>
-														</svg>
+														<img src="{% static "assets/vendors/@coreui/icons/svg/pencil-black.svg" %}" class="c-icon">
 														&nbspEdit
 													</a>
 													<a class="dropdown-item"
 														href="{% url 'flight_copy_v2' flight.id %}?returnUrl={{request.path}}">
-														<svg class="c-icon">
-															<use
-																xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus">
-															</use>
-														</svg>
+														<img src="{% static "assets/vendors/@coreui/icons/svg/plus-black.svg" %}" class="c-icon">
 														&nbspCopy
 													</a>
 													<a class="dropdown-item" id="flight{{flight.id}}"
@@ -209,11 +186,7 @@
 														data-message="Are you sure? If you proceed, the {{ flight.callsign }} package will be deleted."
 														data-buttontext="Delete"
 														href="{% url 'flight_delete_v2' flight.id %}?returnUrl={{request.path}}">
-														<svg class="c-icon">
-															<use
-																xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
-															</use>
-														</svg>
+														<img src="{% static "assets/vendors/@coreui/icons/svg/trash-black.svg" %}" class="c-icon">
 														&nbspDelete
 													</a>
 												</div>
@@ -232,10 +205,7 @@
 							<h6>
 								<a href="{% url 'flight_add_v2' package_object.id %}?returnUrl={{request.path}}"
 									class="btn btn-sm btn-success float-right" role="button">
-									<svg class="c-icon">
-										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus">
-										</use>
-									</svg>
+									<img src="{% static "assets/vendors/@coreui/icons/svg/plus.svg" %}" class="c-icon">
 									Add Flight
 								</a>
 							</h6>
@@ -264,19 +234,11 @@
 												data-buttontext="Delete"
 												href="{% url 'package_imagery_delete_v2' imagery.id %}?returnUrl={{request.path}}"
 												role="button">
-												<svg class="c-icon">
-													<use
-														xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
-													</use>
-												</svg>
+												<img src="{% static "assets/vendors/@coreui/icons/svg/trash-black.svg" %}" class="c-icon">
 											</a>
 											<a href="{% url 'package_imagery_update_v2' imagery.id %}?returnUrl={{request.path}}"
 												role="button">
-												<svg class="c-icon">
-													<use
-														xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
-													</use>
-												</svg>
+												<img src="{% static "assets/vendors/@coreui/icons/svg/pencil-black.svg" %}" class="c-icon">
 											</a>
 										</figcaption>
 									</figure>
@@ -293,10 +255,7 @@
 							<h6>
 								<a href="{% url 'package_imagery_add_v2' package_object.id %}?returnUrl={{request.path}}"
 									class="btn btn-sm btn-success float-right" role="button">
-									<svg class="c-icon">
-										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus">
-										</use>
-									</svg>
+									<img src="{% static "assets/vendors/@coreui/icons/svg/plus.svg" %}" class="c-icon">
 									Add Imagery
 								</a>
 							</h6>
