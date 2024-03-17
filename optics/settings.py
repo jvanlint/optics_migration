@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.sites",
+    "django.contrib.sites",
     # Maintenance Mode app
     "maintenance_mode",
     # OPTICS App
@@ -94,7 +94,7 @@ INSTALLED_APPS = [
     "django_htmx",
     "import_export",
     # Django Requests App
-    # "request",
+    "request",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -116,7 +116,7 @@ MIDDLEWARE = [
     # Add the htmx middleware:
     "django_htmx.middleware.HtmxMiddleware",
     # Add the Django Requests middleware:
-    # "request.middleware.RequestMiddleware",
+    "request.middleware.RequestMiddleware",
 ]
 
 ROOT_URLCONF = "optics.urls"
