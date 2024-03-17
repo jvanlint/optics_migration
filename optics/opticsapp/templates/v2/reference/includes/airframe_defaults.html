@@ -1,3 +1,4 @@
+{% load static%}
 <div id="airframe_defaults">
     <div class="card">
         <div class="card-header">
@@ -39,18 +40,12 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item"
                                     href="{% url 'reference_object_update' airframe_defaults.id 'airframe_defaults' %}?returnUrl={{request.path}}">
-                                    <svg class="c-icon">
-                                        <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil">
-                                        </use>
-                                    </svg>
+                                    <img src="{% static 'assets/vendors/@coreui/icons/svg/pencil-black.svg' %}" class="c-icon" />
                                     &nbspEdit
                                 </a>
                                 <a class="dropdown-item"
                                     href="{% url 'reference_object_delete' airframe_defaults.id 'airframe_defaults' %}?returnUrl={{request.path}}">
-                                    <svg class="c-icon">
-                                        <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash">
-                                        </use>
-                                    </svg>
+                                    <img src="{% static 'assets/vendors/@coreui/icons/svg/trash-black.svg' %}" class="c-icon" />
                                     &nbspDelete
                                 </a>
                             </div>
@@ -93,9 +88,7 @@
                 <h6>
                     <a href="{% url 'reference_object_add' 'airframe_defaults' %}?returnUrl={{request.path}}"
                         class="btn btn-sm btn-success float-right" role="button">
-                        <svg class="c-icon">
-                            <use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
-                        </svg>
+                        <img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
                         Add
                     </a>
                 </h6>

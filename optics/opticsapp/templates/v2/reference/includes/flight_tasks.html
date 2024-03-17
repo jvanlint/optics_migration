@@ -1,3 +1,4 @@
+{% load static%}
 <div id="flight-task">
 	<div class="card">
 		<div class="card-header">
@@ -29,15 +30,11 @@
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="{% url 'reference_object_update' flight_task.id 'flight_task' %}?returnUrl={{request.path}}">
-									<svg class="c-icon">
-										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-									</svg>
+									<img src="{% static 'assets/vendors/@coreui/icons/svg/pencil-black.svg' %}" class="c-icon" />
 									&nbspEdit
 								</a>
 								<a class="dropdown-item" href="{% url 'reference_object_delete' flight_task.id 'flight_task' %}?returnUrl={{request.path}}">
-									<svg class="c-icon">
-										<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-trash"></use>
-									</svg>
+									<img src="{% static 'assets/vendors/@coreui/icons/svg/trash-black.svg' %}" class="c-icon" />
 									&nbspDelete
 								</a>
 							</div>
@@ -74,9 +71,7 @@
 		{% endif %}
 		<h6>
 			<a href="{% url 'reference_object_add' 'flight_task' %}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
-				<svg class="c-icon">
-					<use xlink:href="/static/assets/vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
-				</svg>
+				<img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
 				Add
 			</a>
 		</h6>
