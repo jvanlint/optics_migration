@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
+DEBUG = config("DEBUG", cast=bool)
 print(f"Debug set to: {DEBUG}")
 print(f"Maintenance Mode set to: {config('MAINTENANCE_MODE')}")
 
