@@ -136,9 +136,9 @@ class Flight(models.Model):
 
         return packageID
 
-    def copyToPackage(self, package):
+    def copyToPackage(self, package, user):
         packageID = self.package.id
 
-        self.new(package)
+        self.new(package, user)
 
         return packageID

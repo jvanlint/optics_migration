@@ -366,7 +366,7 @@ class Mission(models.Model):
         mission_packages = self.package_set.all()
         if mission_packages:
             for package in mission_packages:
-                package.copyToMission(new_mission_instance)
+                package.copyToMission(new_mission_instance, user)
 
         mission_targets = self.target_set.all()
         if mission_targets:
