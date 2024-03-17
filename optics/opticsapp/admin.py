@@ -1,5 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+from django.utils.html import format_html
+from django.templatetags.static import static
 
 # Register your models here.
 
@@ -222,7 +224,11 @@ admin.site.register(ThreatReference, ThreatReferenceAdmin)
 
 
 class MissionImageryAdmin(admin.ModelAdmin):
-    list_display = ("caption",)
+    list_display = ("mission", "caption", "image")
+
+    def image_tag(self, obj):
+        url = static(obj.image)
+        return format_html('<img src="{}" width="50" height="50" />', url)
 
 
 admin.site.register(MissionImagery, MissionImageryAdmin)

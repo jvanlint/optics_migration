@@ -28,34 +28,42 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG")
 print(f"Debug set to: {DEBUG}")
+print(f"Maintenance Mode set to: {config('MAINTENANCE_MODE')}")
+
+MAINTENANCE_MODE = config("MAINTENANCE_MODE", default=False, cast=bool)
+MAINTENANCE_MODE_TEMPLATE = "503.html"
 
 ALLOWED_HOSTS = ["*"]
-# ALLOWED_HOSTS = ["https://opticsapp.online", 
-#                  "http://opticsapp.online", 
-#                  "https://django-server-production-c104.up.railway.app", 
-#                  "http://django-server-production-c104.up.railway.app", 
-#                  "http://localhost:8000", 
+# ALLOWED_HOSTS = ["https://opticsapp.online",
+#                  "http://opticsapp.online",
+#                  "https://django-server-production-c104.up.railway.app",
+#                  "http://django-server-production-c104.up.railway.app",
+#                  "http://localhost:8000",
 #                  "https://django-server.railway.internal"
 #                  "http://django-server.railway.internal"
 #                  ]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
-CSRF_TRUSTED_ORIGINS = ["https://opticsapp.online", 
-                        "https://django-server-production-c104.up.railway.app", 
-                        "http://localhost:8000", 
-                        "https://django-server.railway.internal"
-                        ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://opticsapp.online",
+    "https://django-server-production-c104.up.railway.app",
+    "http://localhost:8000",
+    "https://django-server.railway.internal",
+]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    # "django.contrib.sites",
+    # Maintenance Mode app
+    "maintenance_mode",
     # OPTICS App
     "optics.opticsapp.apps.OpticsappConfig",
     # Third Party
@@ -69,44 +77,52 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     "django_htmx",
     "import_export",
+    # Django Requests App
+    # "request",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Maintenance Mode Middleware
+    "maintenance_mode.middleware.MaintenanceModeMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Whitenoise not required when S3 is serving the static files.
     #'whitenoise.middleware.WhiteNoiseMiddleware',
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
     # Add the htmx middleware:
     "django_htmx.middleware.HtmxMiddleware",
+    # Add the Django Requests middleware:
+    # "request.middleware.RequestMiddleware",
 ]
 
-ROOT_URLCONF = 'optics.urls'
+ROOT_URLCONF = "optics.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "maintenance_mode.context_processors.maintenance_mode",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'optics.wsgi.application'
+WSGI_APPLICATION = "optics.wsgi.application"
 
 
 # Database
@@ -129,16 +145,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -160,7 +176,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
@@ -179,13 +195,13 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {"location": "static"},
-        },
+    },
 }
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_REGION_NAME= config("AWS_S3_REGION_NAME")
+AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME")
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-secondary",
@@ -208,7 +224,7 @@ EMAIL_HOST_PASSWORD = "skwuinvytyqauiay"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # DJANGO-ALLAUTH CONFIGS
 # ------------------------------------------------------------------------------
@@ -246,4 +262,6 @@ ACCOUNT_SIGNUP_FORM_CLASS = "optics.opticsapp.forms.SignupForm"
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_EMAIL_VERIFICATION = None
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+SITE_ID = 1
