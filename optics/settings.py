@@ -251,8 +251,6 @@ ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_MAX_EMAIL_ADDRESSES = 3
-# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = None  # Change in production
-# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300  # Seconds
 
 ACCOUNT_RATE_LIMITS = {
     "login_failed": "5/m"  # This means a maximum of 5 failed login attempts per minute
