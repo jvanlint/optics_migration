@@ -30,8 +30,24 @@ DEBUG = config("DEBUG")
 print(f"Debug set to: {DEBUG}")
 print(f"Maintenance Mode set to: {config('MAINTENANCE_MODE')}")
 
+# Set Maintanance mode variables
 MAINTENANCE_MODE = config("MAINTENANCE_MODE", default=False, cast=bool)
 MAINTENANCE_MODE_TEMPLATE = "503.html"
+
+# Configure Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+}
 
 ALLOWED_HOSTS = ["*"]
 # ALLOWED_HOSTS = ["https://opticsapp.online",
