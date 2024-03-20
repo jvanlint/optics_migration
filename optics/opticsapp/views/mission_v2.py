@@ -29,7 +29,6 @@ from ..forms import MissionForm, MissionFileForm, MissionImageryForm
 def mission_v2(request, link_id):
     mission_queryset = Mission.objects.get(id=link_id)
     mission_files_queryset = mission_queryset.missionfile_set.all()
-    combat_files_queryset = mission_queryset.combatflitefile_set.all()
     comments = mission_queryset.comments.all()
     packages = mission_queryset.package_set.all()
     targets = mission_queryset.target_set.all()
@@ -149,7 +148,7 @@ def mission_delete_v2(request, link_id):
     # Check to see if an AO Image exists.
     if mission_files:
         for file in mission_files:
-           file.delete()
+            file.delete()
 
     if mission.discord_msg_id:
         mission.delete_discord_event()
@@ -276,8 +275,6 @@ def mission_file_delete(request, link_id):
     if mission_file_obj:
         mission_file_obj.delete()
 
-    
-
     return HttpResponseRedirect(returnURL)
 
 
@@ -340,7 +337,6 @@ def mission_imagery_delete_v2(request, link_id):
     if imagery:
         imagery.delete()
 
-    
     return HttpResponseRedirect(returnURL)
 
 

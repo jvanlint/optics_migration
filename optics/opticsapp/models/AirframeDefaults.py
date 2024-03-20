@@ -31,3 +31,5 @@ class AirframeDefaults(models.Model):
         ordering = ["-airframe_type", "-callsign"]
         verbose_name = "Airframe Defaults"
         verbose_name_plural = "Airframe Defaults"
+
+    # Methods
