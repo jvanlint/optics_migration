@@ -16,6 +16,17 @@ urlpatterns = [
         views.download_mission_card,
         name="pdf_download",
     ),
+    path("mission/signup/<int:link_id>", views.mission_signup, name="mission_signup"),
+    path(
+        "mission/signup/update/<int:link_id>/<int:seat_id>",
+        views.mission_signup_update,
+        name="mission_signup_update",
+    ),
+    path(
+        "mission/signup/remove/<int:link_id>/<int:seat_id>",
+        views.mission_signup_remove,
+        name="mission_signup_remove",
+    ),
 ]
 
 # Dashboard URL Patterns - V2

@@ -383,3 +383,61 @@ def mission_signup_v2(request, link_id):  # link_id is the mission ID
     }
 
     return render(request, "v2/mission/mission_signup.html", context)
+
+
+@login_required(login_url="account_login")
+def mission_signup(request, link_id):  # link_id is the mission ID
+    mission = Mission.objects.get(id=link_id)
+    packages = mission.package_set.all()
+
+    has_seat = 0
+    package_list = serializers.serialize("python", packages)
+    for package in package_list:
+        has_seat += (
+            Aircraft.objects.filter(flight__package__id=package["pk"])
+            .filter(pilot=request.user)
+            .count()
+        )
+        has_seat += (
+            Aircraft.objects.filter(flight__package__id=package["pk"])
+            .filter(rio_wso=request.user)
+            .count()
+        )
+    campaign = Campaign.objects.get(mission=mission)
+    is_owner = campaign.created_by == request.user
+    context = {
+        "mission_object": mission,
+        "package_object": packages,
+        "has_seat": has_seat,
+        "is_owner": is_owner,
+    }
+
+    return render(request, "mission/mission_signup.html", context)
+
+
+@login_required(login_url="account_login")
+def mission_signup_update(request, link_id, seat_id):
+    returnURL = request.GET.get("returnUrl")
+    aircraft = Aircraft.objects.get(pk=link_id)
+    if seat_id == 1:
+        aircraft.pilot = request.user
+    else:
+        aircraft.rio_wso = request.user
+
+    aircraft.save()
+
+    return HttpResponseRedirect(returnURL)
+
+
+@login_required(login_url="account_login")
+def mission_signup_remove(request, link_id, seat_id):
+    returnURL = request.GET.get("returnUrl")
+    aircraft = Aircraft.objects.get(pk=link_id)
+    if seat_id == 1:
+        aircraft.pilot = None
+    else:
+        aircraft.rio_wso = None
+
+    aircraft.save()
+
+    return HttpResponseRedirect(returnURL)
