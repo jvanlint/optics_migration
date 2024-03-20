@@ -57,7 +57,6 @@ def mission_v2(request, link_id):
         "support_object": supports,
         "imagery_object": imagery,
         "mission_files": mission_files_queryset,
-        "combat_files": combat_files_queryset,
         "isAdmin": user_profile.is_admin(),
         "comments": comments,
         "file_form": form,
