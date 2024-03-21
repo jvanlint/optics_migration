@@ -221,6 +221,7 @@ AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME")
 # Cloudfront URL
 AWS_S3_CUSTOM_DOMAIN = config("AWS_S3_CUSTOM_DOMAIN")
 
+# Message tags used by ?
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-secondary",
     messages.INFO: "alert-info",
@@ -229,15 +230,17 @@ MESSAGE_TAGS = {
     messages.ERROR: "alert-danger",
 }
 
+# Image resize settings
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"PNG": ".png"}
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = "PNG"
 
+# Email Settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = "587"
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "jason.van.lint@gmail.com"
-EMAIL_HOST_PASSWORD = "skwuinvytyqauiay"
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -284,5 +287,3 @@ SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_EMAIL_VERIFICATION = None
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-SITE_ID = 1

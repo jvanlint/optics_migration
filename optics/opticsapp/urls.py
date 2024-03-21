@@ -16,17 +16,6 @@ urlpatterns = [
         views.download_mission_card,
         name="pdf_download",
     ),
-    path("mission/signup/<int:link_id>", views.mission_signup, name="mission_signup"),
-    path(
-        "mission/signup/update/<int:link_id>/<int:seat_id>",
-        views.mission_signup_update,
-        name="mission_signup_update",
-    ),
-    path(
-        "mission/signup/remove/<int:link_id>/<int:seat_id>",
-        views.mission_signup_remove,
-        name="mission_signup_remove",
-    ),
 ]
 
 # Dashboard URL Patterns - V2
@@ -132,10 +121,21 @@ urlpatterns += [
         views.mission_imagery_delete_v2,
         name="mission_imagery_delete_v2",
     ),
+    # Mission Signup Screen
     path(
         "v2/mission/signup/<int:link_id>",
         views.mission_signup_v2,
         name="mission_signup_v2",
+    ),
+    path(
+        "mission/signup/update/<int:link_id>/<int:seat_id>",
+        views.mission_signup_update,
+        name="mission_signup_update",
+    ),
+    path(
+        "mission/signup/remove/<int:link_id>/<int:seat_id>",
+        views.mission_signup_remove,
+        name="mission_signup_remove",
     ),
     # Comments
     path(
