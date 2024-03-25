@@ -1,5 +1,5 @@
 {% load static%}
-<div id="threat-type">
+<div id="threat-type" style="position: relative;">
 	<div class="card">
 		<div class="card-header">
 			<i class="fa fa-align-justify"></i>
@@ -49,7 +49,8 @@
 			{% if threat_type_object.has_other_pages %}
 				<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
 					{% if threat_type_object.has_previous %}
-						<button class="btn btn-outline-primary" type="button" hx-get="{% url 'threat_type_page_manager' %}?page={{ threat_type_object.previous_page_number}}" hx-target="#threat-type" hx-swap="outerHTML">Previous</button>
+						<button class="btn btn-outline-primary" type="button" hx-get="{% url 'threat_type_page_manager' %}?page={{ threat_type_object.previous_page_number}}" hx-target="#threat-type" hx-swap="outerHTML"
+						hx-indicator="#spinner-threat-types">Previous</button>
 					{% else %}
 						<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
 					{% endif %}
@@ -58,12 +59,14 @@
 						{% if threat_type_object.number == i %}
 							<button class="btn btn-outline-primary active" type="button" >{{ i }}</button>
 						{% else %}
-							<button class="btn btn-outline-primary" type="button" hx-get="{% url 'threat_type_page_manager' %}?page={{ i }}" hx-target="#threat-type" hx-swap="outerHTML">{{ i }}</button>
+							<button class="btn btn-outline-primary" type="button" hx-get="{% url 'threat_type_page_manager' %}?page={{ i }}" hx-target="#threat-type" hx-swap="outerHTML"
+							hx-indicator="#spinner-threat-types">{{ i }}</button>
 						{% endif %}
 					{% endfor %}
 					
 					{% if threat_type_object.has_next %}
-						<button class="btn btn-outline-primary" type="button" hx-get="{% url 'threat_type_page_manager' %}?page={{ threat_type_object.next_page_number }}" hx-target="#threat-type" hx-swap="outerHTML">Next</button>
+						<button class="btn btn-outline-primary" type="button" hx-get="{% url 'threat_type_page_manager' %}?page={{ threat_type_object.next_page_number }}" hx-target="#threat-type" hx-swap="outerHTML"
+						hx-indicator="#spinner-threat-types">Next</button>
 					{% else %}
 						<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
 					{% endif %}
@@ -76,5 +79,12 @@
 				</a>
 			</h6>
 		</div>
+
+		<!-- Spinner -->
+        <div id="spinner-threat-types" class="htmx-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
 	</div>
 </div>

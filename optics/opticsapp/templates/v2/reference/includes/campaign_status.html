@@ -1,5 +1,5 @@
 {% load static%}
-<div id="campaign-status">
+<div id="campaign-status" style="position: relative;">
 	<div class="card">
 		<div class="card-header">
 			<i class="fa fa-align-justify"></i>
@@ -50,7 +50,13 @@
 		{% if status_object.has_other_pages %}
 			<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
 				{% if status_object.has_previous %}
-					<button class="btn btn-outline-primary" type="button" hx-get="{% url 'campaign_status_page_manager' %}?page={{ status_object.previous_page_number}}" hx-target="#campaign-status" hx-swap="outerHTML">Previous</button>
+					<button class="btn btn-outline-primary" 
+						type="button" 
+						hx-get="{% url 'campaign_status_page_manager' %}?page={{ status_object.previous_page_number}}" 
+						hx-target="#campaign-status" 
+						hx-swap="outerHTML"
+						hx-indicator="#spinner-campaign-status">Previous
+					</button>
 				{% else %}
 					<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
 				{% endif %}
@@ -59,14 +65,29 @@
 					{% if status_object.number == i %}
 						<button class="btn btn-outline-primary active" type="button" >{{ i }}</button>
 					{% else %}
-						<button class="btn btn-outline-primary" type="button" hx-get="{% url 'campaign_status_page_manager' %}?page={{ i }}" hx-target="#campaign-status" hx-swap="outerHTML">{{ i }}</button>
+						<button class="btn btn-outline-primary" 
+							type="button" 
+							hx-get="{% url 'campaign_status_page_manager' %}?page={{ i }}" 
+							hx-target="#campaign-status" 
+							hx-swap="outerHTML"
+							hx-indicator="#spinner-campaign-status">{{ i }}
+						</button>
 					{% endif %}
 				{% endfor %}
 				
 				{% if status_object.has_next %}
-					<button class="btn btn-outline-primary" type="button" hx-get="{% url 'campaign_status_page_manager' %}?page={{ status_object.next_page_number }}" hx-target="#campaign-status" hx-swap="outerHTML">Next</button>
+					<button class="btn btn-outline-primary" 
+						type="button" 
+						hx-get="{% url 'campaign_status_page_manager' %}?page={{ status_object.next_page_number }}" 
+						hx-target="#campaign-status" 
+						hx-swap="outerHTML"
+						hx-indicator="#spinner-campaign-status">Next
+					</button>
 				{% else %}
-					<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
+					<button class="btn btn-outline-primary" 
+						type="button" 
+						disabled="">Next
+					</button>
 				{% endif %}
 			</div>
 		{% endif %}
@@ -77,5 +98,12 @@
 			</a>
 		</h6>
 		</div>
+
+		<!-- Spinner -->
+        <div id="spinner-campaign-status" class="htmx-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
 	</div>
 </div>

@@ -71,15 +71,11 @@
 {% block javascripts %}
 <script>
 	document.body.addEventListener('htmx:beforeRequest', function(evt) {
-		console.log(evt);
 		const targetElement = document.querySelector(evt.detail.elt.getAttribute('hx-target'));
-        console.log('Target element ID:', targetElement); 
         targetElement.style.opacity = 0.25;
 	});
 	document.body.addEventListener('htmx:afterRequest', function(evt) {
-		console.log(evt);
 		const targetElement = document.querySelector(evt.detail.elt.getAttribute('hx-target'));
-        console.log('Target element ID:', targetElement); 
         targetElement.style.opacity = 1.00;
 	});
 </script>

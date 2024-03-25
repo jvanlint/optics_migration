@@ -1,5 +1,5 @@
 {% load static%}
-<div id="flight-task">
+<div id="flight-task" style="position: relative;">
 	<div class="card">
 		<div class="card-header">
 			<i class="fa fa-align-justify"></i>
@@ -49,7 +49,12 @@
 		{% if flight_task_object.has_other_pages %}
 			<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
 				{% if flight_task_object.has_previous %}
-					<button class="btn btn-outline-primary" type="button" hx-get="{% url 'flight_task_page_manager' %}?page={{ flight_task_object.previous_page_number}}" hx-target="#flight-task" hx-swap="outerHTML">Previous</button>
+					<button class="btn btn-outline-primary" 
+					type="button" 
+					hx-get="{% url 'flight_task_page_manager' %}?page={{ flight_task_object.previous_page_number}}" 
+					hx-target="#flight-task" 
+					hx-swap="outerHTML" 
+					hx-indicator="#spinner-flight-tasks">Previous</button>
 				{% else %}
 					<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
 				{% endif %}
@@ -58,12 +63,22 @@
 					{% if flight_task_object.number == i %}
 						<button class="btn btn-outline-primary active" type="button" >{{ i }}</button>
 					{% else %}
-						<button class="btn btn-outline-primary" type="button" hx-get="{% url 'flight_task_page_manager' %}?page={{ i }}" hx-target="#flight-task" hx-swap="outerHTML">{{ i }}</button>
+						<button class="btn btn-outline-primary" 
+						type="button" 
+						hx-get="{% url 'flight_task_page_manager' %}?page={{ i }}" 
+						hx-target="#flight-task" 
+						hx-swap="outerHTML" 
+						hx-indicator="#spinner-flight-tasks">{{ i }}</button>
 					{% endif %}
 				{% endfor %}
 				
 				{% if flight_task_object.has_next %}
-					<button class="btn btn-outline-primary" type="button" hx-get="{% url 'flight_task_page_manager' %}?page={{ flight_task_object.next_page_number }}" hx-target="#flight-task" hx-swap="outerHTML">Next</button>
+					<button class="btn btn-outline-primary" 
+					type="button" 
+					hx-get="{% url 'flight_task_page_manager' %}?page={{ flight_task_object.next_page_number }}" 
+					hx-target="#flight-task" 
+					hx-swap="outerHTML"
+					hx-indicator="#spinner-flight-tasks">Next</button>
 				{% else %}
 					<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
 				{% endif %}
@@ -76,6 +91,13 @@
 			</a>
 		</h6>
 		</div>
+
+		<!-- Spinner -->
+        <div id="spinner-flight-tasks" class="htmx-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
 	</div>
 </div>
 
