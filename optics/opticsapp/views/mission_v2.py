@@ -9,6 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from django.core import serializers
+from django.core.mail import send_mail
 
 from ..models import (
     Campaign,

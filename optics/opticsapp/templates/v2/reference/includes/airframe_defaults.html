@@ -1,5 +1,5 @@
 {% load static%}
-<div id="airframe_defaults">
+<div id="airframe_defaults" style="position: relative;">
     <div class="card">
         <div class="card-header">
             <i class="fa fa-align-justify"></i>
@@ -60,9 +60,12 @@
             {% if airframe_defaults_object.has_other_pages %}
                 <div class="btn-group float-left" role="group" aria-label="Basic outlined example">
                     {% if airframe_defaults_object.has_previous %}
-                    <button class="btn btn-outline-primary" type="button"
+                    <button class="btn btn-outline-primary" 
+                        type="button"
                         hx-get="{% url 'airframe_defaults_page_manager' %}?page={{ airframe_object.previous_page_number}}"
-                        hx-target="#airframe_defaults" hx-swap="outerHTML">Previous</button>
+                        hx-target="#airframe_defaults" 
+                        hx-swap="outerHTML"
+                        hx-indicator="#spinner-airframe-defaults">Previous</button>
                     {% else %}
                     <button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
                     {% endif %}
@@ -71,15 +74,22 @@
                     {% if airframe_defaults_object.number == i %}
                     <button class="btn btn-outline-primary active" type="button">{{ i }}</button>
                     {% else %}
-                    <button class="btn btn-outline-primary" type="button"
-                        hx-get="{% url 'airframe_defaults_page_manager' %}?page={{ i }}" hx-target="#airframe_defaults" hx-swap="outerHTML">{{ i }}</button>
+                    <button class="btn btn-outline-primary" 
+                    type="button"
+                    hx-get="{% url 'airframe_defaults_page_manager' %}?page={{ i }}" 
+                    hx-target="#airframe_defaults" 
+                    hx-swap="outerHTML" 
+                    hx-indicator="#spinner-airframe-defaults">{{ i }}</button>
                     {% endif %}
                     {% endfor %}
 
                     {% if airframe_defaults_object.has_next %}
-                    <button class="btn btn-outline-primary" type="button"
+                    <button class="btn btn-outline-primary" 
+                        type="button"
                         hx-get="{% url 'airframe_defaults_page_manager' %}?page={{ airframe_defaults_object.next_page_number }}"
-                        hx-target="#airframe_defaults" hx-swap="outerHTML">Next</button>
+                        hx-target="#airframe_defaults" 
+                        hx-swap="outerHTML" 
+                        hx-indicator="#spinner-airframe-defaults">Next</button>
                     {% else %}
                     <button class="btn btn-outline-primary" type="button" disabled="">Next</button>
                     {% endif %}
@@ -92,6 +102,14 @@
                         Add
                     </a>
                 </h6>
+            </div>
+        </div>
+       
+
+        <!-- Spinner -->
+        <div id="spinner-airframe-defaults" class="htmx-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Loading...</span>
             </div>
         </div>
     </div>
