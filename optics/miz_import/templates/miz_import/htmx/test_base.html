@@ -1,0 +1,27 @@
+{% extends "v2/base.html" %}
+{% block title %} DCS Mission File Import {% endblock %}
+{% load django_htmx %}
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static "miz_import/css/jstree/themes/default/style.min.css" %}" rel="stylesheet" />
+{% endblock stylesheets %}
+{% block content %}
+
+<main class="c-main">
+  <div class="container-fluid">
+    <div class="fade-in">
+      <button hx-get="{% url 'test_htmx1' %}" hx-trigger="click" hx-target="#hx-container">
+        Click Me!
+      </button>
+      <div id="hx-container">
+
+        <!-- htmx content here  -->
+        {% include 'miz_import/htmx/test_partial1.html' %}
+      </div>
+    </div>
+  </div>
+</main>
+<!-- Placeholder for the modal -->
+<div id="modals-here"></div>
+{% endblock content %}

@@ -1,0 +1,142 @@
+{% extends "v2/base.html" %} {% load static %} {% block title %} Mission Import {% endblock %}
+{% load django_htmx %}
+
+{% block stylesheets %}
+<!-- Page stylesheets block  -->
+
+<!-- END Page stylesheets block  -->
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="container-fluid" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div id="tree">
+    <p>Tree should be here</p>
+  </div>
+
+
+  <button id="btnShowSelection" class="gj-button-md">Show Selections</button>
+
+  <div hx-post="test_post" hx-trigger="click" hx-vals='js:{selected: JSON.stringify($("#tree").jstree("get_checked"))}'>
+    Stringify Post the selections via htmx
+  </div>
+  <div hx-post="test_post" hx-trigger="click" hx-vals='js:{myVal: return_checked_as_JSON()}'>Parse Post the selections
+    via htmx
+  </div>
+
+</div>
+
+https://preview.keenthemes.com/start/documentation/general/jstree/customicons.html
+https://github.com/orangehill/jstree-bootstrap-theme
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
+  integrity="sha512-TGClBy3S4qrWJtzel4qMtXsmM0Y9cap6QwRm3zo1MpVjvIURa90YYz5weeh6nvDGKZf/x3hrl1zzHW/uygftKg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+  var tree = $('#tree').jstree({
+    'core': {
+      'data': tree_data(),
+      "themes": {
+        "icons": true,
+        "stripes": true,
+      }
+    },
+    'plugins': [
+      'types',
+      'checkbox'
+    ],
+    'checkbox': {
+      'keep_selected_style': false,
+    },
+
+    'types': {
+      "root": {
+        "icon": "glyphicon glyphicon-globe"
+      },
+      "coalition": {
+        "icon": "glyphicon glyphicon-globe"
+      },
+      'country': {
+        'icon': 'glyphicon glyphicon-globe'
+      },
+      'flights': {
+        'icon': 'glyphicon glyphicon-cloud'
+      },
+      'flight': {
+        'icon': 'glyphicon glyphicon-option-vertical'
+      },
+      'waypoints': {
+        'icon': 'glyphicon glyphicon-tasks'
+      },
+      'waypoint': {
+        'icon': 'glyphicon glyphicon-screenshot'
+      },
+      'units': {
+        'icon': 'glyphicon glyphicon-send'
+      },
+      'unit': {
+        'icon': 'glyphicon glyphicon-plane'
+      }
+    }
+  });
+
+  /* beautify ignore:start */
+  function tree_data() {
+    return [{{ tree | safe }}]
+  };
+/* beautify ignore:end */
+
+  function return_checked_as_JSON() {
+    var sel = JSON.stringify($('#tree').jstree('get_checked', false));
+    return sel
+  }
+
+</script>
+{##}
+{#  https://www.jstree.com/docs/json/#}
+
+{#   <script>#}
+{#     var tree = $('#tree').tree({#}
+{#uiLibrary: 'bootstrap4',#}
+{#       selectionType: 'multiple',#}
+{#cascadeSelection: true,#}
+{#       primaryKey: 'text',#}
+{#childrenField: 'children',#}
+{#hasChildrenField: 'hasChildren'#}
+{#     });#}
+{#     $('#btnShowSelection').on('click', function () {#}
+{#         var selections = tree.getSelections();#}
+{#         selections && selections.length && alert(selections.join());#}
+{#     });#}
+{# </script>#}
+
+
+{#  <script type="text/javascript">#}
+{#    $(document).ready(function () {#}
+{#      var tree = $('#tree').tree({#}
+{#        uiLibrary: 'bootstrap4',#}
+{##}
+{#        primaryKey: 'id',#}
+{#        checkboxes: false,#}
+{#        selectionType: 'multiple',#}
+{#        cascadeSelection: true#}
+{#      });#}
+{#      $('#btnShowSelection').on('click', function () {#}
+{#         var selections = tree.getSelections();#}
+{#         selections && selections.length && alert(selections.join());#}
+{#     });#}
+{#  </script>#}
+
+{% endblock javascripts %}

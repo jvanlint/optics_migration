@@ -1,0 +1,172 @@
+{% load static%}
+<div id='swaped_in_test_partial_2' hx-swap="outerHTML">
+  {% if alert_text %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error:&nbsp;</strong>{{alert_text}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %}
+
+
+  <div class="container-fluid" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <div id="jstree">
+      <!-- in this example the tree is populated from inline HTML -->
+      <ul>
+        <li>Root node 1
+          <ul>
+            <li id="child_node_1">Child node 1</li>
+            <li>Child node 2</li>
+          </ul>
+        </li>
+        <li>Root node 2</li>
+      </ul>
+    </div>
+    <button>demo button</button>
+    <div id="using_json">
+      JSON tree here
+
+    </div>
+
+  </div>
+  <!-- Start Tree Data -->
+  {{ tree | json_script:"tree_data" }}
+  <!--  End Tree Data  -->
+
+</div>
+
+{% block javascripts %}
+
+
+
+<script src="{% static 'miz_import/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'miz_import/js/jstree/jstree.min.js' %}"></script>
+
+<script>
+  htmx.onLoad(function () {
+    // 6 create an instance when the DOM is ready
+    $('#jstree').jstree();
+    // 7 bind to events triggered on the tree
+    $('#jstree').on("changed.jstree", function (e, data) {
+      console.log(data.selected);
+    });
+    // 8 interact with the tree - either way is OK
+    $('button').on('click', function () {
+      $('#jstree').jstree(true).select_node('child_node_1');
+      $('#jstree').jstree('select_node', 'child_node_1');
+      $.jstree.reference('#jstree').select_node('child_node_1');
+    });
+  });
+
+</script>
+
+<script>
+  htmx.onLoad(function () {
+    $('#using_json').jstree({
+      'core': {
+        'data': [
+          'Simple root node',
+          {
+            'text': 'Root node 2',
+            'state': {
+              'opened': true,
+              'selected': true
+            },
+            'children': [{
+                'text': 'Child 1'
+              },
+              'Child 2'
+            ]
+          }
+        ]
+      }
+    });
+
+  })
+
+</script>
+
+{% comment %}
+<script>
+  htmx.onLoad(function (content) {
+    $('#tree').jstree();
+  })
+
+</script> {% endcomment %}
+{% comment %} <script>
+  htmx.onLoad(function (content) {
+        if ($('#tree').length > 0) {
+          var tree = $('#tree').jstree({
+            'core': {
+              'data': tree_data(),
+              "themes": {
+                "icons": true,
+                "stripes": true,
+              }
+            },
+            'plugins': [
+              'types',
+              'checkbox'
+            ],
+            'checkbox': {
+              'keep_selected_style': false,
+            },
+
+            'types': {
+              "root": {
+                "icon": "glyphicon glyphicon-globe"
+              },
+              "coalition": {
+                "icon": "glyphicon glyphicon-globe"
+              },
+              'country': {
+                'icon': 'glyphicon glyphicon-globe'
+              },
+              'flights': {
+                'icon': 'glyphicon glyphicon-cloud'
+              },
+              'flight': {
+                'icon': 'glyphicon glyphicon-option-vertical'
+              },
+              'waypoints': {
+                'icon': 'glyphicon glyphicon-tasks'
+              },
+              'waypoint': {
+                'icon': 'glyphicon glyphicon-screenshot'
+              },
+              'units': {
+                'icon': 'glyphicon glyphicon-send'
+              },
+              'unit': {
+                'icon': 'glyphicon glyphicon-plane'
+              }
+            }
+          });
+        }
+      }
+
+      /* beautify ignore:start */
+    /* - Required to stop mangling of the variable brackets*/
+  
+    function tree_data() {
+      return  [
+      { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+      { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+      { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+      { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+  ];
+    };
+  
+    /* beautify ignore:end */
+
+      function return_checked_as_JSON() {
+        var sel = JSON.stringify($('#tree').jstree('get_checked', false));
+        return sel;
+      }
+
+</script>
+
+<!-- https://adamj.eu/tech/2020/02/18/safely-including-data-for-javascript-in-a-django-template --> {% endcomment %}
+
+{% endblock javascripts %}

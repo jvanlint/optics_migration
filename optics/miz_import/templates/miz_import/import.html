@@ -1,0 +1,37 @@
+{% extends "v2/base.html" %}
+{% block title %} DCS Mission File Import {% endblock %}
+{% load django_htmx %}
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static "miz_import/css/jstree/themes/default/style.min.css" %}" rel="stylesheet" />
+{% endblock stylesheets %}
+{% block content %}
+
+<main class="c-main">
+  <div class="container-fluid">
+    <div class="fade-in">
+      <div id="hx-container">
+        <!-- htmx content here  -->
+        {% include 'miz_import/htmx/upload_file.html' %}
+      </div>
+    </div>
+  </div>
+</main>
+<!-- Placeholder for the modal -->
+<div id="modals-here"></div>
+{% endblock content %}
+{% block javascripts %}
+<script src="{% static "miz_import/js/closeModal.js" %}" defer></script>
+<script src="{% static 'miz_import/js/custom_file_input/bs-custom-file-input.min.js' %}"></script>
+
+<script src="{% static 'miz_import/js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'miz_import/js/custom_file_input/bs-custom-file-input.min.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    bsCustomFileInput.init()
+  })
+
+</script>
+{% endblock javascripts %}
