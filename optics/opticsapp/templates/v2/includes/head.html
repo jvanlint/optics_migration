@@ -29,6 +29,29 @@
   <!-- Main styles for this application-->
   <link href="{% static "css/coreui/style.css" %}" rel="stylesheet" />
 
+  <style>
+    .hover-image-link {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hover-image {
+        display: none;
+        position: absolute;
+        top: -50px;
+        left: -250px;
+        z-index: 1;
+    }
+
+    .hover-image img {
+        max-width: 200px;  /* Adjust as needed */
+        max-height: 200px;  /* Adjust as needed */
+    }
+
+    .hover-image-link:hover .hover-image {
+        display: block;
+    }
+  </style>
   
   <!-- Specific Page CSS goes HERE  -->
   {% block stylesheets %}{% endblock stylesheets %}
