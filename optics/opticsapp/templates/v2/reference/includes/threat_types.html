@@ -2,6 +2,12 @@
 <div id="threat-type" style="position: relative;">
 	<div class="card">
 		<div class="card-header">
+			<h6>
+				<a href="{% url 'reference_object_add' 'threat_type' %}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
+					Add
+				</a>
+			</h6>
 			<i class="fa fa-align-justify"></i>
 			<h5>Threat Types</h5>
 			<div class="media text-muted">The ground threat classes that be assigned to a gorund threat.</div>
@@ -71,13 +77,14 @@
 						<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
 					{% endif %}
 				</div>
+				{% else %}
+				<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
+					<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
+					<button class="btn btn-outline-primary active" type="button">1</button>
+					<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
+				</div>
 			{% endif %}
-			<h6>
-				<a href="{% url 'reference_object_add' 'threat_type' %}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
-					<img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
-					Add
-				</a>
-			</h6>
+			
 		</div>
 
 		<!-- Spinner -->
