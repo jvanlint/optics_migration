@@ -34,3 +34,7 @@ django-maintenance-mode
 
 # Request stats
 django-request
+
+# Need by miz importer app
+anytree
+pydcs

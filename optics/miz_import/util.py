@@ -1,7 +1,7 @@
 from enum import Enum
 from anytree import AnyNode, search as tree_search
 from dcs import Mission
-from apps.airops.models import (
+from optics.opticsapp.models import (
     Flight,
     Waypoint,
     WaypointType,

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.miz_import import views
+from optics.miz_import import views
 
 # fmt: off
 urlpatterns = [

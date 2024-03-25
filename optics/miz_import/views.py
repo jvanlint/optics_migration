@@ -9,8 +9,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import require_http_methods
-import apps.miz_import.util as util
-from ..airops.models import Package
+import optics.miz_import.util as util
+from optics.opticsapp.models import Package
 from django.contrib.auth import get_user_model
 
 

@@ -82,6 +82,8 @@ INSTALLED_APPS = [
     "maintenance_mode",
     # OPTICS App
     "optics.opticsapp.apps.OpticsappConfig",
+    # Miz Import
+    "optics.miz_import",
     # Third Party
     "allauth",
     "allauth.account",
