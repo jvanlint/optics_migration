@@ -37,4 +37,5 @@ django-request
 
 # Need by miz importer app
 anytree
-pydcs
+# pydcs
+git+https://github.com/pydcs/dcs@master#egg=pydcs

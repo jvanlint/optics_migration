@@ -1,20 +1,14 @@
+from pathlib import Path
+import pytest
 from anytree import AnyNode
 from anytree.exporter import JsonExporter
-from model_bakery import baker
-import pytest
-from pytest_django.asserts import assertRedirects
-from pathlib import Path
 from django.urls import reverse
+from model_bakery import baker
+from pytest_django.asserts import assertRedirects
 
-from apps.airops.models import (
-    Package,
-    Flight,
-    Aircraft,
-    Waypoint,
-    WaypointType,
-)
-from apps.miz_import.tests.data import TestData
-import apps.miz_import.util as util
+import optics.miz_import.util as util
+from optics.miz_import.tests.data import TestData
+from optics.opticsapp.models import Aircraft, Flight, Package, Waypoint, WaypointType
 
 # NOTE: full_tree is stored in conftest.py
 

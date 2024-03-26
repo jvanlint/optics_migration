@@ -1,15 +1,20 @@
+from datetime import timedelta
 from enum import Enum
-from anytree import AnyNode, search as tree_search
-from dcs import Mission
+
+from anytree import AnyNode
+from anytree import search as tree_search
+
+# from dcs import Mission
+from dcs.mission import Mission
+
 from optics.opticsapp.models import (
+    Aircraft,
+    Airframe,
     Flight,
+    Package,
     Waypoint,
     WaypointType,
-    Aircraft,
-    Package,
-    Airframe,
 )
-from datetime import timedelta
 
 
 class NodeType(str, Enum):
@@ -163,7 +168,7 @@ def create_waypoint(full_tree: AnyNode, waypoint_node_id: str) -> Waypoint:
         # ).first()
         # return wp
     else:
-        return None
+        return Waypoint.objects.create()
 
 
 def create_units(full_tree: AnyNode, unit_node_ids: list) -> list:

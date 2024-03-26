@@ -1,0 +1,2 @@
+# pydcs compiled from source 
+-e git+https://github.com/pydcs/dcs@master#egg=pydcs
