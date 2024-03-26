@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import pytest
 from anytree import AnyNode
 from anytree.exporter import JsonExporter
@@ -8,7 +9,15 @@ from pytest_django.asserts import assertRedirects
 
 import optics.miz_import.util as util
 from optics.miz_import.tests.data import TestData
-from optics.opticsapp.models import Aircraft, Flight, Package, Waypoint, WaypointType
+from optics.opticsapp.models import (
+    Aircraft,
+    Campaign,
+    Flight,
+    Mission,
+    Package,
+    Waypoint,
+    WaypointType,
+)
 
 # NOTE: full_tree is stored in conftest.py
 
@@ -36,10 +45,18 @@ def airframes(db):
 
 
 @pytest.fixture
-def package(db, authenticated_user) -> Package:
-    return baker.make(
-        Package, created_by=authenticated_user, _fill_optional=["mission"]
-    )
+def campaign() -> Campaign:
+    return baker.make(Campaign, _fill_optional=True)
+
+
+@pytest.fixture
+def mission(campaign) -> Mission:
+    return baker.make(Mission, campaign=campaign)
+
+
+@pytest.fixture
+def package(authenticated_user, mission) -> Package:
+    return baker.make(Package, created_by=authenticated_user, mission=mission)
 
 
 @pytest.mark.django_db()
@@ -191,12 +208,11 @@ def test_correct_import_to_package_redirects_to_mision_page(
     selected_values = '["flight348","flight470", "unit883"]'
     response = client.post(url, data={"selected": selected_values})
     # redirected to the package page
-    assertRedirects(
-        response,
-        reverse("package_v2", args={package.id}),
-        status_code=302,
-        target_status_code=200,
-    )
+    assertRedirects(response, reverse("package_v2", args={package.id}))
+    # ,
+    #     status_code=302,
+    #     target_status_code=200,
+    # )
 
 
 # -----------------------------------------------
@@ -204,7 +220,7 @@ def test_correct_import_to_package_redirects_to_mision_page(
 # -----------------------------------------------
 
 
-@pytest.mark.skip("Smoke Tests")
+# @pytest.mark.skip("Smoke Tests")
 def test_authenticated_user_works(client, authenticated_user):
     client.user = authenticated_user
     response = client.get(reverse("reference_tables"))

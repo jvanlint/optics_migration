@@ -202,8 +202,8 @@ def build_full_flight(full_tree: AnyNode, flight_node_id: str) -> Flight:
     flight = build_flight(full_tree, flight_node_id)
     if flight is not None:
         flight_node = tree_search.find_by_attr(full_tree, flight_node_id, name='id')
-        waypoints = []
-        units = []
+        # waypoints = []
+        # units = []
         for node in flight_node.descendants:
             if node.type == NodeType.WAYPOINT:
                 waypoint = create_waypoint(full_tree, node.id)
@@ -214,7 +214,7 @@ def build_full_flight(full_tree: AnyNode, flight_node_id: str) -> Flight:
         flight.save()
         return flight
     else:
-        return None
+        return 
 
 
 def build_flight(full_tree: AnyNode, flight_node_id: str) -> Flight:

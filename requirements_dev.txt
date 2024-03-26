@@ -1,12 +1,12 @@
-#-r requirements.txt
+-r requirements.txt
 model-bakery
 pytest
 pytest-django
 factory-man
-#black
+black
 #django-debug-toolbar
-#django_extensions
-#pylint
-#pylint-django
-#pylint-pytest
-#flake8
+django_extensions
+pylint
+pylint-django
+pylint-pytest
+flake8

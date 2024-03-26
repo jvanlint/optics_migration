@@ -22,8 +22,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN python3 -m pip install --upgrade setuptools
 
 # Install pip requirements
-COPY requirements.txt /tmp/pip-tmp/
-RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+COPY requirements_dev.txt /tmp/pip-tmp/
+RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements_dev.txt \
   && rm -rf /tmp/pip-tmp
 
 WORKDIR /workspaces

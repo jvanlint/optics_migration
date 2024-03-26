@@ -55,6 +55,7 @@
 				"ms-python.black-formatter",
 				"ms-python.vscode-pylance",
 				"ms-azuretools.vscode-docker"
+				
 
 			],
 			"settings": {

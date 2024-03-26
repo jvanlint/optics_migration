@@ -100,6 +100,13 @@ INSTALLED_APPS = [
     "request",
 ]
 
+DEV_APPS = [
+    'django_extensions',
+]
+if DEBUG:
+    INSTALLED_APPS.extend(DEV_APPS)
+
+
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
