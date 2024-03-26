@@ -77,7 +77,7 @@ def threat_object_add(request):
     return render(request, "v2/generic/data_entry_form.html", context)
 
 
-def threat_object_update(request):
+def threat_object_update(request, link_id):
     obj = ThreatReference.objects.get(id=link_id)
     form = ThreatReferenceForm(instance=obj)
     returnURL = request.GET.get("returnUrl")
@@ -88,14 +88,14 @@ def threat_object_update(request):
     }
 
     if request.method == "POST":
-        form = formobj(request.POST, instance=obj)
+        form = ThreatReferenceForm(request.POST, instance=obj)
         if form.is_valid():
             form_obj = form.save(commit=False)
-            form_obj.date_modified = timezone.now()
-            form_obj.user = request.user
+            # form_obj.date_modified = timezone.now()
+            # form_obj.user = request.user
             form_obj.save()
             # messages.success(request, "Campaign successfully created.")
-            return redirect("reference_tables")
+            return redirect("threat_db")
 
     context = {
         "form": form,
