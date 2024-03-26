@@ -28,7 +28,7 @@ tzdata
 # S3 required packages
 django-storages
 boto3
-
+Collectfast # speeds up collectstatic
 # Maintenance mode package
 django-maintenance-mode
 

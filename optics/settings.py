@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "collectfast",
     "django.contrib.staticfiles",
     "django.contrib.sites",
     # Maintenance Mode app
@@ -209,12 +210,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Collectfast
+# https://github.com/antonagestam/collectfast/
+# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "miz_import/static/miz_import"),
+]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Base url to serve media files
