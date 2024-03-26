@@ -62,7 +62,11 @@
 						{% else %}
 							<td></td>
 						{% endif %}
-						<td>{{threat.rwr_image3}}</td>
+						{% if threat.rwr_image3 %}
+							<td><img src="{{threat.rwr_image3.url}}" style="width: 50px;"></td>
+						{% else %}
+							<td></td>
+						{% endif %}
 						<td>{{threat.harm_code}}</td>
 						<td>{{threat.date_created}}</td>
 						<td>{{threat.date_modified}}</td>

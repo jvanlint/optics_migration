@@ -40,7 +40,7 @@ def threat_page_manager(request):
     page_num = request.GET.get("page", 1)
     threat_paginated = Paginator(object_list=threat, per_page=15).get_page(page_num)
 
-    template = "v2/threatdb/threats.html"
+    template = "v2/threatdb/includes/threats.html"
     context = {"threat_object": threat_paginated}
 
     return render(request, template_name=template, context=context)
