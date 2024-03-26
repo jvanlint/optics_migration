@@ -319,10 +319,12 @@
 											<td>{{ target.notes|linebreaks }}</td>
 											{% if target.target_image %}
 											<td>
-												<div class="image-popup">
-													<a href="{{ target.target_image.url }}" target="_blank">View</a>
-													
-												</div>
+												<a href="{{ target.target_image.url }}" target="_blank" class="hover-image-link">
+													View
+													<span class="hover-image">
+														<img src="{{ target.target_image.url }}" alt="Target Image">
+													</span>
+												</a>
 											</td>
 											{% else %}
 											<td>None</td>

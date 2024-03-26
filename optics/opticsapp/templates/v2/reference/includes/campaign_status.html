@@ -2,9 +2,16 @@
 <div id="campaign-status" style="position: relative;">
 	<div class="card">
 		<div class="card-header">
+			<h6>
+				<a href="{% url 'reference_object_add' 'status' %}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
+					Add 
+				</a>
+			</h6>
 			<i class="fa fa-align-justify"></i>
 			<h5>Campaign Status</h5>
 			<div class="media text-muted">Used to describe the status of the campaign.</div>
+			
 		</div>
 		<div class="card-body">
 			<table class="table table-responsive-sm table-striped">
@@ -90,13 +97,13 @@
 					</button>
 				{% endif %}
 			</div>
+		{% else %}
+			<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
+				<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
+				<button class="btn btn-outline-primary active" type="button">1</button>
+				<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
+			</div>
 		{% endif %}
-		<h6>
-			<a href="{% url 'reference_object_add' 'status' %}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
-				<img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
-				Add 
-			</a>
-		</h6>
 		</div>
 
 		<!-- Spinner -->
