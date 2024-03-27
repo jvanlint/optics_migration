@@ -1,13 +1,18 @@
-{% extends "v2/base.html" %} {% block title %}About{% endblock %}
+{% extends "v2/base.html" %}
+{% block title %}About{% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+{% block stylesheets %}
+{% comment %}This comment in stylesheet block {% endcomment %}
 <style>
-ul {
-	text-align: left;
-	list-style-position: inside;
-}
-</style>
+	ul {
+		text-align: left;
+		list-style-position: inside;
+	}
+	</style>
+{% endblock stylesheets %} 
+{% block content %}
+
 
 <main class="c-main">
 	<div class="container-fluid">
