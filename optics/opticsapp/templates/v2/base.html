@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-{% include 'v2/includes/head.html' %}
+    <head>
+        {% include 'v2/includes/head.html' %}
+        {% block stylesheets %}
+        <!--having the stylesheets block in head.html does not work-->
+        {% endblock stylesheets %}
+    </head>
+
 	<body class="c-app">
 		{% include 'v2/includes/sidebar.html' %}
 
