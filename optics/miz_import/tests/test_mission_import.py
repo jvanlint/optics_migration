@@ -7,8 +7,8 @@ from django.urls import reverse
 from model_bakery import baker
 from pytest_django.asserts import assertRedirects
 
-import optics.miz_import.util as util
-from optics.miz_import.tests.data import TestData
+import optics.miz_import.tree_parser as tree_parser
+from optics.miz_import import mission_parser
 from optics.opticsapp.models import (
     Aircraft,
     Campaign,
@@ -36,12 +36,12 @@ def flight(db) -> Flight:
 
 @pytest.fixture
 def airframes(db):
-    airframe_A10C = baker.make("Airframe", dcs_mapping="A-10C")
-    airframe_A10C2 = baker.make("Airframe", dcs_mapping="A-10C_2")
-    airframe_F18 = baker.make("Airframe", dcs_mapping="F/A-18C")
-    airframe_AV8B = baker.make("Airframe", dcs_mapping="AV8BNA")
-    airframe_F15C = baker.make("Airframe", dcs_mapping="F-15C")
-    airframe_unmapped = baker.make("Airframe")
+    airframe_A10C = baker.make("Airframe", dcsname="A-10C")
+    airframe_A10C2 = baker.make("Airframe", dcsname="A-10C_2")
+    airframe_F18 = baker.make("Airframe", dcsname="F/A-18C")
+    airframe_AV8B = baker.make("Airframe", dcsname="AV8BNA")
+    airframe_F15C = baker.make("Airframe", dcsname="F-15C")
+    airframe_unmapped = baker.make("Airframe", dcsname="Not-Mapped")
 
 
 @pytest.fixture
@@ -61,7 +61,7 @@ def package(authenticated_user, mission) -> Package:
 
 @pytest.mark.django_db()
 def test_build_full_flight_adds_all_children(full_tree: AnyNode):
-    new_flight = util.build_full_flight(full_tree, "flight348")
+    new_flight = tree_parser.build_full_flight(full_tree, "flight348")
     assert new_flight.aircraft_set.filter(tailcode="812").exists()
     assert new_flight.aircraft_set.filter(tailcode="813").exists()
     assert new_flight.aircraft_set.filter(tailcode="814").exists()
@@ -70,10 +70,10 @@ def test_build_full_flight_adds_all_children(full_tree: AnyNode):
     assert new_flight.waypoint_set.filter(number="2").exists()
 
 
-@pytest.mark.django_db()
+# @pytest.mark.django_db()
 def test_unit_nodes_are_created(full_tree: AnyNode):
     selected_items = ["unit879", "unit880", "unit881", "unit882"]
-    units = util.create_units(full_tree, selected_items)
+    units = tree_parser.create_units(full_tree, selected_items)
     assert units[0].tailcode == "812"
     assert units[1].tailcode == "813"
     assert units[2].tailcode == "814"
@@ -83,13 +83,13 @@ def test_unit_nodes_are_created(full_tree: AnyNode):
 @pytest.mark.django_db()
 def test_waypoint_nodes_are_created(full_tree: AnyNode):
     selected_items = ["waypoint34800", "waypoint34801"]
-    waypoints = util.create_waypoints(full_tree, selected_items)
+    waypoints = tree_parser.create_waypoints(full_tree, selected_items)
     assert waypoints[0].name == "TakeOffParking - Alt 18"
     assert waypoints[1].name == "Turning Point - Alt 2000"
 
 
 def test_copy_flight_to_package_returns_correct_packageID(flight, package):
-    returned_id = util.copy_flight_to_package(flight, package)
+    returned_id = tree_parser.copy_flight_to_package(flight, package)
     assert returned_id == package.id
 
 
@@ -237,11 +237,16 @@ def test_client_without_authenticated_user(client):
 # Test data setup
 # -----------------------------------------------
 
+THIS_DIR = Path(__file__).parent
+test_mission_file = THIS_DIR / "missions/test1.miz"
+
+from optics.miz_import import new_mission_parser
+
 
 @pytest.mark.skip("Only used to build test data")
 def test_build_client_air_units_from_existing_mission():
-    mission, _ = util.load_external_mission(test_mission_file)
-    tree = util.build_client_air_units_tree(mission)
+    mission, _ = mission_parser.load_external_mission(str(test_mission_file))
+    tree = new_mission_parser.build_client_air_units_tree2(mission)
     exporter = JsonExporter()
     tree_dump = exporter.export(tree)
     # ** Pause at the line above **

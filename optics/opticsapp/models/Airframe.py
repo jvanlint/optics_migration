@@ -1,21 +1,15 @@
-import csv
-
 from django.contrib.auth.models import User
 from django.db import models
 
 
-def get_airframes():
-    with open("optics/DCS_airframes.txt") as file:
-        for row in csv.reader(file):
-            yield (row[0], row[1])
+class DCSAirframe(models.Model):
+    dcsname = models.CharField(max_length=50, primary_key=True)  # , unique=True)
+
+    def __str__(self):
+        return self.dcsname
 
 
 class Airframe(models.Model):
-    # Choices:
-    # Run make_choices.py to generate the following list when new aircraft/helos added to DCS
-
-    # Fields
-
     name = models.CharField(max_length=200, help_text="Enter Airframe Name")
     stations = models.IntegerField(default=2)
     multicrew = models.BooleanField(default=False)
@@ -23,11 +17,9 @@ class Airframe(models.Model):
     date_created.hidden = True
     date_modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    dcs_mapping = models.CharField(
-        max_length=50, choices=get_airframes, default="Not_Mapped"
+    dcsname = models.OneToOneField(
+        DCSAirframe, on_delete=models.SET_NULL, null=True, blank=True
     )
-
-    # Metadata
 
     class Meta:
         ordering = ["name"]
@@ -36,3 +28,6 @@ class Airframe(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# https://docs.djangoproject.com/en/5.0/topics/db/examples/one_to_one/

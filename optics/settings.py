@@ -106,7 +106,7 @@ DEV_APPS = [
 ]
 if DEBUG:
     INSTALLED_APPS.extend(DEV_APPS)
-
+    INSTALLED_APPS.remove("request")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
@@ -118,8 +118,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Whitenoise not required when S3 is serving the static files.
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
     # Add the htmx middleware:
@@ -129,6 +127,10 @@ MIDDLEWARE = [
     # Maintenance Mode Middleware
     "maintenance_mode.middleware.MaintenanceModeMiddleware",
 ]
+
+if DEBUG:
+    # remove the request logging middleware to speed up server start
+    MIDDLEWARE.remove("request.middleware.RequestMiddleware")
 
 ROOT_URLCONF = "optics.urls"
 

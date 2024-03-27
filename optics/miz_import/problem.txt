@@ -1,0 +1,32 @@
+Mission parser does not give good text for units and flights etc..
+look at whether the dcs mission tree has changed and alter the mission parser.
+
+plane_group.id
+
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].type = 'F-14B'
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].skill  'Client'
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].onboard_num
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].id 814
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].callsign_dict['name'] 'Enfield31'
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].name 'Pilot #001'
+
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].callsign_as_str() ='Enfield31'
+
+mission.coalition['blue'].countries['USA'].helicopter_group[0].has_human() True
+
+mission.coalition['blue'].countries['USA'].helicopter_group[0].flight_type().id 'Ka-50'
+mission.coalition['blue'].countries['USA'].helicopter_group[0].name 'DAL KA50'
+mission.coalition['blue'].countries['USA'].helicopter_group[0].points[3].action.value 'Turning Point' / 'From Ground Area'
+
+mission.coalition['blue'].countries['USA'].plane_group[0].points[1].action.value 'Turning Point'
+mission.coalition['blue'].countries['USA'].plane_group[1].flight_type().id 'FA-18C_hornet'
+
+mission.coalition['blue'].countries['USA'].plane_group[1].has_human() True
+mission.coalition['blue'].countries['USA'].plane_group[1].units[0].is_human() True
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].type = 'F-14B'
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].skill  'Client'
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].onboard_num '138' (str)
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].id 814 (int)
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].callsign_dict['name'] 'Enfield31'
+mission.coalition['blue'].countries['USA'].plane_group[0].units[0].name 'Pilot #001' 'CVN-71 F/A-18C (HOT)'
+mission.coalition['blue'].countries['USA'].plane_group[4].points[0].action.value 'From Parking Area Hot'

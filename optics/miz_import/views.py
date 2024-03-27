@@ -1,17 +1,20 @@
 import json
 from zipfile import BadZipFile
+
 from anytree.exporter import JsonExporter
 from anytree.importer import JsonImporter
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.files.uploadhandler import TemporaryFileUploadHandler
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import require_http_methods
-import optics.miz_import.util as util
+
+from optics.miz_import import mission_parser, new_mission_parser, tree_parser
 from optics.opticsapp.models import Package
-from django.contrib.auth import get_user_model
 
 
 @login_required(login_url="account_login")
@@ -94,10 +97,10 @@ def _upload_mission_file(request):
 
 def create_mission_tree(mission_file) -> tuple:
     with mission_file:
-        mission, parse_msg = util.load_external_mission(
+        mission, parse_msg = new_mission_parser.load_external_mission(
             mission_file.temporary_file_path()
         )
-    mission_tree = util.build_client_air_units_tree(mission)
+    mission_tree = new_mission_parser.parse_mission_to_tree(mission)
     return mission_tree, parse_msg
 
 
@@ -105,13 +108,18 @@ def create_mission_tree(mission_file) -> tuple:
 @login_required()
 def import_to_package(request):
     package = get_object_or_404(Package, pk=request.session["package_id"])
-    # flights = package.flight_set.all()
-    user = get_object_or_404(get_user_model(), pk=request.user.pk)
-    selected_items = json.loads(request.POST["selected"])  # list
+    selected_items = json.loads(
+        request.POST["selected"]
+    )  # list of things to import to this package
     importer = JsonImporter()
-    ft = request.session.get("full_tree")
-    full_root = importer.import_(ft)
-    package = util.add_to_package(full_root, selected_items, package)
+    # ft = request.session.get("full_tree")
+    full_tree = importer.import_(request.session.get("full_tree"))
+    try:
+        package = tree_parser.add_to_package(full_tree, selected_items, package)
+    except Exception as e:
+        messages.error(request, f"Error adding to package: {e}")
+        return redirect("package_v2", link_id=package.pk)
+
     package.save()
     request.session["full_tree"] = ""
     return redirect("package_v2", link_id=package.pk)

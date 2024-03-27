@@ -7,12 +7,6 @@ from django.db import migrations, models
 import optics.opticsapp.models.Airframe
 
 
-def get_airframes():
-    with open("optics/DCS_airframes.txt") as file:
-        for row in csv.reader(file):
-            yield (row[0], row[1])
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -20,15 +14,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="airframe",
-            name="dcs_mapping",
-            field=models.CharField(
-                choices=get_airframes,
-                default="Not_Mapped",
-                max_length=50,
-            ),
-        ),
         migrations.AddField(
             model_name="waypointtype",
             name="dcs_mapping",

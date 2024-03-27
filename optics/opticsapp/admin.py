@@ -1,36 +1,37 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
-from django.utils.html import format_html
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 from django.templatetags.static import static
+from django.utils.html import format_html
+from import_export.admin import ImportExportModelAdmin
+from import_export.resources import ModelResource
+
+from .models import (
+    Aircraft,
+    Airframe,
+    AirframeDefaults,
+    Campaign,
+    DCSAirframe,
+    Flight,
+    Mission,
+    MissionFile,
+    MissionImagery,
+    Package,
+    Squadron,
+    Status,
+    Support,
+    Target,
+    Task,
+    Terrain,
+    Threat,
+    ThreatReference,
+    UserProfile,
+    Waypoint,
+    WebHook,
+)
 
 # Register your models here.
 
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
-from django.contrib.auth.admin import UserAdmin
-
-from .models import (
-    Campaign,
-    Mission,
-    Package,
-    Flight,
-    Aircraft,
-    Status,
-    Airframe,
-    Terrain,
-    Threat,
-    Target,
-    WebHook,
-    MissionFile,
-    Support,
-    Waypoint,
-    Task,
-    MissionImagery,
-    ThreatReference,
-    Squadron,
-    UserProfile,
-    AirframeDefaults,
-)
 
 # Define the admin class
 
@@ -136,10 +137,31 @@ admin.site.register(Terrain, TerrainAdmin)
 
 
 class AirframeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ("name",)
+    list_display = ("name", "dcsname")
 
 
 admin.site.register(Airframe, AirframeAdmin)
+
+
+class DCSAirframeResource(ModelResource):
+    class Meta:
+        model = DCSAirframe
+        import_id_fields = [
+            'dcsname',
+        ]
+        skip_unchanged = True
+        report_skipped = True
+        fields = "dcsname"
+        exclude = "id"
+
+
+class DSCSAirframeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ["dcsname"]
+    ordering = ["dcsname"]
+    resource_classes = [DCSAirframeResource]
+
+
+admin.site.register(DCSAirframe, DSCSAirframeAdmin)
 
 
 class AirframeDefaultsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
