@@ -220,8 +220,8 @@ COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "optics/miz_import/static/miz_import"),
     os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "miz_import/static/miz_import"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
