@@ -3,7 +3,7 @@
 
 {% block stylesheets %}
 <!-- Page stylesheets block  -->
-
+<link href="{% static 'miz_import/css/jstree/themes/default/style.min.css' %}" rel="stylesheet" />
 <!-- END Page stylesheets block  -->
 {% endblock stylesheets %}
 
@@ -33,18 +33,9 @@ https://github.com/orangehill/jstree-bootstrap-theme
 {% endblock content %}
 
 {% block javascripts %}
+<script src="{% static 'miz_import/js/jstree/jstree.min.js' %}"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
-  integrity="sha512-TGClBy3S4qrWJtzel4qMtXsmM0Y9cap6QwRm3zo1MpVjvIURa90YYz5weeh6nvDGKZf/x3hrl1zzHW/uygftKg=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-<script>
+<!-- <script>
   var tree = $('#tree').jstree({
     'core': {
       'data': tree_data(),
@@ -90,6 +81,22 @@ https://github.com/orangehill/jstree-bootstrap-theme
         'icon': 'glyphicon glyphicon-plane'
       }
     }
+  }); -->
+<script>
+  var tree = $('#tree').jstree({
+    'core': {
+      'data': tree_data(),
+      "themes": {
+        "icons": true,
+        "stripes": true,
+      }
+    },
+    'plugins': [
+      'checkbox'
+    ],
+    'checkbox': {
+      'keep_selected_style': false,
+    },
   });
 
   /* beautify ignore:start */

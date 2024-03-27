@@ -1,13 +1,17 @@
 {% extends "v2/base.html" %}
+
 {% block title %} DCS Mission File Import {% endblock %}
 {% load django_htmx %}
 {% load static %}
 
 {% block stylesheets %}
-<!-- Specific Page CSS -->
-<link href="{% static 'miz_import/css/jstree/themes/default/style.min.css' %}" rel="stylesheet" />
 
+<!-- Specific Page CSS -->
+<!-- inside block stylesheets on view_tree.html-->
+<link href="{% static 'miz_import/css/jstree/themes/default/style.min.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/vendors/@coreui/icons/css/free.min.css' %}" rel="stylesheet" />
 {% endblock stylesheets %}
+
 {% block content %}
 
 
@@ -29,59 +33,55 @@
 {% endblock content %}
 
 {% block javascripts %}
-
-<script src="{% static 'miz_import/js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'miz_import/js/jstree/jstree.min.js' %}"></script>
 
 <script>
-  if ($('#tree').length > 0) {
-    var tree = $('#tree').jstree({
-      'core': {
-        'data': tree_data(),
-        "themes": {
-          "icons": true,
-          "stripes": true,
-        }
-      },
-      'plugins': [
-        'types',
-        'checkbox'
-      ],
-      'checkbox': {
-        'keep_selected_style': false,
-      },
-
-      'types': {
-        "root": {
-          "icon": "glyphicon glyphicon-globe"
-        },
-        "coalition": {
-          "icon": "glyphicon glyphicon-globe"
-        },
-        'country': {
-          'icon': 'glyphicon glyphicon-globe'
-        },
-        'flights': {
-          'icon': 'glyphicon glyphicon-cloud'
-        },
-        'flight': {
-          'icon': 'glyphicon glyphicon-option-vertical'
-        },
-        'waypoints': {
-          'icon': 'glyphicon glyphicon-tasks'
-        },
-        'waypoint': {
-          'icon': 'glyphicon glyphicon-screenshot'
-        },
-        'units': {
-          'icon': 'glyphicon glyphicon-send'
-        },
-        'unit': {
-          'icon': 'glyphicon glyphicon-plane'
-        }
+  var tree = $('#tree').jstree({
+    'core': {
+      'data': tree_data(),
+      "themes": {
+        "icons": true,
+        "stripes": true,
       }
-    });
-  }
+    },
+    'plugins': [
+      'types',
+      'checkbox'
+    ],
+    'checkbox': {
+      'keep_selected_style': true,
+    },
+
+    'types': {
+      "root": {
+        "icon": "cil-globe-alt"
+      },
+      "coalition": {
+        "icon": "cil-globe-alt"
+      },
+      'country': {
+        'icon': 'cil-globe-alt'
+      },
+      'flights': {
+        'icon': 'cil-send'
+      },
+      'flight': {
+        'icon': 'cil-send'
+      },
+      'waypoints': {
+        'icon': 'cil-location-pin'
+      },
+      'waypoint': {
+        'icon': 'cil-location-pin'
+      },
+      'units': {
+        'icon': 'cil-airplane-mode'
+      },
+      'unit': {
+        'icon': 'cil-airplane-mode'
+      }
+    }
+  });
   /* beautify ignore:start */
   /* - Required to stop mangling of the variable brackets*/
 
