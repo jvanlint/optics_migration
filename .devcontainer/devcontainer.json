@@ -54,9 +54,8 @@
 				"ms-python.isort",
 				"ms-python.black-formatter",
 				"ms-python.vscode-pylance",
-				"ms-azuretools.vscode-docker"
-				
-
+				"ms-azuretools.vscode-docker",
+				"ms-ossdata.vscode-postgresql"
 			],
 			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/python"

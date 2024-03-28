@@ -7,6 +7,7 @@ black
 #django-debug-toolbar
 django_extensions
 # pylint
-# pylint-django
-# pylint-pytest
+pylint-django
+pylint-pytest
+django-stubs[compatible-mypy]
 # flake8

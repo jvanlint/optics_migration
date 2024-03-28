@@ -23,6 +23,7 @@ RUN python3 -m pip install --upgrade setuptools
 
 # Install pip requirements
 COPY requirements_dev.txt /tmp/pip-tmp/
+COPY requirements.txt /tmp/pip-tmp/
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements_dev.txt \
   && rm -rf /tmp/pip-tmp
 
