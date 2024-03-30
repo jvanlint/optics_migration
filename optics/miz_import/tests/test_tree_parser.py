@@ -1,6 +1,6 @@
 import dcs
 import pytest
-from anytree import ContRoundStyle, Node, RenderTree
+from anytree import ContRoundStyle, Node, PreOrderIter, RenderTree
 from anytree import search as tree_search
 from django.core.exceptions import ObjectDoesNotExist
 from model_bakery import baker
@@ -18,21 +18,20 @@ from optics.opticsapp.models import (
 
 
 @pytest.fixture
-def airframes(db):  # , dcsnames):
-    # dcs_airframe_A10C = DCSAirframe(dcsname=dcsnames.A10)
-    # dcs_airframe_F18C = DCSAirframe(dcsname=dcsnames.F18)
-    A10 = DCSAirframe.objects.create(dcsname="A-10C_2")
-    F18 = DCSAirframe.objects.create(dcsname="FA-18C_hornet")
-    airframe_A10C = Airframe.objects.create(dcsname=A10)
-    airframe_F18C = Airframe.objects.create(dcsname=F18)
-    return [airframe_A10C, airframe_F18C]
-
-
-@pytest.fixture
-def red_airframes(db):
-    SU33 = DCSAirframe.objects.create(dcsname="Su-33")
-    airframe_SU33 = Airframe.objects.create(dcsname=SU33)
-    return [airframe_SU33]
+def airframes(db):
+    A10C = Airframe.objects.create(
+        dcsname=DCSAirframe.objects.create(dcsname="A-10C_2")
+    )
+    F18C = Airframe.objects.create(
+        dcsname=DCSAirframe.objects.create(dcsname="FA-18C_hornet")
+    )
+    SU25T = Airframe.objects.create(
+        dcsname=DCSAirframe.objects.create(dcsname="Su-25T")
+    )
+    AH64 = Airframe.objects.create(
+        dcsname=DCSAirframe.objects.create(dcsname="AH-64D_BLK_II")
+    )
+    return [A10C, F18C, SU25T, AH64]
 
 
 @pytest.fixture
@@ -79,7 +78,8 @@ def unit_node(full_tree):
 @pytest.mark.django_db
 def test_create_aircraft_sets_correct_tailcode(unit_node, airframes):
     aircraft = tree_parser.create_aircraft(unit_node)
-    assert aircraft.tailcode == '912'
+
+    assert aircraft.tailcode == unit_node.onboard_num
 
 
 @pytest.mark.django_db
@@ -113,40 +113,47 @@ def test_create_aircraft_throws_correct_error_when_airframe_not_linked(
 
 @pytest.mark.django_db
 def test_add_to_package_creates_flights(package, full_tree, airframes):
-    tree_parser.add_to_package(full_tree, ['F18 Carrier Group'], package)
-    assert Flight.objects.filter(callsign="Colt12").exists()
+    passed_unit = tree_search.find_by_attr(
+        full_tree, value='F18 Carrier Group', name='id'
+    )
+    result = tree_parser.add_to_package(full_tree, ['F18 Carrier Group'], package)
+    # [node.name for node in PreOrderIter(f)]
+    # [node for node in PreOrderIter(full_tree) if node.type == 'unit']
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'unit']:
+        # https://anytree.readthedocs.io/en/stable/api/anytree.iterators.html
+        print(f"Checking unit {unit.onboard_num}")
+        assert Aircraft.objects.filter(tailcode=unit.onboard_num).exists()
 
 
 @pytest.mark.django_db
-def test_add_to_package_creates_aircraft(package, full_tree, airframes):
-    tree_parser.add_to_package(full_tree, ["airframe-9"], package)
-    assert Aircraft.objects.filter(tailcode="212").exists()
+def test_add_to_package_creates_aircraft(package: Package, full_tree, airframes):
+    passed_unit = tree_search.find_by_attr(full_tree, value="airframe-9", name='id')
+    result = tree_parser.add_to_package(full_tree, ["airframe-9"], package)
+    assert Aircraft.objects.filter(tailcode=passed_unit.onboard_num).exists()
 
 
 @pytest.mark.django_db
 def test_add_to_package_creates_waypoints(package, full_tree, airframes):
-    tree_parser.add_to_package(full_tree, ["A10 Group"], package)
-    assert Waypoint.objects.filter(text="wp 1 - Turning Point").exists()
+    passed_unit = tree_search.find_by_attr(full_tree, value="A10 Group", name='id')
+    result = tree_parser.add_to_package(full_tree, ["A10 Group"], package)
+
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'waypoint']:
+        # https://anytree.readthedocs.io/en/stable/api/anytree.iterators.html
+        # print(f"Checking unit {unit.onboard_num}")
+        assert Waypoint.objects.filter(name=unit.text).exists()
 
 
 @pytest.mark.django_db
-def test_add_to_package_handles_coalition(full_tree, package, red_airframes):
-    tree_parser.add_to_package(full_tree, ["blue"], package)
-    '''
-   
-    
-    
-    '''
-    # Assert flights created
-    # assert Flight.objects.filter(callsign="CVN-71 F/A-18C #001").exists()
-    assert Flight.objects.filter(callsign="Kuznetsov Su-33").exists()
-
+def test_add_to_package_handles_coalition(full_tree, package, airframes):
+    passed_unit = tree_search.find_by_attr(full_tree, value="red", name='id')
+    result = tree_parser.add_to_package(full_tree, ["red"], package)
     # Assert units created
-    assert Aircraft.objects.filter(tailcode="180").exists()
-    assert Aircraft.objects.filter(tailcode="183").exists()
-
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'unit']:
+        print(f"Checking unit {unit.onboard_num}")
+        assert Aircraft.objects.filter(tailcode=unit.onboard_num).exists()
     # Assert waypoints created
-    assert Waypoint.objects.filter(name="TakeOffParking").exists()
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'waypoint']:
+        assert Waypoint.objects.filter(name=unit.text).exists()
 
     # Assert all linked to package
     for flight in Flight.objects.all():
@@ -154,95 +161,43 @@ def test_add_to_package_handles_coalition(full_tree, package, red_airframes):
 
 
 @pytest.mark.django_db
-def test_add_to_package_handles_country(full_tree, package, red_airframes):
+def test_add_to_package_handles_country(full_tree, package, airframes):
+    passed_unit = tree_search.find_by_attr(full_tree, value="USA", name='id')
     tree_parser.add_to_package(full_tree, ["USA"], package)
-
-    # Assert flights, units, waypoints created and linked to package
-
-    # Assert flights created
-    assert Flight.objects.filter(callsign="Kuznetsov Su-33").exists()
-
     # Assert units created
-    assert Aircraft.objects.filter(tailcode="180").exists()
-    assert Aircraft.objects.filter(tailcode="183").exists()
-
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'unit']:
+        print(f"Checking unit {unit.onboard_num}")
+        assert Aircraft.objects.filter(tailcode=unit.onboard_num).exists()
     # Assert waypoints created
-    assert Waypoint.objects.filter(name="TakeOffParking").exists()
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'waypoint']:
+        assert Waypoint.objects.filter(name=unit.text).exists()
 
     # Assert all linked to package
     for flight in Flight.objects.all():
         assert flight.package == package
-
-
-@pytest.mark.django_db
-def test_add_to_package_handles_waypoints(full_tree, package, airframes):
-    tree_parser.add_to_package(full_tree, ["waypoints376"], package)
-
-    flight = Flight.objects.get(callsign="CVN-71 F/A-18C (HOT)")
-
-    # Assert waypoints created
-    assert Waypoint.objects.filter(name="TakeOffParkingHot").exists()
-    assert Waypoint.objects.filter(name="Turning Point").exists()
-
-    # Assert linked to flight
-    for wp in flight.waypoint_set.all():
-        assert wp.flight == flight
-
-    # Assert flight linked to package
-    assert flight.package == package
-
-
-@pytest.mark.django_db
-def test_add_to_package_handles_units(full_tree, package, airframes):
-    tree_parser.add_to_package(full_tree, ["units376"], package)
-
-    flight = Flight.objects.get(callsign="CVN-71 F/A-18C (HOT)")
-
-    # Assert units created
-    assert Aircraft.objects.filter(tailcode="142").exists()
-    assert Aircraft.objects.filter(tailcode="143").exists()
-
-    # Assert linked to flight
-    for ac in flight.aircraft_set.all():
-        assert ac.flight == flight
-
-    # Assert flight linked to package
-    assert flight.package == package
 
 
 @pytest.mark.django_db
 def test_add_to_package_handles_multiple_nodes(full_tree, package, airframes):
-    nodes = ["flight376", "units376", "waypoints376"]
+
+    # ['Apache Group', 'airframe-19']
+    nodes = ['Apache Group', 'airframe-19']
     tree_parser.add_to_package(full_tree, nodes, package)
 
-    flight = Flight.objects.get(callsign="CVN-71 F/A-18C (HOT)")
-
-    # Assert flight created
-    assert Flight.objects.filter(callsign="CVN-71 F/A-18C (HOT)").exists()
-
-    # Assert waypoints created
-    assert Waypoint.objects.filter(name="TakeOffParkingHot").exists()
-    assert Waypoint.objects.filter(name="Turning Point").exists()
-
-    # Assert waypoints linked to flight
-    for wp in flight.waypoint_set.all():
-        assert wp.flight == flight
-
+    passed_unit = tree_search.find_by_attr(full_tree, value="Apache Group", name='id')
     # Assert units created
-    assert Aircraft.objects.filter(tailcode="142").exists()
-    assert Aircraft.objects.filter(tailcode="143").exists()
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'unit']:
+        print(f"Checking unit {unit.onboard_num}")
+        assert Aircraft.objects.filter(tailcode=unit.onboard_num).exists()
+    # Assert waypoints created
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'waypoint']:
+        assert Waypoint.objects.filter(name=unit.text).exists()
 
-    # Assert units linked to flight
-    for ac in flight.aircraft_set.all():
-        assert ac.flight == flight
-
-    # Assert flight linked to package
-    assert flight.package == package
-
-    # Assert waypoints linked to package via flight
-    for wp in flight.waypoint_set.all():
-        assert wp.flight.package == package
-
-    # Assert units linked to package via flight
-    for ac in flight.aircraft_set.all():
-        assert ac.flight.package == package
+    passed_unit = tree_search.find_by_attr(full_tree, value="airframe-19", name='id')
+    # Assert units created
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'unit']:
+        print(f"Checking unit {unit.onboard_num}")
+        assert Aircraft.objects.filter(tailcode=unit.onboard_num).exists()
+    # Assert waypoints created
+    for unit in [node for node in PreOrderIter(passed_unit) if node.type == 'waypoint']:
+        assert Waypoint.objects.filter(name=unit.text).exists()

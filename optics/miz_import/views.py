@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import require_http_methods
 
-from optics.miz_import import mission_parser, new_mission_parser, tree_parser
+from optics.miz_import import mission_parser, tree_parser
 from optics.opticsapp.models import Package
 
 
@@ -97,10 +97,10 @@ def _upload_mission_file(request):
 
 def create_mission_tree(mission_file) -> tuple:
     with mission_file:
-        mission, parse_msg = new_mission_parser.load_external_mission(
+        mission, parse_msg = mission_parser.load_external_mission(
             mission_file.temporary_file_path()
         )
-    mission_tree = new_mission_parser.parse_mission_to_tree(mission)
+    mission_tree = mission_parser.parse_mission_to_tree(mission)
     return mission_tree, parse_msg
 
 
@@ -119,7 +119,9 @@ def import_to_package(request):
     except Exception as e:
         messages.error(request, f"Error adding to package: {e}")
         return redirect("package_v2", link_id=package.pk)
-
+        #  TDOD: Fix messages on pages with htmx.
+        #  https://www.youtube.com/watch?v=T7TgfRiRb10
+        # https://github.com/bblanchon/django-htmx-messages-framework
     package.save()
     request.session["full_tree"] = ""
     return redirect("package_v2", link_id=package.pk)

@@ -1,14 +1,16 @@
 from enum import Enum
+from pathlib import Path
 from unittest.mock import patch
 
 import dcs
 import pytest
-from anytree import AnyNode, Node, RenderTree, Resolver, search
+from anytree import AnyNode, ContRoundStyle, Node, RenderTree, Resolver, search
 from anytree.exporter import JsonExporter
 from dcs.mapping import Point
 from dcs.mission import Mission
 
-from optics.miz_import.new_mission_parser import parse_mission_to_tree
+from optics.miz_import import mission_parser
+from optics.miz_import.mission_parser import parse_mission_to_tree
 
 
 class NodeType(str, Enum):
@@ -25,6 +27,7 @@ class NodeType(str, Enum):
 @pytest.fixture
 def mission() -> Mission:
     m = dcs.mission.Mission()
+    m.set_sortie_text("Test Mission")
     kobuleti = m.terrain.airports["Kobuleti"]
     kobuleti.set_blue()
     batumi = m.terrain.airports["Batumi"]
@@ -87,6 +90,70 @@ def mission() -> Mission:
         usa, "F18 Carrier Group", dcs.planes.FA_18C_hornet, sg, group_size=4
     )
     [unit.set_player() for unit in F18.units]
+
+    ustanks = m.vehicle_group(
+        usa,
+        "DefTanks",
+        dcs.countries.USA.Vehicle.Armor.M_1_Abrams,
+        dcs.mapping.Point(-283177.42857144, 659188, m.terrain),
+        300,
+        3,
+    )
+    ustanks.add_unit(
+        m.vehicle("airdef", dcs.countries.USA.Vehicle.AirDefence.M1097_Avenger)
+    )
+    ustanks.add_unit(m.vehicle("aaa", dcs.countries.USA.Vehicle.AirDefence.Vulcan))
+    ustanks.units[-1].skill = dcs.unit.Skill.High
+    ustanks.formation(heading=310)
+
+    # ------------------------------------------- RED UNITS --------------------------------------
+    senaki = m.terrain.airports["Senaki-Kolkhi"]
+    senaki.set_red()
+    russia = m.coalition["red"].country("Russia")
+    mozdok = m.terrain.airports["Mozdok"]
+    mozdok.set_red()
+    rfighter = m.flight_group_from_airport(
+        russia, "Migs", dcs.planes.MiG_29A, mozdok, group_size=2
+    )
+    last_wp = rfighter.add_runway_waypoint(mozdok)
+    rfighter.add_waypoint(
+        dcs.mapping.Point(
+            last_wp.position.x - 1000 * 80, last_wp.position.y - 1000 * 150, m.terrain
+        ),
+        6000,
+        800,
+    )
+
+    sukhumi = m.terrain.airports["Sukhumi-Babushara"]
+    sukhumi.set_red()
+    su25 = m.flight_group_from_airport(
+        russia,
+        "Su25 attack",
+        dcs.planes.Su_25T,
+        sukhumi,
+        start_type=dcs.mission.StartType.Runway,
+        group_size=2,
+    )
+    su25.load_loadout(
+        "APU-8 Vikhr-M*2,Kh-25ML,R-73*2,SPPU-22*2,Mercury LLTV Pod,MPS-410"
+    )
+    # Make some flyable
+    [unit.set_player() for unit in su25.units]
+
+    last_wp = su25.add_runway_waypoint(sukhumi)
+    heading = last_wp.position.heading_between_point(ustanks.position)
+    distance = last_wp.position.distance_to_point(ustanks.position)
+    p = last_wp.position.point_from_heading(heading, distance - 1000)
+    last_wp = su25.add_waypoint(p, 3000)
+    last_wp.tasks.append(dcs.task.CAS.EnrouteTasks.EngageGroup(ustanks.id))
+    su25.add_waypoint(
+        dcs.mapping.Point(
+            last_wp.position.x + 1000 * 10, last_wp.position.y, m.terrain
+        ),
+        3000,
+    )
+    su25.add_runway_waypoint(sukhumi)
+    su25.land_at(sukhumi)
 
     return m
 

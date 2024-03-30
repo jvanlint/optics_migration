@@ -143,13 +143,13 @@ def add_to_package(full_tree: AnyNode, selected_items: list, package: Package):
                 waypoint.copyToFlight(flight)
 
         elif item_type == NodeType.WAYPOINT:
-            flight_node = item_node.parent.parent
+            flight_node = item_node.parent
             flight = build_flight(flight_node)
             waypoint = create_waypoint(item_node)
             waypoint.copyToFlight(flight)
 
         elif item_node.type == NodeType.UNIT:
-            flight_node = item_node.parent.parent
+            flight_node = item_node.parent
             flight = build_flight(flight_node)
             unit = create_aircraft(item_node)
             unit.copyToFlight(flight)

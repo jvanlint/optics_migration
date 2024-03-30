@@ -1,7 +1,4 @@
-Mission parser does not give good text for units and flights etc..
-look at whether the dcs mission tree has changed and alter the mission parser.
 
-plane_group.id
 
 mission.coalition['blue'].countries['USA'].plane_group[0].units[0].type = 'F-14B'
 mission.coalition['blue'].countries['USA'].plane_group[0].units[0].skill  'Client'

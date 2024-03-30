@@ -2,7 +2,7 @@ import os
 from datetime import timedelta
 from enum import Enum
 
-from anytree import AnyNode
+from anytree import AnyNode, Node, RenderTree
 from dcs.mission import Mission
 
 
@@ -25,117 +25,157 @@ def load_external_mission(filename: str) -> tuple:
     return (mission, results)
 
 
-"""Builds a tree of air units in the mission organized by coalition and country.
-
-The tree root will be a node with type 'root'. The first level children 
-will be nodes for each coalition in the mission with type 'coalition'.
-The second level children will be nodes for each country in that coalition
-with type 'country'. The third level children will be nodes for each flight 
-in that country with type 'flight'. The fourth level children will be nodes
-for each waypoint for that flight with type 'waypoint'and nodes for each 
-unit in that flight with type 'unit'.
-
-Args:
-    mission: The loaded PyDCS mission object
-
-Returns:
-    The root node of the built tree
-"""
-
-
-def build_client_air_units_tree(mission: Mission) -> AnyNode:
-
+def parse_mission_to_tree(mission: Mission):
     opened = {"opened": True}  # open this node in jtree
     disabled = {"disabled": True}  # disable this node in jtree
     selected = {"selected": True}  # select this node in jtree
-
-    rootNode = AnyNode(
-        id=NodeType.ROOT,
+    start_time = mission.start_time
+    # "text" field is what is shown on jstree rendering on page
+    root = AnyNode(
+        id=NodeType.ROOT.value,
         text=mission.sortie_text(),
         state=opened,
-        start_time=mission.start_time.isoformat(),
+        start_time=start_time.isoformat(),
         type=NodeType.ROOT,
     )
+    for coalition in mission.coalition.values():
+        for country in coalition.countries.values():
+            human_plane_groups = [pg for pg in country.plane_group if pg.has_human()]
+            if human_plane_groups:
+                coalition_node = AnyNode(
+                    id=coalition.name,
+                    state=opened,
+                    type=NodeType.COALITION,
+                    parent=root,
+                    text=f"{coalition.name} coalition",
+                )
 
-    for index, coalition in enumerate(mission.coalition.values()):
-        coalition_node = AnyNode(
-            id=NodeType.COALITION + str(index),
-            parent=rootNode,
-            text=f'{coalition.name} coalition',
-            state=opened,
-            type=NodeType.COALITION,
-        )
+                country_node = AnyNode(
+                    id=country.shortname,
+                    text=country.name,
+                    state=opened,
+                    type=NodeType.COUNTRY,
+                    parent=coalition_node,
+                )
+            for plane_group in human_plane_groups:
+                plane_group_node = create_airframe_group_node(plane_group, country_node)
 
-        countries = coalition.countries
-        for country in countries.values():
-            country_node = AnyNode(
-                id=NodeType.COUNTRY + str(country.id),
-                parent=coalition_node,
-                text=country.name,
-                state=opened,
-                type=NodeType.COUNTRY,
-            )
-            client_plane_groups = [
-                pg for pg in country.plane_group if pg.units[0].skill.value == "Client"
+                human_units = [unit for unit in plane_group.units if unit.is_human()]
+                for unit in human_units:
+                    airframe_unit_node = create_airframe_unit_node(
+                        unit, plane_group_node
+                    )
+
+                waypoint_nodes = create_waypoint_nodes(
+                    plane_group.points, plane_group_node, start_time
+                )
+
+            human_helo_groups = [
+                hg for hg in country.helicopter_group if hg.has_human()
             ]
-            for plane_group in client_plane_groups:
+            for helo_group in human_helo_groups:
+                helo_group_node = create_airframe_group_node(helo_group, country_node)
 
-                plane_group_node = AnyNode(
-                    id=NodeType.FLIGHT + str(plane_group.id),
-                    parent=country_node,
-                    text=plane_group.name,
-                    frequency=plane_group.frequency,
-                    task=plane_group.task,
-                    type=NodeType.FLIGHT.value,
-                )
-
-                points_parent = AnyNode(
-                    id=NodeType.WAYPOINTS + str(plane_group.id),
-                    parent=plane_group_node,
-                    text=f"{plane_group.name} Waypoints",
-                    type=NodeType.WAYPOINTS,
-                )
-
-                for point_index, point in enumerate(plane_group.points):
-                    point_node = AnyNode(
-                        id=NodeType.WAYPOINT
-                        + str(plane_group.id)
-                        + str(point_index).zfill(2),
-                        parent=points_parent,
-                        latlng=point.position.latlng().format_dms(),
-                        lat=point.position.latlng()._format_component(
-                            point.position.latlng().lat, ("N", "S"), 2
-                        ),
-                        long=point.position.latlng()._format_component(
-                            point.position.latlng().lng, ("E", "W"), 2
-                        ),
-                        waypoint_type=point.type,
-                        alt=point.alt,
-                        ETA=(mission.start_time + timedelta(seconds=point.ETA))
-                        .time()
-                        .isoformat(),
-                        type=NodeType.WAYPOINT,
-                        action=point.action.name,
-                        text=point.type,
+                # helo_group_name = helo_group.name
+                # helo_group_node = AnyNode(
+                #     id=helo_group.name,
+                #     frequency=helo_group.frequency,
+                #     task=helo_group.task,
+                #     type=NodeType.FLIGHT,
+                #     parent=country_node,
+                #     state={"opened": True},
+                # )
+                human_units = [unit for unit in helo_group.units if unit.is_human()]
+                for unit in human_units:
+                    airframe_unit_node = create_airframe_unit_node(
+                        unit, helo_group_node
                     )
 
-                units_list = AnyNode(
-                    id=NodeType.UNITS + str(plane_group.id),
-                    parent=plane_group_node,
-                    text=f"{plane_group.name} Aircraft",
-                    type=NodeType.UNITS,
+                waypoint_nodes = create_waypoint_nodes(
+                    helo_group.points, helo_group_node, start_time
                 )
+                # for unit in human_units:
 
-                for unit in plane_group.units:
-                    name = f"{unit.onboard_num} - {unit.name} - {unit.type}"
-                    unit_node = AnyNode(
-                        id=NodeType.UNIT + str(unit.id),
-                        parent=units_list,
-                        unit_type=unit.type,
-                        text=name,
-                        name=unit.name,
-                        onboard_num=unit.onboard_num,
-                        type=NodeType.UNIT,
-                    )
+                #     unit_node = AnyNode(
+                #         id=f"airframe-{unit.id}",
+                #         parent=helo_group_node,
+                #         airframe_type=unit.type,
+                #         callsign=unit.callsign_dict['name'],
+                #         type=NodeType.UNIT,
+                #         state={"opened": True},
+                #         text=unit.name,
+                #         onboard_num=unit.onboard_num,
+                #     )
+                # for point_index, point in enumerate(helo_group.points):
+                #     point_node = AnyNode(
+                #         id=f'{helo_group_name}-wp-{point_index:02d}',
+                #         parent=helo_group_node,
+                #         latlng=point.position.latlng().format_dms(),
+                #         lat=point.position.latlng()._format_component(
+                #             point.position.latlng().lat, ("N", "S"), 2
+                #         ),
+                #         long=point.position.latlng()._format_component(
+                #             point.position.latlng().lng, ("E", "W"), 2
+                #         ),
+                #         waypoint_type=point.type,
+                #         alt=point.alt,
+                #         ETA=(mission.start_time + timedelta(seconds=point.ETA))
+                #         .time()
+                #         .isoformat(),
+                #         type=NodeType.WAYPOINT,
+                #         action=point.action.name,
+                #         text=f"wp {point_index} - {point.action.value}",
+                #     )
+    print(RenderTree(root))
+    return root
 
-    return rootNode
+
+def create_airframe_group_node(airframe_group, parent_node):
+    return AnyNode(
+        id=airframe_group.name,
+        frequency=airframe_group.frequency,
+        task=airframe_group.task,
+        type=NodeType.FLIGHT,
+        parent=parent_node,
+        state={"opened": True},
+        text=airframe_group.name,
+    )
+
+
+def create_airframe_unit_node(unit, parent_node):
+    return AnyNode(
+        id=f"airframe-{unit.id}",
+        parent=parent_node,
+        airframe_type=unit.type,
+        callsign=unit.callsign_dict['name'],
+        type=NodeType.UNIT,
+        state={"opened": True},
+        text=unit.name,
+        onboard_num=unit.onboard_num,
+    )
+
+
+def create_waypoint_nodes(waypoints, parent_node, start_time):
+    nodes = []
+    parent_name = parent_node.id
+    for point_index, point in enumerate(waypoints):
+        nodes.append(
+            AnyNode(
+                id=f'{parent_name}-wp-{point_index:02d}',
+                parent=parent_node,
+                latlng=point.position.latlng().format_dms(),
+                lat=point.position.latlng()._format_component(
+                    point.position.latlng().lat, ("N", "S"), 2
+                ),
+                long=point.position.latlng()._format_component(
+                    point.position.latlng().lng, ("E", "W"), 2
+                ),
+                waypoint_type=point.type,
+                alt=point.alt,
+                ETA=(start_time + timedelta(seconds=point.ETA)).time().isoformat(),
+                type=NodeType.WAYPOINT,
+                action=point.action.name,
+                text=f"wp {point_index} - {point.action.value}",
+            )
+        )
+    return nodes
