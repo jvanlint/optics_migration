@@ -76,15 +76,6 @@ def parse_mission_to_tree(mission: Mission):
             for helo_group in human_helo_groups:
                 helo_group_node = create_airframe_group_node(helo_group, country_node)
 
-                # helo_group_name = helo_group.name
-                # helo_group_node = AnyNode(
-                #     id=helo_group.name,
-                #     frequency=helo_group.frequency,
-                #     task=helo_group.task,
-                #     type=NodeType.FLIGHT,
-                #     parent=country_node,
-                #     state={"opened": True},
-                # )
                 human_units = [unit for unit in helo_group.units if unit.is_human()]
                 for unit in human_units:
                     airframe_unit_node = create_airframe_unit_node(
@@ -94,39 +85,8 @@ def parse_mission_to_tree(mission: Mission):
                 waypoint_nodes = create_waypoint_nodes(
                     helo_group.points, helo_group_node, start_time
                 )
-                # for unit in human_units:
 
-                #     unit_node = AnyNode(
-                #         id=f"airframe-{unit.id}",
-                #         parent=helo_group_node,
-                #         airframe_type=unit.type,
-                #         callsign=unit.callsign_dict['name'],
-                #         type=NodeType.UNIT,
-                #         state={"opened": True},
-                #         text=unit.name,
-                #         onboard_num=unit.onboard_num,
-                #     )
-                # for point_index, point in enumerate(helo_group.points):
-                #     point_node = AnyNode(
-                #         id=f'{helo_group_name}-wp-{point_index:02d}',
-                #         parent=helo_group_node,
-                #         latlng=point.position.latlng().format_dms(),
-                #         lat=point.position.latlng()._format_component(
-                #             point.position.latlng().lat, ("N", "S"), 2
-                #         ),
-                #         long=point.position.latlng()._format_component(
-                #             point.position.latlng().lng, ("E", "W"), 2
-                #         ),
-                #         waypoint_type=point.type,
-                #         alt=point.alt,
-                #         ETA=(mission.start_time + timedelta(seconds=point.ETA))
-                #         .time()
-                #         .isoformat(),
-                #         type=NodeType.WAYPOINT,
-                #         action=point.action.name,
-                #         text=f"wp {point_index} - {point.action.value}",
-                #     )
-    print(RenderTree(root))
+    # print(RenderTree(root))
     return root
 
 
