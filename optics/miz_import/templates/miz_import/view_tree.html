@@ -1,0 +1,111 @@
+{% extends "v2/base.html" %}
+
+{% block title %} DCS Mission File Import {% endblock %}
+{% load django_htmx %}
+{% load static %}
+
+{% block stylesheets %}
+
+<!-- Specific Page CSS -->
+<!-- inside block stylesheets on view_tree.html-->
+<link href="{% static 'miz_import/css/jstree/themes/default/style.min.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/vendors/@coreui/icons/css/free.min.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="container-fluid" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div id="tree">
+    <p>Tree should be here</p>
+  </div>
+
+  <button class="button" hx-post="import_to_package" hx-trigger="click"
+    hx-vals='js:{selected: JSON.stringify($("#tree").jstree("get_top_checked"))}'>
+    Import Selected</button>
+
+</div>
+<!-- Start Tree Data -->
+{{ tree | json_script:"tree_data" }}
+<!--  End Tree Data  -->
+
+
+{% endblock content %}
+
+{% block javascripts %}
+<script src="{% static 'miz_import/js/jstree/jstree.min.js' %}"></script>
+
+<script>
+  var tree = $('#tree').jstree({
+    'core': {
+      'data': tree_data(),
+      "themes": {
+        "icons": true,
+        "stripes": true,
+      }
+    },
+    'plugins': [
+      'types',
+      'checkbox'
+    ],
+    'checkbox': {
+      'keep_selected_style': true,
+    },
+
+    'types': {
+      "root": {
+        "icon": "cil-globe-alt"
+      },
+      "coalition": {
+        "icon": "cil-globe-alt"
+      },
+      'country': {
+        'icon': 'cil-globe-alt'
+      },
+      'flights': {
+        'icon': 'cil-send'
+      },
+      'flight': {
+        'icon': 'cil-send'
+      },
+      'waypoints': {
+        'icon': 'cil-location-pin'
+      },
+      'waypoint': {
+        'icon': 'cil-location-pin'
+      },
+      'units': {
+        'icon': 'cil-airplane-mode'
+      },
+      'unit': {
+        'icon': 'cil-airplane-mode'
+      }
+    }
+  });
+  /* beautify ignore:start */
+  /* - Required to stop mangling of the variable brackets*/
+
+  function tree_data() {
+    return {{ tree | safe }};
+  };
+
+  /* beautify ignore:end */
+
+  function safe_tree_data() {
+    if ($('#tree_data').length > 0) {
+      const tree_data = JSON.parse(document.getElementById('tree_data').textContent);
+      return JSON.parse(tree_data);
+    }
+  };
+
+
+
+  function return_checked_as_JSON() {
+    var sel = JSON.stringify($('#tree').jstree('get_checked', false));
+    return sel;
+  }
+
+</script>
+<!-- https://adamj.eu/tech/2020/02/18/safely-including-data-for-javascript-in-a-django-template -->
+
+{% endblock javascripts %}

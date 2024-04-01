@@ -13,22 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import RedirectView
+from optics.miz_import import urls as mission_import_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('optics/', include('optics.opticsapp.urls')),
+    path("admin/", admin.site.urls),
+    path("optics/", include("optics.opticsapp.urls")),
+    # Mission import
+    path("mission_import/", include(mission_import_urls)),
     # Account management is done by allauth
     path("accounts/", include("allauth.urls")),
 ]
 
 # Add URL maps to redirect the base URL to our application
 urlpatterns += [
-    path('', RedirectView.as_view(url='optics/', permanent=True)),
+    path("", RedirectView.as_view(url="optics/", permanent=True)),
 ]
 
 # Use static() to add url mapping to serve static files during development (only)
@@ -36,5 +40,4 @@ urlpatterns += [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+
 from decouple import config
 from django.contrib.messages import constants as messages
 
@@ -76,12 +77,15 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "collectfast",
     "django.contrib.staticfiles",
     "django.contrib.sites",
     # Maintenance Mode app
     "maintenance_mode",
     # OPTICS App
     "optics.opticsapp.apps.OpticsappConfig",
+    # Miz Import
+    "optics.miz_import",
     # Third Party
     "allauth",
     "allauth.account",
@@ -97,6 +101,13 @@ INSTALLED_APPS = [
     "request",
 ]
 
+DEV_APPS = [
+    'django_extensions',
+]
+if DEBUG:
+    INSTALLED_APPS.extend(DEV_APPS)
+    INSTALLED_APPS.remove("request")
+
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
@@ -107,8 +118,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Whitenoise not required when S3 is serving the static files.
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
     # Add the htmx middleware:
@@ -118,6 +127,10 @@ MIDDLEWARE = [
     # Maintenance Mode Middleware
     "maintenance_mode.middleware.MaintenanceModeMiddleware",
 ]
+
+if DEBUG:
+    # remove the request logging middleware to speed up server start
+    MIDDLEWARE.remove("request.middleware.RequestMiddleware")
 
 ROOT_URLCONF = "optics.urls"
 
@@ -143,17 +156,28 @@ WSGI_APPLICATION = "optics.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("PGDATABASE"),
-        "USER": config("PGUSER"),
-        "PASSWORD": config("PGPASSWORD"),
-        "HOST": config("PGHOST"),
-        "PORT": config("PGPORT"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config("LOCAL_PGDATABASE"),
+            "USER": config("LOCAL_PGUSER"),
+            "PASSWORD": config("LOCAL_PGPASSWORD"),
+            "HOST": config("LOCAL_PGHOST"),
+            "PORT": config("LOCAL_PGPORT"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config("PGDATABASE"),
+            "USER": config("PGUSER"),
+            "PASSWORD": config("PGPASSWORD"),
+            "HOST": config("PGHOST"),
+            "PORT": config("PGPORT"),
+        }
+    }
 
 
 # Password validation
@@ -188,12 +212,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Collectfast
+# https://github.com/antonagestam/collectfast/
+# STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "optics/miz_import/static/miz_import"),
+    os.path.join(BASE_DIR, "static"),
+]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Base url to serve media files

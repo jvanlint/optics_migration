@@ -87,3 +87,5 @@ local_settings.py
 media/
 .env
 db.json
+.env prod
+.env staging
