@@ -29,6 +29,63 @@ class NodeType(str, Enum):
     UNIT = "unit"
 
 
+def add_to_package(full_tree: AnyNode, selected_items: list, package: Package):
+    '''Entrypoint for importing assets from a miz file.
+    .miz file has been parsed and stored as in a tree strucutre in full_tree.
+    selected_items contains the list of items that need to be added to the package.
+    '''
+    flight = None
+    for item in selected_items:
+        item_node = tree_search.find_by_attr(full_tree, value=item, name='id')
+        if not item_node:
+            logger.warning(f"Item {item} not found in tree")
+            continue
+        item_type = item_node.type
+        if item_type == NodeType.COALITION or item_type == NodeType.COUNTRY:
+            # Build all descendants, all flights including waypoints
+            for child in item_node.descendants:
+                if child.type == NodeType.FLIGHT:
+                    flight = build_full_flight(child)
+                    copy_flight_to_package(flight, package)
+
+        elif item_type == NodeType.FLIGHT:
+            # Build full flight including waypoints
+            flight_node = item_node
+            flight = build_full_flight(item_node)
+
+        elif item_type == NodeType.UNITS:
+            # infer and build Parent Flight
+            flight_node = item_node.parent
+            flight = build_flight(flight_node)
+            # add all the units to the flight
+            for child in item_node.children:
+                unit = create_aircraft(child)
+                unit.copyToFlight(flight)
+
+        elif item_type == NodeType.WAYPOINTS:
+            flight_node = item_node.parent
+            flight = build_flight(flight_node)
+            for child in item_node.children:
+                waypoint = create_waypoint(child)
+                waypoint.copyToFlight(flight)
+
+        elif item_type == NodeType.WAYPOINT:
+            flight_node = item_node.parent
+            flight = build_flight(flight_node)
+            waypoint = create_waypoint(item_node)
+            waypoint.copyToFlight(flight)
+
+        elif item_node.type == NodeType.UNIT:
+            flight_node = item_node.parent
+            flight = build_flight(flight_node)
+            unit = create_aircraft(item_node)
+            unit.copyToFlight(flight)
+
+        copy_flight_to_package(flight, package)
+
+    return package
+
+
 def create_waypoints(full_tree: AnyNode, waypoint_node_ids: list) -> list:
     waypoints = []
     for id in waypoint_node_ids:
@@ -88,9 +145,6 @@ def build_flight(flight_node) -> Flight:
     )
 
 
-# flight_node.name + flight_node.task
-
-
 def copy_flight_to_package(flight: Flight, package: Package) -> int:
     flight.package = package
     flight.save()
@@ -100,79 +154,3 @@ def copy_flight_to_package(flight: Flight, package: Package) -> int:
 def set_package(items: list, package: Package):
     for item in items:
         item.copyToPackage(package)
-
-
-def add_to_package(full_tree: AnyNode, selected_items: list, package: Package):
-    '''Entrypoint for importing assets from a miz file.
-    .miz file has been parsed and stored as in a tree strucutre in full_tree.
-    selected_items contains the list of items that need to be added to the package.
-    '''
-    flight = None
-    for item in selected_items:
-        item_node = tree_search.find_by_attr(full_tree, value=item, name='id')
-        if not item_node:
-            logger.warning(f"Item {item} not found in tree")
-            continue
-        item_type = item_node.type
-        if item_type == NodeType.COALITION or item_type == NodeType.COUNTRY:
-            # Build all descendants, all flights including waypoints
-            for child in item_node.descendants:
-                if child.type == NodeType.FLIGHT:
-                    flight = build_full_flight(child)
-                    copy_flight_to_package(flight, package)
-
-        elif item_type == NodeType.FLIGHT:
-            # Build full flight including waypoints
-            flight_node = item_node
-            flight = build_full_flight(item_node)
-
-        elif item_type == NodeType.UNITS:
-            # infer and build Parent Flight
-            flight_node = item_node.parent
-            flight = build_flight(flight_node)
-            # add all the units to the flight
-            for child in item_node.children:
-                unit = create_aircraft(child)
-                unit.copyToFlight(flight)
-
-        elif item_type == NodeType.WAYPOINTS:
-            flight_node = item_node.parent
-            flight = build_flight(flight_node)
-            for child in item_node.children:
-                waypoint = create_waypoint(child)
-                waypoint.copyToFlight(flight)
-
-        elif item_type == NodeType.WAYPOINT:
-            flight_node = item_node.parent
-            flight = build_flight(flight_node)
-            waypoint = create_waypoint(item_node)
-            waypoint.copyToFlight(flight)
-
-        elif item_node.type == NodeType.UNIT:
-            flight_node = item_node.parent
-            flight = build_flight(flight_node)
-            unit = create_aircraft(item_node)
-            unit.copyToFlight(flight)
-
-        copy_flight_to_package(flight, package)
-
-    return package
-
-
-# def create_units(full_tree: AnyNode, unit_node_ids: list, messages) -> list:
-#     units = []
-
-#     for id in unit_node_ids:
-#         unit_node = tree_search.find_by_attr(full_tree, id, name='id')
-#         if unit_node is not None:
-#             try:
-#                 airframe = Airframe.objects.get(dcsname__dcsname=unit_node.unit_type)
-#             except Airframe.DoesNotExist:
-#                 # Handle missing airframe
-#                 messages.error("airframe does not exist")
-#                 # TODO : return
-#                 airframe = None
-
-#             if airframe:
-#                 units.append(create_unit(full_tree, unit_node, airframe))
-#     return units
