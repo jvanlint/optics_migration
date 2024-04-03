@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         {% include 'v2/includes/head.html' %}
         {% block stylesheets %}
@@ -7,22 +8,24 @@
         {% endblock stylesheets %}
     </head>
 
-	<body class="c-app">
-		{% include 'v2/includes/sidebar.html' %}
+    <body class="c-app" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        {% include 'v2/includes/sidebar.html' %}
 
-		<div class="c-wrapper c-fixed-components">
+        <div class="c-wrapper c-fixed-components">
             {% include 'v2/includes/navigation.html' %}
-        <div class="c-body">
-            {% include 'v2/includes/messages.html' %}
-            {% block content %}
-            {% endblock content %}
-		</div>
-        <div class="footer">
-            {% include 'v2/includes/footer.html' %}
-        </div>
-		{% include 'v2/includes/scripts.html' %}
+            <div class="c-body">
+                {% include 'v2/includes/messages.html' %}
 
-		<!-- Specific Page JS goes HERE  -->
-		{% block javascripts %}{% endblock javascripts %}
-	</body>
+                {% block content %}
+                {% endblock content %}
+            </div>
+            <div class="footer">
+                {% include 'v2/includes/footer.html' %}
+            </div>
+            {% include 'v2/includes/scripts.html' %}
+
+            <!-- Specific Page JS goes HERE  -->
+            {% block javascripts %}{% endblock javascripts %}
+    </body>
+
 </html>
