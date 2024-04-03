@@ -1,7 +1,6 @@
 {% load static %}
 
 
-
 <h5>Mission Tree</h5>
 <div id="tree">
   <p>Tree should be here</p>
@@ -14,7 +13,7 @@
   function tree_data() {
     return [{{ tree | safe }}];
   };
-/* beautify ignore:end */
+  /* beautify ignore:end */
 
   htmx.onLoad(function () {
     alert('onload from view_tree');

@@ -10,9 +10,9 @@ echo
 echo "Dropping old local DB"
 dropdb  --username ${LOCAL_PGUSER} --host ${LOCAL_PGHOST} --port ${LOCAL_PGPORT} railway
 echo
-echo "creating new local DB"
-createdb --username ${LOCAL_PGUSER} --host ${LOCAL_PGHOST} --port ${LOCAL_PGPORT} railway
-echo
+# echo "creating new local DB"
+# createdb --username ${LOCAL_PGUSER} --host ${LOCAL_PGHOST} --port ${LOCAL_PGPORT} railway
+# echo
 echo "populating new local DB"
 pg_restore -d postgresql://${LOCAL_PGUSER}@${LOCAL_PGHOST}:${LOCAL_PGPORT} --create --clean  External_data.tar
 

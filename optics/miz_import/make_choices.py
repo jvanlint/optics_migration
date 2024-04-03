@@ -5,11 +5,11 @@ from dcs.planes import plane_map
 def get_flyable_aircraft():
     flyable_planes = [(id, plane) for id, plane in plane_map.items() if plane.flyable]
     flyable_helos = [(id, helo) for id, helo in helicopter_map.items() if helo.flyable]
-
-    for plane in flyable_planes:
-        print(plane[1].id)
-    for helicopter in flyable_helos:
-        print(helicopter[1].id)
+    print('id,dcsname')
+    for idx, plane in enumerate(flyable_planes, start=1):
+        print(f"{idx},{plane[0]}")
+    for idx, helicopter in enumerate(flyable_helos, start=idx + 1):
+        print(f'{idx},{helicopter[0]}')
 
 
 if __name__ == "__main__":
