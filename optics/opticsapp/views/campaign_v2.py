@@ -103,10 +103,10 @@ def campaign_add_v2(request):
             obj.modified_by = request.user
             obj.created_by = request.user
             obj.save()
-            name = form.cleaned_data.get('name')
+            campaign_name = form.cleaned_data.get('name')
             #logger.info('Campaign created.', extra={'user': request.user, 'name': "campaign name"})
             logger.info('New campaign created.', extra={
-                'name': name,
+                'campaign name': campaign_name,
                 'user': request.user
             })
             # messages.success(request, "Campaign successfully created.")
