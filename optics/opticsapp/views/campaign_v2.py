@@ -47,8 +47,7 @@ def campaigns_all(request):
 @login_required(login_url="account_login")
 def campaigns_filter(request):
     filter = request.GET.get("filter")
-    logger.info("Filtering campaigns by: " + filter)
-
+    
     if filter == "All":
         campaigns_queryset = Campaign.objects.order_by("status", "name")
     else:
@@ -59,7 +58,9 @@ def campaigns_filter(request):
     user_profile = UserProfile.objects.get(user=request.user)
 
     breadcrumbs = {"Home": ""}
-    logger.warning("Retrieved campaigns: " + str(campaigns_queryset))
+
+    logger.info("Filtering campaigns by: " + filter, extra={'retrieved_campaigns': str(campaigns_queryset)})
+    
     context = {
         "campaigns": campaigns_queryset,
         "isAdmin": user_profile.is_admin(),
@@ -104,7 +105,7 @@ def campaign_add_v2(request):
             obj.created_by = request.user
             obj.save()
             campaign_name = form.cleaned_data.get('name')
-            #logger.info('Campaign created.', extra={'user': request.user, 'name': "campaign name"})
+        
             logger.info('New campaign created.', extra={
                 'campaign name': campaign_name,
                 'user': request.user
@@ -142,6 +143,9 @@ def campaign_update_v2(request, link_id):
             obj = form.save(commit=False)
             obj.modified_by = request.user
             obj.save()
+
+            logger.info('Campaign updated.', extra={'user': request.user})
+
             # messages.success(request, "Campaign successfully updated.")
             return HttpResponseRedirect(return_url)
 
@@ -158,8 +162,11 @@ def campaign_update_v2(request, link_id):
 @login_required(login_url="account_login")
 def campaign_delete_v2(request, link_id):
     campaign = Campaign.objects.get(id=link_id)
+    campaign_name = campaign.name
 
     campaign.delete()
+
+    logger.info('Campaign deleted.', extra={'campaign_name': campaign_name, 'user': request.user})
     # messages.success(request, "Campaign successfully deleted.")
     campaigns_queryset = Campaign.objects.order_by("status", "name")
     user_profile = UserProfile.objects.get(user=request.user)
@@ -183,6 +190,7 @@ def campaign_add_comment(request):
         # Get the post object
         campaign = Campaign.objects.get(pk=campaign_id)
         campaign.comments.create(comment=comment, user=request.user)
+        logger.info('A campaign comment was added.', extra={'campaign_name': campaign.name, 'comment': comment, 'user': request.user})
 
     context = campaign_all_comments(campaign_id)
 
@@ -193,6 +201,8 @@ def campaign_delete_comment(request, link_id):
 
     campaign_id = request.GET.get("campaign_id")
     comment = Comment.objects.get(id=link_id)
+    
+    logger.info('A campaign comment was deleted.', extra={'campaign_name': campaign.name, 'comment': comment, 'user': request.user})
 
     comment.delete()
 

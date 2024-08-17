@@ -37,6 +37,7 @@ MAINTENANCE_MODE_TEMPLATE = "503.html"
 # Betterstack Token
 BETTERSTACK_TOKEN = config("BETTERSTACK_TOKEN")
 
+
 # Configure Logging
 # LOGGING = {
 #     "version": 1,
