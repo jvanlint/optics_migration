@@ -25,11 +25,12 @@ def campaigns_all(request):
     Returns:
             A rendered HTML page with context containing campaign data, whether the user is an admin and breadcrumbs.
     """
-    logger.info("Retrieving all campaigns.")
 
     campaigns_queryset = Campaign.objects.filter(
         status__name__iexact="Active"
     ).order_by("status", "name")
+
+    logger.info("Retrieved all campaigns.")
 
     user_profile = UserProfile.objects.get(user=request.user)
 
@@ -59,7 +60,7 @@ def campaigns_filter(request):
 
     breadcrumbs = {"Home": ""}
 
-    logger.info("Filtering campaigns by: " + filter, extra={'retrieved_campaigns': str(campaigns_queryset)})
+    logger.info("Filtered campaigns by: " + filter, extra={'retrieved_campaigns': str(campaigns_queryset)})
     
     context = {
         "campaigns": campaigns_queryset,
@@ -80,6 +81,8 @@ def campaign_detail_v2(request, link_id):
     breadcrumbs = {"Campaigns": reverse_lazy("campaigns"), campaign.name: ""}
 
     campaign.refresh_from_db()
+
+    logger.info("Campaign detail retrieved.", extra={'campaign_name': campaign.name})
 
     context = {
         "campaign_object": campaign,
@@ -106,7 +109,7 @@ def campaign_add_v2(request):
             obj.save()
             campaign_name = form.cleaned_data.get('name')
         
-            logger.info('New campaign created.', extra={
+            logger.info('Campaign added.', extra={
                 'campaign name': campaign_name,
                 'user': request.user
             })
@@ -144,7 +147,12 @@ def campaign_update_v2(request, link_id):
             obj.modified_by = request.user
             obj.save()
 
-            logger.info('Campaign updated.', extra={'user': request.user})
+            campaign_name = form.cleaned_data.get('name')
+        
+            logger.info('Campaign updated.', extra={
+                'campaign name': campaign_name,
+                'user': request.user
+            })
 
             # messages.success(request, "Campaign successfully updated.")
             return HttpResponseRedirect(return_url)
@@ -190,7 +198,8 @@ def campaign_add_comment(request):
         # Get the post object
         campaign = Campaign.objects.get(pk=campaign_id)
         campaign.comments.create(comment=comment, user=request.user)
-        logger.info('A campaign comment was added.', extra={'campaign_name': campaign.name, 'comment': comment, 'user': request.user})
+
+        logger.info('Campaign comment added.', extra={'campaign_name': campaign.name, 'comment': comment, 'user': request.user})
 
     context = campaign_all_comments(campaign_id)
 
@@ -202,7 +211,7 @@ def campaign_delete_comment(request, link_id):
     campaign_id = request.GET.get("campaign_id")
     comment = Comment.objects.get(id=link_id)
     
-    logger.info('A campaign comment was deleted.', extra={'campaign_name': campaign.name, 'comment': comment, 'user': request.user})
+    logger.info('Campaign comment deleted.', extra={'comment': comment, 'user': request.user})
 
     comment.delete()
 
@@ -216,6 +225,8 @@ def campaign_edit_comment(request, link_id):
 
     campaign_id = request.GET.get("campaign_id")
     campaign = Campaign.objects.get(id=campaign_id)
+
+    logger.info('Campaign comment edited.', extra={'comment': comment, 'user': request.user})
 
     context = {
         "comment": comment,
