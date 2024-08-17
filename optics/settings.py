@@ -56,7 +56,7 @@ LOGGING = {
     'handlers': {
         'logtail': {
             'class': 'logtail.LogtailHandler',
-            'source_token': "G6dFmHDdcLGSWzwTvmrg5D4o",
+            'source_token': config("BETTERSTACK_TOKEN"),
         },
     },
     "loggers": {
