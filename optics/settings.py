@@ -34,6 +34,9 @@ print(f"Maintenance Mode set to: {config('MAINTENANCE_MODE')}")
 MAINTENANCE_MODE = config("MAINTENANCE_MODE", default=False, cast=bool)
 MAINTENANCE_MODE_TEMPLATE = "503.html"
 
+# Betterstack Token
+BETTERSTACK_TOKEN = config("BETTERSTACK_TOKEN")
+
 # Configure Logging
 # LOGGING = {
 #     "version": 1,
@@ -56,7 +59,7 @@ LOGGING = {
     'handlers': {
         'logtail': {
             'class': 'logtail.LogtailHandler',
-            'source_token': config("BETTERSTACK_TOKEN"),
+            'source_token': BETTERSTACK_TOKEN,
         },
     },
     "loggers": {
