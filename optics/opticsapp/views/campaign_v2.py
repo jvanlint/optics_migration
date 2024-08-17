@@ -103,7 +103,8 @@ def campaign_add_v2(request):
             obj.modified_by = request.user
             obj.created_by = request.user
             obj.save()
-            logger.info('Campaign Added', extra={'name': obj.name ,'user': request.user})
+            name = form.cleaned_data.get('name')
+            logger.info('Campaign created.', extra={'name': name ,'user': request.user})
             # messages.success(request, "Campaign successfully created.")
             return HttpResponseRedirect(reverse_lazy("campaigns"))
     else:
