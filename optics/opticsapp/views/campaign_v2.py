@@ -108,10 +108,6 @@ def campaign_add_v2(request):
             return HttpResponseRedirect(reverse_lazy("campaigns"))
     else:
         form = CampaignForm(initial={"creator": request.user.id})
-    
-    
-})
-
 
     context = {
         "form": form,
