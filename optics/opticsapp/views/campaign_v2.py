@@ -47,7 +47,7 @@ def campaigns_all(request):
 @login_required(login_url="account_login")
 def campaigns_filter(request):
     filter = request.GET.get("filter")
-    logging.info("Filtering campaigns by: " + filter)
+    logger.info("Filtering campaigns by: " + filter)
 
     if filter == "All":
         campaigns_queryset = Campaign.objects.order_by("status", "name")
@@ -59,7 +59,7 @@ def campaigns_filter(request):
     user_profile = UserProfile.objects.get(user=request.user)
 
     breadcrumbs = {"Home": ""}
-    logging.warning("Retrieved campaigns: " + str(campaigns_queryset))
+    logger.warning("Retrieved campaigns: " + str(campaigns_queryset))
     context = {
         "campaigns": campaigns_queryset,
         "isAdmin": user_profile.is_admin(),
@@ -103,10 +103,15 @@ def campaign_add_v2(request):
             obj.modified_by = request.user
             obj.created_by = request.user
             obj.save()
+            logger.info('Campaign Added', extra={'name': obj.name ,'user': request.user})
             # messages.success(request, "Campaign successfully created.")
             return HttpResponseRedirect(reverse_lazy("campaigns"))
     else:
         form = CampaignForm(initial={"creator": request.user.id})
+    
+    
+})
+
 
     context = {
         "form": form,
