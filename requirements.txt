@@ -35,3 +35,6 @@ django-maintenance-mode
 
 # Request stats
 django-request
+
+# BetterStack Logging
+pip3 install logtail-python
