@@ -1,4 +1,7 @@
 import os
+import logging
+import time
+
 from django.conf import settings
 from django.shortcuts import render
 
@@ -23,20 +26,37 @@ from ..models import (
 )
 from ..forms import MissionForm, MissionFileForm, MissionImageryForm
 
+logger = logging.getLogger(__name__)
+
 # ---------------- Mission -------------------------
 
 
 @login_required(login_url="account_login")
 def mission_v2(request, link_id):
-    mission_queryset = Mission.objects.get(id=link_id)
-    mission_files_queryset = mission_queryset.missionfile_set.all()
-    comments = mission_queryset.comments.all()
-    packages = mission_queryset.package_set.all()
-    targets = mission_queryset.target_set.all()
-    threats = mission_queryset.threat_set.all()
-    supports = mission_queryset.support_set.all()
-    imagery = mission_queryset.missionimagery_set.all()
-    user_profile = UserProfile.objects.get(user=request.user)
+    start_time = time.time()
+    logger.info(f"Retrieving mission object.[{link_id}]")    
+
+    try:
+        mission_queryset = Mission.objects.get(id=link_id)
+        mission_files_queryset = mission_queryset.missionfile_set.all()
+        comments = mission_queryset.comments.all()
+        packages = mission_queryset.package_set.all()
+        targets = mission_queryset.target_set.all()
+        threats = mission_queryset.threat_set.all()
+        supports = mission_queryset.support_set.all()
+        imagery = mission_queryset.missionimagery_set.all()
+        user_profile = UserProfile.objects.get(user=request.user)
+    except Mission.DoesNotExist:
+        logger.error("Mission object does not exist.", extra={"mission_id": link_id})
+        # Handle the case where the mission does not exist
+        return HttpResponse(status=404)
+    except Exception as e:
+        logger.error(f"An error occurred: {e}", extra={"mission_id": link_id})
+        return HttpResponse(status=500)
+
+    end_time = time.time()
+    duration = end_time - start_time
+    logger.info(f"Retrieved mission object [{link_id}] in {duration:.2f} seconds.", extra={"mission_id": mission_queryset.id, "mission_name": mission_queryset.name, "discord_msg_id": mission_queryset.discord_msg_id, "discord_api_id": mission_queryset.discord_api_id})
 
     form = MissionFileForm(
         initial={"mission": mission_queryset, "uploaded_by": request.user.id}
