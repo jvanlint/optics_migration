@@ -56,7 +56,7 @@ def mission_v2(request, link_id):
 
     end_time = time.time()
     duration = end_time - start_time
-    logger.info(f"Retrieved mission object [{link_id}] in {duration:.2f} seconds.", extra={"mission_id": mission_queryset.id, "mission_name": mission_queryset.name, "discord_msg_id": mission_queryset.discord_msg_id, "discord_api_id": mission_queryset.discord_api_id})
+    logger.info(f"Retrieved mission object [{link_id} - {mission_queryset.name}] in {duration:.2f} seconds.", extra={"mission_id": mission_queryset.id, "mission_name": mission_queryset.name, "discord_msg_id": mission_queryset.discord_msg_id, "discord_api_id": mission_queryset.discord_api_id})
 
     form = MissionFileForm(
         initial={"mission": mission_queryset, "uploaded_by": request.user.id}
@@ -365,6 +365,8 @@ def mission_imagery_delete_v2(request, link_id):
 
 @login_required(login_url="account_login")
 def mission_signup_v2(request, link_id):  # link_id is the mission ID
+    logger.info(f"{request.user} has launched signup for [{link_id}]")
+
     mission = Mission.objects.get(id=link_id)
     comments = mission.comments.all()
     packages = mission.package_set.all()
@@ -439,6 +441,7 @@ def mission_signup_v2(request, link_id):  # link_id is the mission ID
 
 @login_required(login_url="account_login")
 def mission_signup_update(request, link_id, seat_id):
+    
     returnURL = request.GET.get("returnUrl")
     aircraft = Aircraft.objects.get(pk=link_id)
     if seat_id == 1:
@@ -447,6 +450,8 @@ def mission_signup_update(request, link_id, seat_id):
         aircraft.rio_wso = request.user
 
     aircraft.save()
+
+    logger.info(f"{request.user} has signed up for [{aircraft.type.name}] in mission [{aircraft.flight.package.mission.name}]")
 
     return HttpResponseRedirect(returnURL)
 
