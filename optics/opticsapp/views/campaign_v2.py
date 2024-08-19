@@ -1,6 +1,7 @@
 # For deleting physical files (like images) when campaign is deleted.
 import os
 import logging
+import time
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -73,21 +74,35 @@ def campaigns_filter(request):
 
 @login_required(login_url="account_login")
 def campaign_detail_v2(request, link_id):
-    campaign = Campaign.objects.get(id=link_id)
-    missions = campaign.mission_set.all().order_by("number")
-    comments = campaign.comments.all()
-    user_profile = UserProfile.objects.get(user=request.user)
+    start_time = time.time()
+    logger.info(f"Retrieving campaign object.[{link_id}]")
 
-    breadcrumbs = {"Campaigns": reverse_lazy("campaigns"), campaign.name: ""}
+    try:
+        campaign = Campaign.objects.get(id=link_id)
+        missions = campaign.mission_set.all().order_by("number")
+        comments = campaign.comments.all()
+        user_profile = UserProfile.objects.get(user=request.user)
+        isAdmin = user_profile.is_admin()
 
-    campaign.refresh_from_db()
+        breadcrumbs = {"Campaigns": reverse_lazy("campaigns"), campaign.name: ""}
+        campaign.refresh_from_db()
 
-    logger.info("Campaign detail retrieved.", extra={'campaign_name': campaign.name})
+        end_time = time.time()
+        duration = end_time - start_time
+        logger.info(f"Retrieved campaign object [{link_id} - {campaign.name}] in {duration:.2f} seconds.", extra={"campaign_id": link_id, "campaign_name": campaign.name, "user": request.user, "isAdmin": user_profile.is_admin()})
+    except Campaign.DoesNotExist:
+        campaign = None
+        missions= None
+        comments = None
+        user_profile = None
+        isAdmin = False
+        breadcrumbs = {"Campaigns": reverse_lazy("campaigns")}
+        logger.info(f"Campaign object with [{link_id}] does not exist.")
 
     context = {
         "campaign_object": campaign,
         "mission_object": missions,
-        "isAdmin": user_profile.is_admin(),
+        "isAdmin": isAdmin,
         "comments": comments,
         "breadcrumbs": breadcrumbs,
     }

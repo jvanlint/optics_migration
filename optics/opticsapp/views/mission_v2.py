@@ -47,7 +47,7 @@ def mission_v2(request, link_id):
         imagery = mission_queryset.missionimagery_set.all()
         user_profile = UserProfile.objects.get(user=request.user)
     except Mission.DoesNotExist:
-        logger.error("Mission object does not exist.", extra={"mission_id": link_id})
+        logger.error(f"Mission object [{link_id}]does not exist.", extra={"mission_id": link_id})
         # Handle the case where the mission does not exist
         return HttpResponse(status=404)
     except Exception as e:
