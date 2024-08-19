@@ -36,6 +36,9 @@ def mission_v2(request, link_id):
     start_time = time.time()
     logger.info(f"Retrieving mission object.[{link_id}]")    
 
+    user_profile = UserProfile.objects.get(user=request.user)
+    isAdmin = user_profile.is_admin()
+
     try:
         mission_queryset = Mission.objects.get(id=link_id)
         mission_files_queryset = mission_queryset.missionfile_set.all()
@@ -45,30 +48,40 @@ def mission_v2(request, link_id):
         threats = mission_queryset.threat_set.all()
         supports = mission_queryset.support_set.all()
         imagery = mission_queryset.missionimagery_set.all()
-        user_profile = UserProfile.objects.get(user=request.user)
+
+        breadcrumbs = {
+            "Campaigns": reverse("campaigns"),
+            mission_queryset.campaign.name: reverse(
+                "campaign_detail_v2", args=(mission_queryset.campaign.id,)
+            ),
+            mission_queryset.name: "",
+        }
+
+        form = MissionFileForm(
+            initial={"mission": mission_queryset, "uploaded_by": request.user.id}
+        )
+
+        end_time = time.time()
+        duration = end_time - start_time
+        logger.info(f"Retrieved mission object [{link_id} - {mission_queryset.name}] in {duration:.2f} seconds.", extra={"mission_id": mission_queryset.id, "mission_name": mission_queryset.name, "discord_msg_id": mission_queryset.discord_msg_id, "discord_api_id": mission_queryset.discord_api_id})
     except Mission.DoesNotExist:
-        logger.error(f"Mission object [{link_id}]does not exist.", extra={"mission_id": link_id})
-        # Handle the case where the mission does not exist
-        return HttpResponse(status=404)
+        mission_queryset = None
+        mission_files_queryset = None
+        comments = None
+        packages = None
+        targets = None
+        threats = None
+        supports = None
+        imagery = None
+        form = None
+        breadcrumbs = {
+        "Campaigns": reverse("campaigns"),
+        "Mission": 'Not found'}
+        logger.error(f"Mission object [{link_id}]does not exist.", extra={"user": user_profile.user})
+        #return HttpResponse(status=404)
     except Exception as e:
         logger.error(f"An error occurred: {e}", extra={"mission_id": link_id})
         return HttpResponse(status=500)
-
-    end_time = time.time()
-    duration = end_time - start_time
-    logger.info(f"Retrieved mission object [{link_id} - {mission_queryset.name}] in {duration:.2f} seconds.", extra={"mission_id": mission_queryset.id, "mission_name": mission_queryset.name, "discord_msg_id": mission_queryset.discord_msg_id, "discord_api_id": mission_queryset.discord_api_id})
-
-    form = MissionFileForm(
-        initial={"mission": mission_queryset, "uploaded_by": request.user.id}
-    )
-
-    breadcrumbs = {
-        "Campaigns": reverse("campaigns"),
-        mission_queryset.campaign.name: reverse(
-            "campaign_detail_v2", args=(mission_queryset.campaign.id,)
-        ),
-        mission_queryset.name: "",
-    }
 
     context = {
         "mission_object": mission_queryset,
@@ -78,7 +91,7 @@ def mission_v2(request, link_id):
         "support_object": supports,
         "imagery_object": imagery,
         "mission_files": mission_files_queryset,
-        "isAdmin": user_profile.is_admin(),
+        "isAdmin": isAdmin,
         "comments": comments,
         "file_form": form,
         "breadcrumbs": breadcrumbs,

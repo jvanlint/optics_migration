@@ -77,27 +77,28 @@ def campaign_detail_v2(request, link_id):
     start_time = time.time()
     logger.info(f"Retrieving campaign object.[{link_id}]")
 
+    user_profile = UserProfile.objects.get(user=request.user)
+    isAdmin = user_profile.is_admin()
+
     try:
         campaign = Campaign.objects.get(id=link_id)
         missions = campaign.mission_set.all().order_by("number")
         comments = campaign.comments.all()
-        user_profile = UserProfile.objects.get(user=request.user)
-        isAdmin = user_profile.is_admin()
-
         breadcrumbs = {"Campaigns": reverse_lazy("campaigns"), campaign.name: ""}
         campaign.refresh_from_db()
 
         end_time = time.time()
         duration = end_time - start_time
-        logger.info(f"Retrieved campaign object [{link_id} - {campaign.name}] in {duration:.2f} seconds.", extra={"campaign_id": link_id, "campaign_name": campaign.name, "user": request.user, "isAdmin": user_profile.is_admin()})
+        logger.info(f"Retrieved campaign object [{link_id} - {campaign.name}] in {duration:.2f} seconds.", extra={"campaign_id": link_id, "campaign_name": campaign.name, "user": request.user, "isAdmin": isAdmin})
     except Campaign.DoesNotExist:
         campaign = None
         missions= None
         comments = None
-        user_profile = None
-        isAdmin = False
         breadcrumbs = {"Campaigns": reverse_lazy("campaigns")}
-        logger.info(f"Campaign object with [{link_id}] does not exist.")
+        logger.error(f"Campaign object with [{link_id}] does not exist.", extra={"user": user_profile.user})
+    except Exception as e:
+        logger.error(f"An error occurred: {e}", extra={"campaign_id": link_id})
+        return HttpResponse(status=500)
 
     context = {
         "campaign_object": campaign,
