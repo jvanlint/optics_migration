@@ -1,30 +1,26 @@
-import os
 import logging
+import os
 import time
 
 from django.conf import settings
-from django.shortcuts import render
-
 from django.contrib.auth.decorators import login_required
-
-from django.http import HttpResponse, HttpResponseRedirect
-
-from django.urls import reverse
-
 from django.core import serializers
 from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
 
+from ..forms import MissionFileForm, MissionForm, MissionImageryForm
 from ..models import (
-    Campaign,
-    Mission,
-    MissionImagery,
-    UserProfile,
-    MissionFile,
-    Comment,
-    Package,
     Aircraft,
+    Campaign,
+    Comment,
+    Mission,
+    MissionFile,
+    MissionImagery,
+    Package,
+    UserProfile,
 )
-from ..forms import MissionForm, MissionFileForm, MissionImageryForm
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +30,7 @@ logger = logging.getLogger(__name__)
 @login_required(login_url="account_login")
 def mission_v2(request, link_id):
     start_time = time.time()
-    logger.info(f"Retrieving mission object.[{link_id}]")    
+    logger.info(f"Retrieving mission object.[{link_id}]")
 
     user_profile = UserProfile.objects.get(user=request.user)
     isAdmin = user_profile.is_admin()
@@ -63,7 +59,15 @@ def mission_v2(request, link_id):
 
         end_time = time.time()
         duration = end_time - start_time
-        logger.info(f"Retrieved mission object [{link_id} - {mission_queryset.name}] in {duration:.2f} seconds.", extra={"mission_id": mission_queryset.id, "mission_name": mission_queryset.name, "discord_msg_id": mission_queryset.discord_msg_id, "discord_api_id": mission_queryset.discord_api_id})
+        logger.info(
+            f"Retrieved mission object [{link_id} - {mission_queryset.name}] in {duration:.2f} seconds.",
+            extra={
+                "mission_id": mission_queryset.id,
+                "mission_name": mission_queryset.name,
+                "discord_msg_id": mission_queryset.discord_msg_id,
+                "discord_api_id": mission_queryset.discord_api_id,
+            },
+        )
     except Mission.DoesNotExist:
         mission_queryset = None
         mission_files_queryset = None
@@ -74,11 +78,12 @@ def mission_v2(request, link_id):
         supports = None
         imagery = None
         form = None
-        breadcrumbs = {
-        "Campaigns": reverse("campaigns"),
-        "Mission": 'Not found'}
-        logger.error(f"Mission object [{link_id}]does not exist.", extra={"user": user_profile.user})
-        #return HttpResponse(status=404)
+        breadcrumbs = {"Campaigns": reverse("campaigns"), "Mission": "Not found"}
+        logger.error(
+            f"Mission object [{link_id}]does not exist.",
+            extra={"user": user_profile.user},
+        )
+        # return HttpResponse(status=404)
     except Exception as e:
         logger.error(f"An error occurred: {e}", extra={"mission_id": link_id})
         return HttpResponse(status=500)
@@ -454,7 +459,7 @@ def mission_signup_v2(request, link_id):  # link_id is the mission ID
 
 @login_required(login_url="account_login")
 def mission_signup_update(request, link_id, seat_id):
-    
+
     returnURL = request.GET.get("returnUrl")
     aircraft = Aircraft.objects.get(pk=link_id)
     if seat_id == 1:
@@ -464,7 +469,9 @@ def mission_signup_update(request, link_id, seat_id):
 
     aircraft.save()
 
-    logger.info(f"{request.user} has signed up for [{aircraft.type.name}] in mission [{aircraft.flight.package.mission.name}]")
+    logger.info(
+        f"{request.user} has signed up for [{aircraft.type.name}] in mission [{aircraft.flight.package.mission.name}]"
+    )
 
     return HttpResponseRedirect(returnURL)
 

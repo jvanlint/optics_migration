@@ -1,6 +1,6 @@
 # For deleting physical files (like images) when campaign is deleted.
-import os
 import logging
+import os
 import time
 
 from django.conf import settings
@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 
 from ..forms import CampaignForm
-from ..models import Campaign, UserProfile, Comment
+from ..models import Campaign, Comment, UserProfile
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ def campaigns_all(request):
 @login_required(login_url="account_login")
 def campaigns_filter(request):
     filter = request.GET.get("filter")
-    
+
     if filter == "All":
         campaigns_queryset = Campaign.objects.order_by("status", "name")
     else:
@@ -61,8 +61,11 @@ def campaigns_filter(request):
 
     breadcrumbs = {"Home": ""}
 
-    logger.info("Filtered campaigns by: " + filter, extra={'retrieved_campaigns': str(campaigns_queryset)})
-    
+    logger.info(
+        "Filtered campaigns by: " + filter,
+        extra={"retrieved_campaigns": str(campaigns_queryset)},
+    )
+
     context = {
         "campaigns": campaigns_queryset,
         "isAdmin": user_profile.is_admin(),
@@ -89,13 +92,24 @@ def campaign_detail_v2(request, link_id):
 
         end_time = time.time()
         duration = end_time - start_time
-        logger.info(f"Retrieved campaign object [{link_id} - {campaign.name}] in {duration:.2f} seconds.", extra={"campaign_id": link_id, "campaign_name": campaign.name, "user": request.user, "isAdmin": isAdmin})
+        logger.info(
+            f"Retrieved campaign object [{link_id} - {campaign.name}] in {duration:.2f} seconds.",
+            extra={
+                "campaign_id": link_id,
+                "campaign_name": campaign.name,
+                "user": request.user,
+                "isAdmin": isAdmin,
+            },
+        )
     except Campaign.DoesNotExist:
         campaign = None
-        missions= None
+        missions = None
         comments = None
         breadcrumbs = {"Campaigns": reverse_lazy("campaigns")}
-        logger.error(f"Campaign object with [{link_id}] does not exist.", extra={"user": user_profile.user})
+        logger.error(
+            f"Campaign object with [{link_id}] does not exist.",
+            extra={"user": user_profile.user},
+        )
     except Exception as e:
         logger.error(f"An error occurred: {e}", extra={"campaign_id": link_id})
         return HttpResponse(status=500)
@@ -123,12 +137,12 @@ def campaign_add_v2(request):
             obj.modified_by = request.user
             obj.created_by = request.user
             obj.save()
-            campaign_name = form.cleaned_data.get('name')
-        
-            logger.info('Campaign added.', extra={
-                'campaign name': campaign_name,
-                'user': request.user
-            })
+            campaign_name = form.cleaned_data.get("name")
+
+            logger.info(
+                "Campaign added.",
+                extra={"campaign name": campaign_name, "user": request.user},
+            )
             # messages.success(request, "Campaign successfully created.")
             return HttpResponseRedirect(reverse_lazy("campaigns"))
     else:
@@ -163,12 +177,12 @@ def campaign_update_v2(request, link_id):
             obj.modified_by = request.user
             obj.save()
 
-            campaign_name = form.cleaned_data.get('name')
-        
-            logger.info('Campaign updated.', extra={
-                'campaign name': campaign_name,
-                'user': request.user
-            })
+            campaign_name = form.cleaned_data.get("name")
+
+            logger.info(
+                "Campaign updated.",
+                extra={"campaign name": campaign_name, "user": request.user},
+            )
 
             # messages.success(request, "Campaign successfully updated.")
             return HttpResponseRedirect(return_url)
@@ -190,7 +204,10 @@ def campaign_delete_v2(request, link_id):
 
     campaign.delete()
 
-    logger.info('Campaign deleted.', extra={'campaign_name': campaign_name, 'user': request.user})
+    logger.info(
+        "Campaign deleted.",
+        extra={"campaign_name": campaign_name, "user": request.user},
+    )
     # messages.success(request, "Campaign successfully deleted.")
     campaigns_queryset = Campaign.objects.order_by("status", "name")
     user_profile = UserProfile.objects.get(user=request.user)
@@ -215,7 +232,14 @@ def campaign_add_comment(request):
         campaign = Campaign.objects.get(pk=campaign_id)
         campaign.comments.create(comment=comment, user=request.user)
 
-        logger.info('Campaign comment added.', extra={'campaign_name': campaign.name, 'comment': comment, 'user': request.user})
+        logger.info(
+            "Campaign comment added.",
+            extra={
+                "campaign_name": campaign.name,
+                "comment": comment,
+                "user": request.user,
+            },
+        )
 
     context = campaign_all_comments(campaign_id)
 
@@ -226,8 +250,10 @@ def campaign_delete_comment(request, link_id):
 
     campaign_id = request.GET.get("campaign_id")
     comment = Comment.objects.get(id=link_id)
-    
-    logger.info('Campaign comment deleted.', extra={'comment': comment, 'user': request.user})
+
+    logger.info(
+        "Campaign comment deleted.", extra={"comment": comment, "user": request.user}
+    )
 
     comment.delete()
 
@@ -242,7 +268,9 @@ def campaign_edit_comment(request, link_id):
     campaign_id = request.GET.get("campaign_id")
     campaign = Campaign.objects.get(id=campaign_id)
 
-    logger.info('Campaign comment edited.', extra={'comment': comment, 'user': request.user})
+    logger.info(
+        "Campaign comment edited.", extra={"comment": comment, "user": request.user}
+    )
 
     context = {
         "comment": comment,
