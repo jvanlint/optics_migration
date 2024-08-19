@@ -107,7 +107,7 @@ def campaign_detail_v2(request, link_id):
         comments = None
         breadcrumbs = {"Campaigns": reverse_lazy("campaigns")}
         logger.error(
-            f"Campaign object with [{link_id}] does not exist.",
+            f"Campaign object [{link_id}] does not exist.",
             extra={"user": user_profile.user},
         )
     except Exception as e:

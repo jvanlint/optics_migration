@@ -66,6 +66,8 @@ def mission_v2(request, link_id):
                 "mission_name": mission_queryset.name,
                 "discord_msg_id": mission_queryset.discord_msg_id,
                 "discord_api_id": mission_queryset.discord_api_id,
+                "user": request.user,
+                "isAdmin": isAdmin,
             },
         )
     except Mission.DoesNotExist:
