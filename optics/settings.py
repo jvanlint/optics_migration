@@ -309,7 +309,7 @@ ACCOUNT_RATE_LIMITS = {
 }
 
 ACCOUNT_SIGNUP_REDIRECT_URL = LOGIN_REDIRECT_URL
-ACCOUNT_EMAIL_VERIFICATION = None  # change in production?
+ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = (
     True  # Allows automatic login after confirming email
 )
