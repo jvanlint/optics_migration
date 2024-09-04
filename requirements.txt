@@ -21,8 +21,8 @@ crispy-bootstrap4
 xhtml2pdf
 
 django-allauth
+PyJWT
 django-htmx
-
 tzdata
 
 # S3 required packages
