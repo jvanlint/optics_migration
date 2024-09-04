@@ -35,6 +35,9 @@ django-maintenance-mode
 # Request stats
 django-request
 
+#Run Lua code in Python
+lupa
+
 # Need by miz importer app
 anytree
 # pydcs
