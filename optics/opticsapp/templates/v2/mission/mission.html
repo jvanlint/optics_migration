@@ -51,6 +51,7 @@
 		<div class="fade-in">
 			<div class="row">
 				<div class="col-sm-12 col-md-5">
+					{% if mission_object %}
 					<div class="card">
 						<div class="card-header">
 							<h6 class="text-muted">Mission</h6>
@@ -573,6 +574,15 @@
 
 				</div>
 				<!-- /.col-->
+				{% else %}
+				<div class="card">
+					<div class="card-header">Mission Not Found</div>
+					<div class="card-body">
+						<p>This mission can not be found in the database. It may have been deleted or the mission ID was changed. Please contact an administrator.</p>
+						<p><a href="{% url 'campaigns' %}">Back to Campaigns</a></p>
+					</div>
+				</div>
+				{% endif %}
 			</div>
 			<!-- /.row-->
 		</div>

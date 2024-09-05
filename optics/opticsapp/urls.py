@@ -427,6 +427,23 @@ urlpatterns += [
     ),
 ]
 
+# Threat Database URL Patterns - V2
+urlpatterns += [
+    path("threat_db/", views.threat_reference_table, name="threat_db"),
+    path("threat/add", views.threat_object_add, name="threat_object_add"),
+    path(
+        "threat/update/<int:link_id>",
+        views.threat_object_update,
+        name="threat_object_update",
+    ),
+    path(
+        "threat/delete/<int:link_id>",
+        views.threat_object_delete,
+        name="threat_object_delete",
+    ),
+    path("threat_page_manager", views.threat_page_manager, name="threat_page_manager"),
+]
+
 # Profile URL Patterns - V2
 urlpatterns += [
     path("v2/profile/", views.own_profile_view, name="own_profile"),

@@ -12,6 +12,7 @@
 		<div class="fade-in">
 			<div class="row">
 				<div class="col-sm-12 col-md-5">
+					{% if campaign_object %}
 					<div class="card">
 						<div class="card-header">
 							<h2>{{campaign_object.name}} <img class="float-right rounded" height="100" src="{% if campaign_object.campaignImage %}{{ campaign_object.campaignImage.url }}{% else %}{% static 'assets/no_image.png' %}{% endif %}" /></h2>
@@ -159,6 +160,15 @@
 					</div>
 				</div>
 				<!-- /.col-->
+			{% else %}
+				<div class="card">
+					<div class="card-header">Campaign Not Found</div>
+					<div class="card-body">
+						<p>This campaign can not be found in the database. It may have been deleted or the campaign ID was changed. Please contact an administrator.</p>
+						<p><a href="{% url 'campaigns' %}">Back to Campaigns</a></p>
+					</div>
+				</div>
+			{% endif %}
 			</div>
 			<!-- /.row-->
 		</div>

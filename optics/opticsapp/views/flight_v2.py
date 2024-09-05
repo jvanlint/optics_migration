@@ -27,7 +27,7 @@ from ..forms import FlightForm, FlightImageryForm
 def flight_v2(request, link_id):
     flight = Flight.objects.get(id=link_id)
     aircraft = flight.aircraft_set.all()
-    waypoints = flight.waypoint_set.all()
+    waypoints = flight.waypoint_set.all().order_by("number")
     targets = flight.targets.all()
     comments = flight.comments.all()
     imagery = flight.flightimagery_set.all()
