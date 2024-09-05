@@ -1,0 +1,38 @@
+{% extends "v2/base.html" %} 
+{% block title %} Threat Database {% endblock %}
+{% load django_htmx %} 
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} 
+{% block content %}
+
+<main class="c-main">
+	<div class="container-fluid">
+		<div class="fade-in">
+			<!-- .row -->
+			<div class="row">
+				<div class="col-lg-12">
+					{% include "v2/threatdb/includes/threats.html" %}
+				</div>
+			</div>
+			<!-- /.row -->
+
+		</div>
+	</div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+	document.body.addEventListener('htmx:beforeRequest', function(evt) {
+		const targetElement = document.querySelector(evt.detail.elt.getAttribute('hx-target'));
+        targetElement.style.opacity = 0.25;
+	});
+	document.body.addEventListener('htmx:afterRequest', function(evt) {
+		const targetElement = document.querySelector(evt.detail.elt.getAttribute('hx-target'));
+        targetElement.style.opacity = 1.00;
+	});
+</script>
+{% endblock javascripts %}

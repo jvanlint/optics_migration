@@ -34,6 +34,7 @@ from optics.opticsapp.models import (
     ThreatType,
     Airframe,
     AirframeDefaults,
+    ThreatReference,
 )
 
 
@@ -144,7 +145,6 @@ class TargetForm(ModelForm):
 
 
 class FlightForm(ModelForm):
-    
 
     def __init__(self, target, *args, **kwargs):
         super(FlightForm, self).__init__(*args, **kwargs)
@@ -389,6 +389,17 @@ class AirframeDefaultsForm(ModelForm):
             "laser_code",
         )
         # exclude = ("user",)
+
+
+class ThreatReferenceForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ThreatReferenceForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+
+    class Meta:
+        model = ThreatReference
+        fields = "__all__"
 
 
 class NewUserForm(UserCreationForm):

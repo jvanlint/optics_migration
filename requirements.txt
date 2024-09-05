@@ -21,6 +21,7 @@ crispy-bootstrap4
 xhtml2pdf
 
 django-allauth
+PyJWT
 django-htmx
 
 tzdata
@@ -34,3 +35,6 @@ django-maintenance-mode
 
 # Request stats
 django-request
+
+# BetterStack Logging
+logtail-python

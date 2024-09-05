@@ -36,7 +36,7 @@ def target_update_v2(request, link_id):
 	form = TargetForm(instance=target)
 
 	if request.method == "POST":
-		form = TargetForm(request.POST, instance=target)
+		form = TargetForm(request.POST, request.FILES, instance=target)
 		print(request.path)
 		if form.is_valid():
 			form.save(commit=True)

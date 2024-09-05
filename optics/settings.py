@@ -35,18 +35,42 @@ print(f"Maintenance Mode set to: {config('MAINTENANCE_MODE')}")
 MAINTENANCE_MODE = config("MAINTENANCE_MODE", default=False, cast=bool)
 MAINTENANCE_MODE_TEMPLATE = "503.html"
 
+# Betterstack Token
+BETTERSTACK_TOKEN = config("BETTERSTACK_TOKEN")
+
+
 # Configure Logging
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "console": {
+#             "class": "logging.StreamHandler",
+#         },
+#     },
+#     "root": {
+#         "handlers": ["console"],
+#         "level": "INFO",
+#     },
+# }
+
+# BetterStack Logging
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
+    'handlers': {
+        'logtail': {
+            'class': 'logtail.LogtailHandler',
+            'source_token': BETTERSTACK_TOKEN,
         },
     },
-    "root": {
-        "handlers": ["console"],
-        "level": "INFO",
+    "loggers": {
+        "": {
+            "handlers": [
+                "logtail",
+            ],
+            "level": "INFO",
+        },
     },
 }
 
@@ -290,7 +314,7 @@ ACCOUNT_RATE_LIMITS = {
 }
 
 ACCOUNT_SIGNUP_REDIRECT_URL = LOGIN_REDIRECT_URL
-ACCOUNT_EMAIL_VERIFICATION = None  # change in production?
+ACCOUNT_EMAIL_VERIFICATION = "none"  # change in production?
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = (
     True  # Allows automatic login after confirming email
 )

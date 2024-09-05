@@ -1,0 +1,150 @@
+{% load static%}
+<div id="threat-database" style="position: relative;">
+	<div class="card">
+		<div class="card-header">
+			<h6>
+				<a href="{% url 'threat_object_add'%}?returnUrl={{request.path}}" class="btn btn-sm btn-success float-right" role="button">
+					<img src="{% static 'assets/vendors/@coreui/icons/svg/plus.svg' %}" class="c-icon" />
+					Add 
+				</a>
+			</h6>
+			<i class="fa fa-align-justify"></i>
+			<h5>Threat Database</h5>
+			<div class="media text-muted">Used to enrich information of flight cards and provide pilot with knowledge of threat systems.</div>
+			
+		</div>
+		<div class="card-body">
+			<table class="table table-responsive-sm table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Nato Code</th>
+						<th>Class</th>
+						<th>Type</th>
+						<th>Ammo(Gun)</th>
+						<th>Ammo(Missile)</th>
+						<th>minRng</th>
+						<th>maxRng</th>
+						<th>minAlt</th>
+						<th>maxAlt</th>
+						<th>Acq Time</th>
+						<th>RWR Img(1)</th>
+						<th>RWR Img(2)</th>
+						<th>RWR Img(3)</th>
+						<th>HARM Code</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for threat in threat_object %}
+					<tr>
+						<td>{{threat.name}}</td>
+						<td>{{threat.nato_code}}</td>
+						<td>{{threat.threat_class}}</td>
+						<td>{{threat.threat_type}}</td>
+						<td>{{threat.gun_ammo}}</td>
+						<td>{{threat.missile_ammo}}</td>
+						<td>{{threat.range_min}}</td>
+						<td>{{threat.range_max}}</td>
+						<td>{{threat.alt_min}}</td>
+						<td>{{threat.alt_max}}</td>
+						<td>{{threat.acquire_time}}</td>
+						{% if threat.rwr_image %}
+							<td><img src="{{threat.rwr_image.url}}" style="width: 50px;"></td>
+						{% else %}
+							<td></td>
+						{% endif %}
+						{% if threat.rwr_image2 %}
+							<td><img src="{{threat.rwr_image2.url}}" style="width: 50px;"></td>
+						{% else %}
+							<td></td>
+						{% endif %}
+						{% if threat.rwr_image3 %}
+							<td><img src="{{threat.rwr_image3.url}}" style="width: 50px;"></td>
+						{% else %}
+							<td></td>
+						{% endif %}
+						<td>{{threat.harm_code}}</td>
+						<td>
+							<button class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								&nbspAction
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="{% url 'threat_object_update' threat.id%}?returnUrl={{request.path}}">
+									<img src="{% static 'assets/vendors/@coreui/icons/svg/pencil-black.svg' %}" class="c-icon" />
+									&nbspEdit
+								</a>
+								<a class="dropdown-item" href="{% url 'threat_object_delete' threat.id%}?returnUrl={{request.path}}">
+									<img src="{% static 'assets/vendors/@coreui/icons/svg/trash-black.svg' %}" class="c-icon" />
+									&nbspDelete
+								</a>
+							</div>
+						</td>
+					</tr>
+					{% endfor %}
+					
+				</tbody>
+			</table>
+			<div class="media text-muted">Showing {{ threat_object.start_index }} to {{ threat_object.end_index }} of {{ threat_object.paginator.count }} records.</div>
+		</div>
+		<div class="card-footer">
+		{% if threat_object.has_other_pages %}
+			<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
+				{% if threat_object.has_previous %}
+					<button class="btn btn-outline-primary" 
+						type="button" 
+						hx-get="{% url 'threat_page_manager' %}?page={{ threat_object.previous_page_number}}" 
+						hx-target="#threat-database" 
+						hx-swap="outerHTML"
+						hx-indicator="#spinner-threat">Previous
+					</button>
+				{% else %}
+					<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
+				{% endif %}
+				
+				{% for i in threat_object.paginator.page_range %}
+					{% if threat_object.number == i %}
+						<button class="btn btn-outline-primary active" type="button" >{{ i }}</button>
+					{% else %}
+						<button class="btn btn-outline-primary" 
+							type="button" 
+							hx-get="{% url 'threat_page_manager' %}?page={{ i }}" 
+							hx-target="#threat-database" 
+							hx-swap="outerHTML"
+							hx-indicator="#spinner-threat">{{ i }}
+						</button>
+					{% endif %}
+				{% endfor %}
+				
+				{% if threat_object.has_next %}
+					<button class="btn btn-outline-primary" 
+						type="button" 
+						hx-get="{% url 'threat_page_manager' %}?page={{ threat_object.next_page_number }}" 
+						hx-target="#threat-database" 
+						hx-swap="outerHTML"
+						hx-indicator="#spinner-threat">Next
+					</button>
+				{% else %}
+					<button class="btn btn-outline-primary" 
+						type="button" 
+						disabled="">Next
+					</button>
+				{% endif %}
+			</div>
+		{% else %}
+			<div class="btn-group float-left" role="group" aria-label="Basic outlined example">
+				<button class="btn btn-outline-primary" type="button" disabled="">Previous</button>
+				<button class="btn btn-outline-primary active" type="button">1</button>
+				<button class="btn btn-outline-primary" type="button" disabled="">Next</button>
+			</div>
+		{% endif %}
+		</div>
+
+		<!-- Spinner -->
+        <div id="spinner-threat" class="htmx-indicator" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+	</div>
+</div>

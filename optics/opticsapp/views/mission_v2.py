@@ -1,54 +1,94 @@
+import logging
 import os
+import time
+
 from django.conf import settings
-from django.shortcuts import render
-
 from django.contrib.auth.decorators import login_required
-
-from django.http import HttpResponse, HttpResponseRedirect
-
-from django.urls import reverse
-
 from django.core import serializers
 from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
 
+from ..forms import MissionFileForm, MissionForm, MissionImageryForm
 from ..models import (
-    Campaign,
-    Mission,
-    MissionImagery,
-    UserProfile,
-    MissionFile,
-    Comment,
-    Package,
     Aircraft,
+    Campaign,
+    Comment,
+    Mission,
+    MissionFile,
+    MissionImagery,
+    Package,
+    UserProfile,
 )
-from ..forms import MissionForm, MissionFileForm, MissionImageryForm
+
+logger = logging.getLogger(__name__)
 
 # ---------------- Mission -------------------------
 
 
 @login_required(login_url="account_login")
 def mission_v2(request, link_id):
-    mission_queryset = Mission.objects.get(id=link_id)
-    mission_files_queryset = mission_queryset.missionfile_set.all()
-    comments = mission_queryset.comments.all()
-    packages = mission_queryset.package_set.all()
-    targets = mission_queryset.target_set.all()
-    threats = mission_queryset.threat_set.all()
-    supports = mission_queryset.support_set.all()
-    imagery = mission_queryset.missionimagery_set.all()
+    start_time = time.time()
+    logger.info(f"Retrieving mission object.[{link_id}]")
+
     user_profile = UserProfile.objects.get(user=request.user)
+    isAdmin = user_profile.is_admin()
 
-    form = MissionFileForm(
-        initial={"mission": mission_queryset, "uploaded_by": request.user.id}
-    )
+    try:
+        mission_queryset = Mission.objects.get(id=link_id)
+        mission_files_queryset = mission_queryset.missionfile_set.all()
+        comments = mission_queryset.comments.all()
+        packages = mission_queryset.package_set.all()
+        targets = mission_queryset.target_set.all()
+        threats = mission_queryset.threat_set.all()
+        supports = mission_queryset.support_set.all()
+        imagery = mission_queryset.missionimagery_set.all()
 
-    breadcrumbs = {
-        "Campaigns": reverse("campaigns"),
-        mission_queryset.campaign.name: reverse(
-            "campaign_detail_v2", args=(mission_queryset.campaign.id,)
-        ),
-        mission_queryset.name: "",
-    }
+        breadcrumbs = {
+            "Campaigns": reverse("campaigns"),
+            mission_queryset.campaign.name: reverse(
+                "campaign_detail_v2", args=(mission_queryset.campaign.id,)
+            ),
+            mission_queryset.name: "",
+        }
+
+        form = MissionFileForm(
+            initial={"mission": mission_queryset, "uploaded_by": request.user.id}
+        )
+
+        end_time = time.time()
+        duration = end_time - start_time
+        logger.info(
+            f"Retrieved mission object [{link_id} - {mission_queryset.name}] in {duration:.2f} seconds.",
+            extra={
+                "mission_id": mission_queryset.id,
+                "mission_name": mission_queryset.name,
+                "discord_msg_id": mission_queryset.discord_msg_id,
+                "discord_api_id": mission_queryset.discord_api_id,
+                "user": request.user,
+                "isAdmin": isAdmin,
+            },
+        )
+    except Mission.DoesNotExist:
+        mission_queryset = None
+        mission_files_queryset = None
+        comments = None
+        packages = None
+        targets = None
+        threats = None
+        supports = None
+        imagery = None
+        form = None
+        breadcrumbs = {"Campaigns": reverse("campaigns"), "Mission": "Not found"}
+        logger.error(
+            f"Mission object [{link_id}]does not exist.",
+            extra={"user": user_profile.user},
+        )
+        # return HttpResponse(status=404)
+    except Exception as e:
+        logger.error(f"An error occurred: {e}", extra={"mission_id": link_id})
+        return HttpResponse(status=500)
 
     context = {
         "mission_object": mission_queryset,
@@ -58,7 +98,7 @@ def mission_v2(request, link_id):
         "support_object": supports,
         "imagery_object": imagery,
         "mission_files": mission_files_queryset,
-        "isAdmin": user_profile.is_admin(),
+        "isAdmin": isAdmin,
         "comments": comments,
         "file_form": form,
         "breadcrumbs": breadcrumbs,
@@ -345,6 +385,8 @@ def mission_imagery_delete_v2(request, link_id):
 
 @login_required(login_url="account_login")
 def mission_signup_v2(request, link_id):  # link_id is the mission ID
+    logger.info(f"{request.user} has launched signup for [{link_id}]")
+
     mission = Mission.objects.get(id=link_id)
     comments = mission.comments.all()
     packages = mission.package_set.all()
@@ -419,6 +461,7 @@ def mission_signup_v2(request, link_id):  # link_id is the mission ID
 
 @login_required(login_url="account_login")
 def mission_signup_update(request, link_id, seat_id):
+
     returnURL = request.GET.get("returnUrl")
     aircraft = Aircraft.objects.get(pk=link_id)
     if seat_id == 1:
@@ -427,6 +470,10 @@ def mission_signup_update(request, link_id, seat_id):
         aircraft.rio_wso = request.user
 
     aircraft.save()
+
+    logger.info(
+        f"{request.user} has signed up for [{aircraft.type.name}] in mission [{aircraft.flight.package.mission.name}]"
+    )
 
     return HttpResponseRedirect(returnURL)
 
