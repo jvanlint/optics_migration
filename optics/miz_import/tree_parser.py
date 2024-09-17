@@ -34,7 +34,7 @@ def add_to_package(full_tree: AnyNode, selected_items: list, package: Package):
     .miz file has been parsed and stored as in a tree strucutre in full_tree.
     selected_items contains the list of items that need to be added to the package.
     '''
-    flight = None
+    flight = Flight()
     for item in selected_items:
         item_node = tree_search.find_by_attr(full_tree, value=item, name='id')
         if not item_node:
@@ -100,7 +100,7 @@ def create_waypoint(wp_node) -> Waypoint:
             number=int(wp_node.id[-2:]),
             name=wp_node.text,
             lat=wp_node.lat,
-            long=wp_node.long,
+            long=wp_node.lon,
             elevation=wp_node.alt,
             tot=wp_node.ETA,
             waypoint_type=WaypointType.objects.filter(
@@ -114,9 +114,11 @@ def create_waypoint(wp_node) -> Waypoint:
 
 def create_aircraft(node) -> Aircraft:
     try:
-        airframe = Airframe.objects.get(dcsname__dcsname=node.airframe_type)
+        airframe = Airframe.objects.get(dcsname__dcsname=node.unit_type)
     except ObjectDoesNotExist as e:
-        msg = f"Unable to link {node.airframe_type} with any aircraft in the optics database."
+        msg = (
+            f"Unable to link {node.unit_type} with any aircraft in the optics database."
+        )
         logger.warning(msg)
         raise ObjectDoesNotExist(msg)
     return Aircraft.objects.create(tailcode=node.onboard_num, type=airframe)

@@ -38,3 +38,10 @@ django-request
 
 # BetterStack Logging
 logtail-python
+
+# Miz_Import
+anytree
+pyproj
+
+# Faster uploading for static files
+collectfast

@@ -4,7 +4,7 @@ pytest
 pytest-django
 #factory-man
 black
-#django-debug-toolbar
+django-debug-toolbar
 django_extensions
 # pylint
 pylint-django

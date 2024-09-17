@@ -35,44 +35,42 @@ print(f"Maintenance Mode set to: {config('MAINTENANCE_MODE')}")
 MAINTENANCE_MODE = config("MAINTENANCE_MODE", default=False, cast=bool)
 MAINTENANCE_MODE_TEMPLATE = "503.html"
 
-# Betterstack Token
-BETTERSTACK_TOKEN = config("BETTERSTACK_TOKEN")
-
-
 # Configure Logging
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "handlers": {
-#         "console": {
-#             "class": "logging.StreamHandler",
-#         },
-#     },
-#     "root": {
-#         "handlers": ["console"],
-#         "level": "INFO",
-#     },
-# }
-
-# BetterStack Logging
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    'handlers': {
-        'logtail': {
-            'class': 'logtail.LogtailHandler',
-            'source_token': BETTERSTACK_TOKEN,
+if DEBUG:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+            },
         },
-    },
-    "loggers": {
-        "": {
-            "handlers": [
-                "logtail",
-            ],
+        "root": {
+            "handlers": ["console"],
             "level": "INFO",
         },
-    },
-}
+    }
+else:
+    # BetterStack Logging
+    BETTERSTACK_TOKEN = config("BETTERSTACK_TOKEN")
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        'handlers': {
+            'logtail': {
+                'class': 'logtail.LogtailHandler',
+                'source_token': BETTERSTACK_TOKEN,
+            },
+        },
+        "loggers": {
+            "": {
+                "handlers": [
+                    "logtail",
+                ],
+                "level": "INFO",
+            },
+        },
+    }
 
 ALLOWED_HOSTS = ["*"]
 # ALLOWED_HOSTS = ["https://opticsapp.online",
@@ -127,10 +125,12 @@ INSTALLED_APPS = [
 
 DEV_APPS = [
     'django_extensions',
+    'debug_toolbar',
 ]
 if DEBUG:
     INSTALLED_APPS.extend(DEV_APPS)
     INSTALLED_APPS.remove("request")
+    INSTALLED_APPS.remove("collectfast")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
@@ -142,11 +142,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Add the account middleware:
+    # Account middleware:
     "allauth.account.middleware.AccountMiddleware",
-    # Add the htmx middleware:
+    # htmx middleware:
     "django_htmx.middleware.HtmxMiddleware",
-    # Add the Django Requests middleware:
+    # Django Requests middleware:
     "request.middleware.RequestMiddleware",
     # Maintenance Mode Middleware
     "maintenance_mode.middleware.MaintenanceModeMiddleware",
@@ -155,6 +155,7 @@ MIDDLEWARE = [
 if DEBUG:
     # remove the request logging middleware to speed up server start
     MIDDLEWARE.remove("request.middleware.RequestMiddleware")
+    MIDDLEWARE.insert(3, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 ROOT_URLCONF = "optics.urls"
 
@@ -257,17 +258,27 @@ MEDIA_URL = "/media/"
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-# S3 Bucket Settings
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {"location": "media"},
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {"location": "static"},
-    },
-}
+if DEBUG:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+else:  # S3 Bucket Settings for django-storages
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {"location": "media"},
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {"location": "static"},
+        },
+    }
+
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
@@ -342,3 +353,8 @@ SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_EMAIL_VERIFICATION = None
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# Required by DebugTRoolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

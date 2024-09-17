@@ -15,9 +15,9 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import require_http_methods
 
-from optics.miz_import import mission_parser, tree_parser
+from optics.miz_import import tree_parser
 from optics.opticsapp.models import Package
-
+from optics.miz_import.pydcs_mission import DCSMission
 from .forms import UploadFileForm
 
 logger = logging.getLogger(__name__)
@@ -105,10 +105,10 @@ def _upload_mission_file(request):
 
 def create_mission_tree(mission_file) -> tuple:
     with mission_file:
-        mission, parse_msg = mission_parser.load_external_mission(
-            mission_file.temporary_file_path()
-        )
-    mission_tree = mission_parser.parse_mission_to_tree(mission)
+        mission = DCSMission()
+    # optics/miz_import/tests/missions/test.miz
+        parse_msg = mission.load_file(mission_file)
+        mission_tree = mission.to_tree()
     return mission_tree, parse_msg
 
 
