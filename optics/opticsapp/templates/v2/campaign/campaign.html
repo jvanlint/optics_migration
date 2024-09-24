@@ -114,7 +114,7 @@
 									</thead>
 									<tbody>
 										{% if mission_object %} {% for mission in mission_object %}
-										{% if not mission.is_draft or not(mission.created_by.username or isAdmin)%} 
+										{% if not mission.is_draft or not (mission.created_by.username or isAdmin) %} 
 											<tr>
 												<td>{{mission.number}}</td>
 												<td><a href="{% url 'mission_v2' mission.id %}">{{mission.name}}</a></td>
