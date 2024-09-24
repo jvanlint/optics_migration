@@ -114,7 +114,7 @@
 									</thead>
 									<tbody>
 										{% if mission_object %} {% for mission in mission_object %}
-										{% if not mission.is_draft %} 
+										{% if not mission.is_draft or mission.created_by.username or isAdmin%} 
 											<tr>
 												<td>{{mission.number}}</td>
 												<td><a href="{% url 'mission_v2' mission.id %}">{{mission.name}}</a></td>
@@ -141,35 +141,6 @@
 													</div>
 												</td>
 											</tr>
-										{% else %}
-											{% if mission.created_by.username == user.username or isAdmin == True %}
-												<tr>
-													<td>{{mission.number}}</td>
-													<td><a href="{% url 'mission_v2' mission.id %}">{{mission.name}}</a></td>
-													<td>{{mission.description}}</td>
-													<td>{{mission.mission_date}}</td>
-													<td>
-														<button class="btn btn-info btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-															<img src="{% static "assets/vendors/@coreui/icons/svg/pencil.svg" %}" class="c-icon">
-															&nbspMission
-														</button>
-														<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-															<a class="dropdown-item" href="{% url 'mission_update_v2' mission.id %}?returnUrl={{request.path}}">
-																<img src="{% static "assets/vendors/@coreui/icons/svg/pencil-black.svg" %}" class="c-icon">
-																&nbspEdit
-															</a>
-															<a class="dropdown-item" id="generatemission_{{mission.id}}" data-toggle="modal" data-target="#confirmModal" data-message="Are you sure? If you proceed, the {{ mission.name }} mission will be deleted." data-buttontext="Delete" href="{% url 'mission_delete_v2' mission.id %}?returnUrl={{request.path}}">
-																<img src="{% static "assets/vendors/@coreui/icons/svg/trash-black.svg" %}" class="c-icon">
-																&nbspDelete
-															</a>
-															<a class="dropdown-item" href="{% url 'mission_copy_v2' mission.id %}?returnUrl={{request.path}}">
-																<img src="{% static "assets/vendors/@coreui/icons/svg/plus-black.svg" %}" class="c-icon">
-																&nbspCopy
-															</a>
-														</div>
-													</td>
-												</tr>
-											{% endif %}
 										{% endif %}
 										{% endfor %} {% else %}
 										<tr>
