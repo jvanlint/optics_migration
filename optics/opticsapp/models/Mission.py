@@ -162,7 +162,7 @@ class Mission(models.Model):
     )
     is_draft = models.BooleanField(
         default=False,
-        verbose_name="If in draft the mission does not appear to non-admins.",
+        verbose_name="Draft Mode",
     )
 
     # Metadata
