@@ -160,6 +160,10 @@ class Mission(models.Model):
     discord_api_id = models.CharField(
         max_length=20, blank=True, null=True, verbose_name="Discord API Event ID"
     )
+    is_draft = models.BooleanField(
+        default=False,
+        verbose_name="If in draft the mission does not appear to non-admins.",
+    )
 
     # Metadata
 
