@@ -23,7 +23,6 @@ xhtml2pdf
 django-allauth
 PyJWT
 django-htmx
-
 tzdata
 
 # S3 required packages
@@ -36,10 +35,17 @@ django-maintenance-mode
 # Request stats
 django-request
 
+
 # BetterStack Logging
 logtail-python
 
 # Miz_Import
+
+#Run Lua code in Python
+lupa
+
+# Need by miz importer app
+
 anytree
 pyproj
 
