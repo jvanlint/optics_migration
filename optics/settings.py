@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+
 from decouple import config
 from django.contrib.messages import constants as messages
 
@@ -167,17 +168,28 @@ WSGI_APPLICATION = "optics.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("PGDATABASE"),
-        "USER": config("PGUSER"),
-        "PASSWORD": config("PGPASSWORD"),
-        "HOST": config("PGHOST"),
-        "PORT": config("PGPORT"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config("LOCAL_PGDATABASE"),
+            "USER": config("LOCAL_PGUSER"),
+            "PASSWORD": config("LOCAL_PGPASSWORD"),
+            "HOST": config("LOCAL_PGHOST"),
+            "PORT": config("LOCAL_PGPORT"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config("PGDATABASE"),
+            "USER": config("PGUSER"),
+            "PASSWORD": config("PGPASSWORD"),
+            "HOST": config("PGHOST"),
+            "PORT": config("PGPORT"),
+        }
+    }
 
 
 # Password validation
