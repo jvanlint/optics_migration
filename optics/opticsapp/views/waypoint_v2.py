@@ -14,11 +14,16 @@ from ..forms import WaypointForm
 @login_required(login_url="account_login")
 def waypoint_add_v2(request, link_id):
 	flight = Flight.objects.get(id=link_id)
+	waypointCount = flight.waypoint_set.count() + 1
 	returnURL = request.GET.get('returnUrl')
 
 	form_title = 'Waypoint'
 
-	form = WaypointForm(initial={"flight": flight})
+	form = WaypointForm(initial={
+		"flight": flight,
+		"number": waypointCount,
+		}
+		)
 
 	if request.method == "POST":
 		form = WaypointForm(request.POST)

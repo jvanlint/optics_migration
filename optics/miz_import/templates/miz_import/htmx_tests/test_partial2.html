@@ -74,8 +74,8 @@
               'selected': true
             },
             'children': [{
-                'text': 'Child 1'
-              },
+              'text': 'Child 1'
+            },
               'Child 2'
             ]
           }
@@ -94,76 +94,77 @@
   })
 
 </script> {% endcomment %}
-{% comment %} <script>
+{% comment %}
+<script>
   htmx.onLoad(function (content) {
-        if ($('#tree').length > 0) {
-          var tree = $('#tree').jstree({
-            'core': {
-              'data': tree_data(),
-              "themes": {
-                "icons": true,
-                "stripes": true,
-              }
-            },
-            'plugins': [
-              'types',
-              'checkbox'
-            ],
-            'checkbox': {
-              'keep_selected_style': false,
-            },
+    if ($('#tree').length > 0) {
+      var tree = $('#tree').jstree({
+        'core': {
+          'data': tree_data(),
+          "themes": {
+            "icons": true,
+            "stripes": true,
+          }
+        },
+        'plugins': [
+          'types',
+          'checkbox'
+        ],
+        'checkbox': {
+          'keep_selected_style': false,
+        },
 
-            'types': {
-              "root": {
-                "icon": "glyphicon glyphicon-globe"
-              },
-              "coalition": {
-                "icon": "glyphicon glyphicon-globe"
-              },
-              'country': {
-                'icon': 'glyphicon glyphicon-globe'
-              },
-              'flights': {
-                'icon': 'glyphicon glyphicon-cloud'
-              },
-              'flight': {
-                'icon': 'glyphicon glyphicon-option-vertical'
-              },
-              'waypoints': {
-                'icon': 'glyphicon glyphicon-tasks'
-              },
-              'waypoint': {
-                'icon': 'glyphicon glyphicon-screenshot'
-              },
-              'units': {
-                'icon': 'glyphicon glyphicon-send'
-              },
-              'unit': {
-                'icon': 'glyphicon glyphicon-plane'
-              }
-            }
-          });
+        'types': {
+          "root": {
+            "icon": "glyphicon glyphicon-globe"
+          },
+          "coalition": {
+            "icon": "glyphicon glyphicon-globe"
+          },
+          'country': {
+            'icon': 'glyphicon glyphicon-globe'
+          },
+          'flights': {
+            'icon': 'glyphicon glyphicon-cloud'
+          },
+          'flight': {
+            'icon': 'glyphicon glyphicon-option-vertical'
+          },
+          'waypoints': {
+            'icon': 'glyphicon glyphicon-tasks'
+          },
+          'waypoint': {
+            'icon': 'glyphicon glyphicon-screenshot'
+          },
+          'units': {
+            'icon': 'glyphicon glyphicon-send'
+          },
+          'unit': {
+            'icon': 'glyphicon glyphicon-plane'
+          }
         }
-      }
+      });
+    }
+  }
 
       /* beautify ignore:start */
     /* - Required to stop mangling of the variable brackets*/
   
     function tree_data() {
-      return  [
-      { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
-      { "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
-      { "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
-      { "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
-  ];
+      return [
+        { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+        { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+        { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+        { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+      ];
     };
-  
-    /* beautify ignore:end */
 
-      function return_checked_as_JSON() {
-        var sel = JSON.stringify($('#tree').jstree('get_checked', false));
-        return sel;
-      }
+  /* beautify ignore:end */
+
+  function return_checked_as_JSON() {
+    var sel = JSON.stringify($('#tree').jstree('get_checked', false));
+    return sel;
+  }
 
 </script>
 

@@ -152,11 +152,11 @@ class DCSAirframeResource(ModelResource):
         skip_unchanged = True
         report_skipped = True
         fields = "dcsname"
-        exclude = "id"
+        # exclude = "id"
 
 
 class DSCSAirframeAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ["dcsname"]
+    list_display = ["dcsname", "airframe"]
     ordering = ["dcsname"]
     resource_classes = [DCSAirframeResource]
 

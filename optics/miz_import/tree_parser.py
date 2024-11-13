@@ -29,85 +29,12 @@ class NodeType(str, Enum):
     UNIT = "unit"
 
 
-def create_waypoints(full_tree: AnyNode, waypoint_node_ids: list) -> list:
-    waypoints = []
-    for id in waypoint_node_ids:
-        waypoints.append(create_waypoint(full_tree, id))
-    return waypoints  # list of waypoint objects
-
-
-def create_waypoint(wp_node) -> Waypoint:
-    if wp_node is not None:
-        # wp = Waypoint()
-        wp = Waypoint.objects.create(
-            number=int(wp_node.id[-2:]),
-            name=wp_node.text,
-            lat=wp_node.lat,
-            long=wp_node.long,
-            elevation=wp_node.alt,
-            tot=wp_node.ETA,
-            waypoint_type=WaypointType.objects.filter(
-                dcs_mapping=wp_node.waypoint_type
-            ).first(),
-        )
-        return wp
-    else:
-        return Waypoint.objects.create()
-
-
-def create_aircraft(node) -> Aircraft:
-    try:
-        airframe = Airframe.objects.get(dcsname__dcsname=node.airframe_type)
-    except ObjectDoesNotExist as e:
-        msg = f"Unable to link {node.airframe_type} with any aircraft in the optics database."
-        logger.warning(msg)
-        raise ObjectDoesNotExist(msg)
-    return Aircraft.objects.create(tailcode=node.onboard_num, type=airframe)
-
-
-def build_full_flight(flight_node) -> Flight:
-    flight = build_flight(flight_node)
-    if flight is not None:
-        for node in flight_node.descendants:
-            if node.type == NodeType.WAYPOINT:
-                waypoint = create_waypoint(node)
-                waypoint.copyToFlight(flight)
-            if node.type == NodeType.UNIT:
-                aircraft = create_aircraft(node)
-                aircraft.copyToFlight(flight)
-        flight.save()
-        return flight
-    else:
-        return Flight()
-
-
-def build_flight(flight_node) -> Flight:
-    return Flight.objects.create(
-        callsign=f"{flight_node.id} - {flight_node.task}",
-        radio_frequency=flight_node.frequency,
-    )
-
-
-# flight_node.name + flight_node.task
-
-
-def copy_flight_to_package(flight: Flight, package: Package) -> int:
-    flight.package = package
-    flight.save()
-    return flight.package.id
-
-
-def set_package(items: list, package: Package):
-    for item in items:
-        item.copyToPackage(package)
-
-
 def add_to_package(full_tree: AnyNode, selected_items: list, package: Package):
     '''Entrypoint for importing assets from a miz file.
     .miz file has been parsed and stored as in a tree strucutre in full_tree.
     selected_items contains the list of items that need to be added to the package.
     '''
-    flight = None
+    flight = Flight()
     for item in selected_items:
         item_node = tree_search.find_by_attr(full_tree, value=item, name='id')
         if not item_node:
@@ -159,20 +86,73 @@ def add_to_package(full_tree: AnyNode, selected_items: list, package: Package):
     return package
 
 
-# def create_units(full_tree: AnyNode, unit_node_ids: list, messages) -> list:
-#     units = []
+def create_waypoints(full_tree: AnyNode, waypoint_node_ids: list) -> list:
+    waypoints = []
+    for id in waypoint_node_ids:
+        waypoints.append(create_waypoint(full_tree, id))
+    return waypoints  # list of waypoint objects
 
-#     for id in unit_node_ids:
-#         unit_node = tree_search.find_by_attr(full_tree, id, name='id')
-#         if unit_node is not None:
-#             try:
-#                 airframe = Airframe.objects.get(dcsname__dcsname=unit_node.unit_type)
-#             except Airframe.DoesNotExist:
-#                 # Handle missing airframe
-#                 messages.error("airframe does not exist")
-#                 # TODO : return
-#                 airframe = None
 
-#             if airframe:
-#                 units.append(create_unit(full_tree, unit_node, airframe))
-#     return units
+def create_waypoint(wp_node) -> Waypoint:
+    if wp_node is not None:
+        # wp = Waypoint()
+        wp = Waypoint.objects.create(
+            number=int(wp_node.id[-2:]),
+            name=wp_node.text,
+            lat=wp_node.lat,
+            long=wp_node.lon,
+            elevation=wp_node.alt,
+            tot=wp_node.ETA,
+            waypoint_type=WaypointType.objects.filter(
+                dcs_mapping=wp_node.waypoint_type
+            ).first(),
+        )
+        return wp
+    else:
+        return Waypoint.objects.create()
+
+
+def create_aircraft(node) -> Aircraft:
+    try:
+        airframe = Airframe.objects.get(dcsname__dcsname=node.unit_type)
+    except ObjectDoesNotExist as e:
+        msg = (
+            f"Unable to link {node.unit_type} with any aircraft in the optics database."
+        )
+        logger.warning(msg)
+        raise ObjectDoesNotExist(msg)
+    return Aircraft.objects.create(tailcode=node.onboard_num, type=airframe)
+
+
+def build_full_flight(flight_node) -> Flight:
+    flight = build_flight(flight_node)
+    if flight is not None:
+        for node in flight_node.descendants:
+            if node.type == NodeType.WAYPOINT:
+                waypoint = create_waypoint(node)
+                waypoint.copyToFlight(flight)
+            if node.type == NodeType.UNIT:
+                aircraft = create_aircraft(node)
+                aircraft.copyToFlight(flight)
+        flight.save()
+        return flight
+    else:
+        return Flight()
+
+
+def build_flight(flight_node) -> Flight:
+    return Flight.objects.create(
+        callsign=f"{flight_node.id} - {flight_node.task}",
+        radio_frequency=flight_node.frequency,
+    )
+
+
+def copy_flight_to_package(flight: Flight, package: Package) -> int:
+    flight.package = package
+    flight.save()
+    return flight.package.id
+
+
+def set_package(items: list, package: Package):
+    for item in items:
+        item.copyToPackage(package)

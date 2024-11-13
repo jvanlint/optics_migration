@@ -1,37 +1,56 @@
 {% extends "v2/base.html" %}
 {% block title %} DCS Mission File Import {% endblock %}
-{% load django_htmx %}
+
 {% load static %}
-<!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}
-<link href="{% static "miz_import/css/jstree/themes/default/style.min.css" %}" rel="stylesheet" />
-{% endblock stylesheets %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <main class="c-main">
   <div class="container-fluid">
-    <div class="fade-in">
-      <div id="hx-container">
-        <!-- htmx content here  -->
-        {% include 'miz_import/htmx/upload_file.html' %}
+    {% crispy form %}
+{% comment %}     
+    <!-- Upload form. Note enctype attribute! -->
+    <form action="{% url "upload_miz" %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ message }}
+      <p>{{ form.non_field_errors }}</p>
+
+      <p>{{ form.file.label_tag }} {{ form.file.help_text }}</p>
+
+      <p>
+          {{ form.file.errors }}
+          {{ form.file }}
+      </p>
+
+      <p><input type="submit" value="Upload"/></p>
+    </form> {% endcomment %}
+
+
+
+
+{% comment %} 
+
+
+    <form id='form' action= "{% url 'upload_miz' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class=" col-sm-12 mt-5">
+        <h6>Select mission file to import</h6>
+        <div class="input-group mt-3">
+          <div class="custom-file mb-3">
+            <input type="file" class="custom-file-input" id="customFile" name="filename">
+            <label class="custom-file-label" for="customFile">Choose file (.miz)</label>
+          </div>
+
+          
+          <button type="submit" class="btn btn-primary" hx-trigger="click">Upload</button>
+        </div>
       </div>
-    </div>
+      <a href="{{ return_url }}" class="btn btn-warning" role="button">Cancel</a>
+    </form> 
+    
+    {% endcomment %}
   </div>
 </main>
-<!-- Placeholder for the modal -->
-<div id="modals-here"></div>
+
+  
 {% endblock content %}
-{% block javascripts %}
-<script src="{% static "miz_import/js/closeModal.js" %}" defer></script>
-<script src="{% static 'miz_import/js/custom_file_input/bs-custom-file-input.min.js' %}"></script>
-
-<script src="{% static 'miz_import/js/jquery-3.6.0.min.js' %}"></script>
-
-<script src="{% static 'miz_import/js/custom_file_input/bs-custom-file-input.min.js' %}"></script>
-<script>
-  $(document).ready(function () {
-    bsCustomFileInput.init()
-  })
-
-</script>
-{% endblock javascripts %}

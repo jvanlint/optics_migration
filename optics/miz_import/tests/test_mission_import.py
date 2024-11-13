@@ -8,7 +8,6 @@ from model_bakery import baker
 from pytest_django.asserts import assertRedirects
 
 import optics.miz_import.tree_parser as tree_parser
-from optics.miz_import import mission_parser
 from optics.opticsapp.models import (
     Aircraft,
     Campaign,

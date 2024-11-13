@@ -1,0 +1,61 @@
+{% extends "v2/base.html" %}
+{% block title %} DCS Mission File Import {% endblock %}
+{% load django_htmx %}
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static "miz_import/css/jstree/themes/default/style.min.css" %}" rel="stylesheet" />
+{% endblock stylesheets %}
+{% block content %}
+
+<main class="c-main">
+  <div class="container-fluid">
+    <div class="fade-in">
+      <section id="messages">
+        {% include "toasts.html" %}
+      </section>
+      <section id="alerts">
+        {% include "miz_import/partials/alerts.html" %}
+      </section>
+
+      <section id="hx-container">
+        {% include "miz_import/partials/test0.html" %}
+        
+
+      </section>
+      
+      
+    </div>
+  </div>
+</main>
+<!-- Placeholder for the modal -->
+<div id="modals-here"></div>
+{% endblock content %}
+{% block javascripts %}
+
+{% comment %} <script src="{% static 'toasts.js' %}"></script> {% endcomment %}
+<script>
+; (function () {
+  const toastOptions = { delay: 20000 }
+
+  htmx.onLoad(() => {
+      htmx.findAll(".toast").forEach((element) => {
+          let toast = coreui.Toast.getInstance(element)
+
+          // Remove hidden toasts (optional)
+          // .isShown() not available in bootstrap4
+          //if (toast && !toast.isShown()) {
+          //    toast.dispose()
+          //    element.remove()
+          //}
+
+          // Show new ones
+          if (!toast) {
+              const toast = new coreui.Toast(element, toastOptions)
+              toast.show()
+          }
+      })
+  })
+})()
+</script>
+{% endblock javascripts %}

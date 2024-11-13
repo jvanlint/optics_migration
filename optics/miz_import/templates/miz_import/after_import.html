@@ -1,0 +1,36 @@
+{% extends "v2/base.html" %}
+{% block title %} DCS Mission File Import {% endblock %}
+
+{% load static %}
+{% block content %}
+
+<main class="c-main">
+  <div class="container-fluid">
+
+
+<div>
+    <h5 class="modal-title">Mission upload results</h5>
+  
+    <p>Congratulations! OPTICS has parsed your mission file.</p>
+    <dl class="row">
+      <dt class="col-sm-3">Mission Name:</dt>
+      <dd class="col-sm-9">{{mission_text}}</dd>
+    </dl>
+    <p>The following was the output from the mission upload.</p>
+    <ul class="list-unstyled">
+      {% for message in parse_messages %}
+      <li>{{message}}</li>
+      {%empty %}
+      <li>Clean mission file - No messages!</li>
+      {% endfor %}
+    </ul>
+    <!-- <button hx-get="{% url 'view_tree' %}" hx-trigger="click" class="btn btn-primary">Continue</button>-->
+    <a href="{% url 'view_tree' %}" class="btn btn-primary" role="button">continue</a>
+    {% comment %} <button hx-get="{% url 'upload_file_init' %}" hx-trigger="click" class="btn btn-secondary">Back</button> {% endcomment %}
+    <a href="{{return_url}}" class="btn btn-warning" role="button">Cancel</a>
+  </div>
+</div>
+</main>
+
+  
+{% endblock content %}

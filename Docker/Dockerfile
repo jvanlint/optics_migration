@@ -18,10 +18,6 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN python -m pip install -r requirements.txt
 
-# REMOVE FOR PROD
-COPY requirements_dev.txt .
-RUN python -m pip install -r requirements_dev.txt
-
 
 WORKDIR /app
 COPY . /app

@@ -1,0 +1,13 @@
+<p>Test1.html</p>
+<p>second page</p>
+<button hx-get="{% url 'test_getpage' 2 %}" hx-trigger="click" hx-target="#hx-container">
+    Click Me!
+  </button>
+
+  <button hx-get="{% url 'test_toast' %}" hx-trigger="click" >
+    test toast
+  </button>
+  <section id="messages" hx-swap-oob="true" hx-swap="innerHTML">
+
+    {% include "miz_import/partials/toast.html" %}
+  </section>

@@ -1,0 +1,10 @@
+<section id="messages" hx-swap-oob="true" >
+   
+  
+    <p>messages toast partial</p>
+        {% if messages %}
+            {% for message in messages %}
+                        {{message}}
+        {% endfor %}
+    {% endif %}
+</section>

@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Python Debugger: Current File",
             "type": "debugpy",
@@ -22,20 +23,20 @@
             "django": true,
             "justMyCode": true
         },
-        {
-            "name": "Docker: Python - Django",
-            "type": "docker",
-            "request": "launch",
-            "preLaunchTask": "docker-run: debug",
-            "python": {
-                "pathMappings": [
-                    {
-                        "localRoot": "${workspaceFolder}",
-                        "remoteRoot": "/app"
-                    }
-                ],
-                "projectType": "django"
-            }
-        }
+        // {
+        //     "name": "Docker: Python - Django",
+        //     "type": "docker",
+        //     "request": "launch",
+        //     "preLaunchTask": "docker-run: debug",
+        //     "python": {
+        //         "pathMappings": [
+        //             {
+        //                 "localRoot": "${workspaceFolder}",
+        //                 "remoteRoot": "/app"
+        //             }
+        //         ],
+        //         "projectType": "django"
+        //     }
+        // }
     ]
 }

@@ -12,9 +12,10 @@ urlpatterns = [
     
     # path('test_post', views.test_post, name='test_post'),
     path('test_modal/<int:link_id>', views.test_modal, name='test_modal'),
-    
-    path('test/htmx1', views.test_htmx1, name='test_htmx1'),
-    path('test/htmx2', views.test_htmx2, name='test_htmx2'),
+    path('test', views.test_htmx1, name='test_getpage_initial'),
+    path('test/getpage/<int:pageNumber>', views.test_htmx, name='test_getpage'),
+    path('test/toast', views.test_toast, name='test_toast'),
+   
     
 ]
 # fmt: on

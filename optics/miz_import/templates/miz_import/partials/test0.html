@@ -1,0 +1,29 @@
+<p>Test0.html</p>
+<p>initial page</p>
+
+<!--
+Include the section below in all htmx partials that are returned.
+The OOB swap will populate the messages with any added by the view
+
+
+-->
+<section id="messages">
+  {% include "toasts.html" %}
+</section>
+
+  <div class="container py-4">
+    <div class="p-5 bg-light rounded-3 border">
+      <h1>Django+HTMX</h1>
+      <p class="lead">Integration with the messages framework</p>
+      <p>
+        <button class="btn btn-primary" hx-get="{% url 'test_toast' %}" hx-target="#main">Emit message</button>
+      </p>
+      <p>
+        Click on the button above to trigger a <code>hx-get</code> that includes a message.
+      </p>
+      <p class="mb-0" id="main">
+        This message is sent to the <i>messages</i> framework as in a regular Django project, then it's appended to the response in a custom middleware.
+      </p>
+    </div>
+  </div>
+  {% include "toasts.html" %}

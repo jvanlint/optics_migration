@@ -1,16 +1,16 @@
 import os
-
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.contrib import messages
-from optics.opticsapp.forms import ProfileForm
-from optics.opticsapp.models import Comment, UserProfile
 from collections import namedtuple
 
 import boto3
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+from django.urls import reverse
+
+from optics.opticsapp.forms import ProfileForm
+from optics.opticsapp.models import Comment, UserProfile
 
 
 @login_required(login_url="account_login")
@@ -39,21 +39,24 @@ def select_avatar(request):
     context = {}
     new_file = []
 
-    s3 = boto3.resource("s3")
-    bucket = s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME)
-    files = [
-        obj.key for obj in bucket.objects.filter(Prefix="static/assets/img/avatars/")
-    ]
+    if settings.DEBUG:
+        files = os.listdir(os.path.join(settings.MEDIA_ROOT, "assets/img/avatars/"))
+        for file in files:
+            new_file.append(f"assets/img/avatars/{file}")
+    else:
+        s3 = boto3.resource("s3")
+        bucket = s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME)
+        files = [
+            obj.key
+            for obj in bucket.objects.filter(Prefix="static/assets/img/avatars/")
+        ]
 
-    # This code below retired as we no longer reference local file system and instead use S3.
-    # files = os.listdir(os.path.join(settings.STATIC_ROOT, "assets/img/avatars/"))
-    for file in files:
-        # We need to take out the static/ part of the file path to make the URI in S3 resolve correctly.
-        new_file.append(file.replace("static/", ""))
+        for file in files:
+            # We need to take out the static/ part of the file path to make the URI in S3 resolve correctly.
+            new_file.append(file.replace("static/", ""))
 
-    print(new_file)
-
-    context = {"files": new_file}
+    files = new_file
+    context = {"files": files}
     return render(request, "v2/profile/avatar_selection.html", context=context)
 
 

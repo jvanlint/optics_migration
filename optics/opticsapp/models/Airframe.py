@@ -3,7 +3,7 @@ from django.db import models
 
 
 class DCSAirframe(models.Model):
-    dcsname = models.CharField(max_length=50, primary_key=True)  # , unique=True)
+    dcsname = models.CharField(max_length=50, primary_key=True, unique=True)
 
     def __str__(self):
         return self.dcsname
@@ -16,7 +16,7 @@ class Airframe(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_created.hidden = True
     date_modified = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     dcsname = models.OneToOneField(
         DCSAirframe, on_delete=models.SET_NULL, null=True, blank=True
     )
