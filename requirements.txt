@@ -51,3 +51,6 @@ pyproj
 
 # Faster uploading for static files
 collectfast
+
+# Reference django-debug-toolbar to stop urls.py breaking in prod
+django-debug-toolbar
