@@ -11,20 +11,20 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="waypointtype",
-            name="dcs_mapping",
-            field=models.CharField(
-                choices=[
-                    ("Not Mapped", "Not Mapped"),
-                    ("TakeOffParking", "Takeoffparking"),
-                    ("TakeOffParkingHot", "Takeoffparkinghot"),
-                    ("Turning Point", "Turning Point"),
-                ],
-                default="Not Mapped",
-                max_length=50,
-            ),
-        ),
+        # migrations.AddField(
+        #     model_name="waypointtype",
+        #     name="dcs_mapping",
+        #     field=models.CharField(
+        #         choices=[
+        #             ("Not Mapped", "Not Mapped"),
+        #             ("TakeOffParking", "Takeoffparking"),
+        #             ("TakeOffParkingHot", "Takeoffparkinghot"),
+        #             ("Turning Point", "Turning Point"),
+        #         ],
+        #         default="Not Mapped",
+        #         max_length=50,
+        #     ),
+        # ),
         migrations.CreateModel(
             name="DCSAirframe",
             fields=[
