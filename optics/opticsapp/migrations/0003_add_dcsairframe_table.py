@@ -25,15 +25,15 @@ class Migration(migrations.Migration):
         #         max_length=50,
         #     ),
         # ),
-        migrations.CreateModel(
-            name="DCSAirframe",
-            fields=[
-                (
-                    "dcsname",
-                    models.CharField(max_length=50, primary_key=True, serialize=False),
-                ),
-            ],
-        ),
+        # migrations.CreateModel(
+        #     name="DCSAirframe",
+        #     fields=[
+        #         (
+        #             "dcsname",
+        #             models.CharField(max_length=50, primary_key=True, serialize=False),
+        #         ),
+        #     ],
+        # ),
         # migrations.AddField(
         #     model_name="airframe",
         #     name="dcsname",
