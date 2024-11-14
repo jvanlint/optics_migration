@@ -108,7 +108,7 @@ class DCSMission:
     def _setup_terrain(self, mission_dict: dict) -> None:
         self.terrain = self.TERRAIN_MAP.get(mission_dict["theatre"])
         if self.terrain is None:
-            raise RuntimeError(f"Unknown theatre: '{mission_dict["theatre"]}'")
+            raise RuntimeError("Unknown theatre in mission file")
         else:
             self.terrain = self.terrain.value
 
