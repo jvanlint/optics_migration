@@ -8,6 +8,7 @@ from django.core import serializers
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.templatetags.static import static
 from django.urls import reverse
 
 from ..forms import MissionFileForm, MissionForm, MissionImageryForm
@@ -112,7 +113,11 @@ def mission_add_v2(request, link_id):
     campaign = Campaign.objects.get(id=link_id)
     missionCount = campaign.mission_set.count() + 1
     returnURL = request.GET.get("returnUrl")
-    image_url = request.build_absolute_uri(campaign.campaignImage.url)
+    image_url = (
+        request.build_absolute_uri(campaign.campaignImage.url)
+        if campaign.campaignImage
+        else request.build_absolute_uri(static("assets/no_image.png"))
+    )
 
     form_title = "Mission"
 
